@@ -1,0 +1,1 @@
+Keep your TypeScript type definitions and interfaces.

@@ -1,0 +1,1 @@
+Contains constants that are used throughout the application, like API endpoints, default values, or configuration settings.

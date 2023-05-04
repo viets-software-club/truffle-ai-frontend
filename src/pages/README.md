@@ -1,0 +1,1 @@
+Contains the page components for your Next.js application. Each file here maps to a route in your application.

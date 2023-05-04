@@ -1,0 +1,1 @@
+Contains custom hooks to encapsulate logic and share it across components.

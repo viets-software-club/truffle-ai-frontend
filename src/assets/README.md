@@ -1,0 +1,1 @@
+Store static assets like images, fonts, or any other media files.
