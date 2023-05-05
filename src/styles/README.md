@@ -1,1 +1,0 @@
-The *styles* folder contains global styling files and style-related utilities. This is where you'll find the base styles, theme configuration, and any CSS-in-JS or CSS preprocessor files. 

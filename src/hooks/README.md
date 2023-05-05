@@ -1,1 +1,0 @@
-In the *hooks* folder, you will find custom React hooks that abstract and manage complex logic or side effects. 

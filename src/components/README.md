@@ -1,1 +1,0 @@
-*components* houses all the reusable React components in the project. Each component is encapsulated, meaning it has its own styles, logic, and markup. Components can be easily combined and reused throughout the application, ensuring a consistent look and feel.

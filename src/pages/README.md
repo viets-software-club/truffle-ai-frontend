@@ -1,1 +1,0 @@
-The pages folder contains components that represent individual pages or views in the application. Each file in this folder is responsible for the layout and rendering of a specific page or view.

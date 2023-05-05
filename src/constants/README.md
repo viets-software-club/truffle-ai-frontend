@@ -1,1 +1,0 @@
-The *constants* folder contains files with predefined values that remain unchanged throughout the application.
