@@ -1,1 +1,1 @@
-Store static assets like images, fonts, or any other media files.
+The *assets* folder is where you'll find all the static resources of the project, such as images, fonts, icons, and other media files.

@@ -1,0 +1,1 @@
+The *utils* folder contains utility functions and helpers that are used throughout the project. These functions are often general-purpose and can be reused across different components or modules.

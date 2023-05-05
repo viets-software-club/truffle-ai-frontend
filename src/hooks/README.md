@@ -1,1 +1,1 @@
-Contains custom hooks to encapsulate logic and share it across components.
+In the *hooks* folder, you will find custom React hooks that abstract and manage complex logic or side effects. 

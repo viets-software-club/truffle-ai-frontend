@@ -1,1 +1,1 @@
-Keep your TypeScript type definitions and interfaces.
+In the *types* folder, you'll find TypeScript type definitions and interfaces for the entire project.

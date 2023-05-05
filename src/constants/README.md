@@ -1,1 +1,1 @@
-Contains constants that are used throughout the application, like API endpoints, default values, or configuration settings.
+The *constants* folder contains files with predefined values that remain unchanged throughout the application.
