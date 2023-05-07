@@ -13,7 +13,7 @@ export default function RepositoryListView() {
     getCoreRowModel: getCoreRowModel()
   })
   return (
-    <div className="p-2">
+    <div>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -39,6 +39,7 @@ export default function RepositoryListView() {
             </tr>
           ))}
         </tbody>
+        {/* We are not using Footers for now */}
         <tfoot>
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
@@ -53,7 +54,6 @@ export default function RepositoryListView() {
           ))}
         </tfoot>
       </table>
-      <div className="h-4" />
     </div>
   )
 }
