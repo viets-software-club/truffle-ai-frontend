@@ -1,25 +1,25 @@
 import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table'
 import React from 'react'
 import { mockRepositories } from '../constants/repositoryShortMockData'
-import { useHandleColumns, getCellClassName } from '../hooks/useHandleColumns'
+import { getColumns } from '../constants/tableHelper'
 import { IRepositoryShort } from '../types/repositoryShort'
 
 export default function RepositoryListView() {
   const tableData: IRepositoryShort[] = React.useMemo(() => mockRepositories, [])
-  const { browseListColumns } = useHandleColumns()
+  const { browseListColumns } = getColumns()
   const table = useReactTable({
     data: tableData,
     columns: browseListColumns,
     getCoreRowModel: getCoreRowModel()
   })
   return (
-    <div>
+    <div className="flex flex-col gap-10 rounded-lg bg-bg-secondary p-8">
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th key={header.id} className="text-left font-light text-text-secondary">
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
@@ -30,9 +30,12 @@ export default function RepositoryListView() {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr key={row.id} className="">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className={getCellClassName(cell.column.id)}>
+                <td
+                  key={cell.id}
+                  className={`${cell.column.id === 'name' ? 'font-bold' : ''} text-text-primary`}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

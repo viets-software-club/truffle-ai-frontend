@@ -3,10 +3,9 @@ import RepositoryListView from '@/pages/RepositoryListView'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home()
-{
+export default function Home() {
   return (
-    <main className={`min-h-screen p-24 ${inter.className}`}>
+    <main className={`min-h-screen p-24 ${inter.className} bg-bg-primary text-text-primary`}>
       <RepositoryListView />
     </main>
   )

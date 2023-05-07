@@ -1,7 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table'
 import { IRepositoryShort } from '@/types/repositoryShort'
 
-export function useHandleColumns() {
+export function getColumns() {
   const columnHelper = createColumnHelper<IRepositoryShort>()
   const browseListColumns = [
     columnHelper.accessor('name', {
@@ -39,11 +39,9 @@ export function useHandleColumns() {
 export function getCellClassName(columnId: string): string {
   switch (columnId) {
     case 'name':
-      return 'bg-blue-400'
-    case 'ownerName':
-      return 'bg-green-100'
-    case 'starCount':
-      return 'bg-yellow-100'
+      return 'font-bold'
+    case 'owner':
+      return 'italic'
     default:
       return ''
   }
