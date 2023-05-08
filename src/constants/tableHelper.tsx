@@ -5,7 +5,8 @@ export function getColumns() {
   const columnHelper = createColumnHelper<IRepositoryShort>()
   const browseListColumns = [
     columnHelper.accessor('name', {
-      header: () => 'Name'
+      header: () => 'Name',
+      cell: (info) => <div className="font-bold">{info.getValue()}</div>
     }),
     columnHelper.accessor('ownerName', {
       header: () => 'Owner Name'
@@ -26,7 +27,8 @@ export function getColumns() {
       header: () => 'Pull Requests'
     }),
     columnHelper.accessor('programmingLanguage', {
-      header: () => 'Programming Language'
+      header: () => 'Programming Language',
+      cell: (info) => <div className="text-sky-300">{info.getValue()}</div>
     }),
     columnHelper.accessor('category', {
       header: () => 'Category'
@@ -34,15 +36,4 @@ export function getColumns() {
   ]
 
   return { browseListColumns }
-}
-
-export function getCellClassName(columnId: string): string {
-  switch (columnId) {
-    case 'name':
-      return 'font-bold'
-    case 'owner':
-      return 'italic'
-    default:
-      return ''
-  }
 }

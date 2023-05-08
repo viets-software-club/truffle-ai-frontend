@@ -13,7 +13,7 @@ export default function RepositoryListView() {
     getCoreRowModel: getCoreRowModel()
   })
   return (
-    <div className="flex flex-col gap-10 rounded-lg bg-bg-secondary p-8">
+    <div className="flex flex-col rounded-lg bg-bg-secondary p-8">
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -32,10 +32,7 @@ export default function RepositoryListView() {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className="">
               {row.getVisibleCells().map((cell) => (
-                <td
-                  key={cell.id}
-                  className={`${cell.column.id === 'name' ? 'font-bold' : ''} text-text-primary`}
-                >
+                <td key={cell.id} className="text-text-primary">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
