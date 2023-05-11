@@ -5,7 +5,13 @@ import {
   createColumnHelper
 } from '@tanstack/react-table'
 import React from 'react'
-import { FaAddressBook } from 'react-icons/fa'
+import {
+  AiOutlineFork,
+  AiOutlineStar,
+  BiGitPullRequest,
+  BsPeople,
+  VscIssues
+} from 'react-icons/all'
 import { mockRepositories } from '../constants/repositoryShortMockData'
 import { IRepositoryShort } from '../constants/repositoryShort'
 
@@ -16,36 +22,71 @@ export default function RepositoryListView() {
   const browseListColumns = [
     columnHelper.accessor('name', {
       header: () => 'Name',
-      cell: (info) => (
-        <div className="font-bold">
-          <FaAddressBook />
-          <p>{info.getValue()}</p>
-        </div>
-      )
+      cell: (info) => <p className="font-bold">{info.getValue()}</p>
     }),
     columnHelper.accessor('ownerName', {
       header: () => 'Owner Name'
     }),
     columnHelper.accessor('starCount', {
-      header: () => 'Stars'
+      header: () => 'Stars',
+      cell: (info) => (
+        <div className="flex flex-row items-center space-x-1 text-green">
+          <AiOutlineStar />
+          <p>{info.getValue()}</p>
+        </div>
+      )
     }),
     columnHelper.accessor('forkCount', {
-      header: () => 'Forks'
+      header: () => 'Forks',
+      cell: (info) => (
+        <div className="flex flex-row items-center space-x-1 text-red">
+          <AiOutlineFork />
+          <p>{info.getValue()}</p>
+        </div>
+      )
     }),
     columnHelper.accessor('issueCount', {
-      header: 'Issues'
+      header: 'Issues',
+      cell: (info) => (
+        <div className="flex flex-row items-center space-x-1">
+          <VscIssues />
+          <p>{info.getValue()}</p>
+        </div>
+      )
     }),
     columnHelper.accessor('contributorCount', {
-      header: 'Contributors'
+      header: 'Contributors',
+      cell: (info) => (
+        <div className="flex flex-row items-center space-x-1">
+          <BsPeople />
+          <p>{info.getValue()}</p>
+        </div>
+      )
     }),
     columnHelper.accessor('pullRequestCount', {
-      header: () => 'Pull Requests'
+      header: () => 'Pull Requests',
+      cell: (info) => (
+        <div className="flex flex-row items-center space-x-1">
+          <BiGitPullRequest />
+          <p>{info.getValue()}</p>
+        </div>
+      )
     }),
     columnHelper.accessor('programmingLanguage', {
-      header: () => 'Programming Language'
+      header: () => 'Programming Language',
+      cell: (info) => (
+        <p className="text-color-text-primary inline-block rounded-lg border border-border-color bg-bg-secondary-highlighted p-1.5 text-xs">
+          {info.getValue()}
+        </p>
+      )
     }),
     columnHelper.accessor('category', {
-      header: () => 'Category'
+      header: () => 'Category',
+      cell: (info) => (
+        <p className="text-color-text-primary inline-block rounded-lg border border-border-color bg-bg-secondary-highlighted p-1.5 text-xs">
+          {info.getValue()}
+        </p>
+      )
     })
   ]
   const table = useReactTable({
@@ -71,9 +112,9 @@ export default function RepositoryListView() {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="">
+            <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="text-text-primary">
+                <td key={cell.id} className="text-left text-text-primary">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
