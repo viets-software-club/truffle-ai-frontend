@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google'
-import RepositoryListView from '@/pages/RepositoryListView'
+import RepositoryListView from '@/components/RepositoryListView'
 
 const inter = Inter({ subsets: ['latin'] })
 

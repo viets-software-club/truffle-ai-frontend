@@ -1,12 +1,47 @@
-import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table'
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+  createColumnHelper
+} from '@tanstack/react-table'
 import React from 'react'
 import { mockRepositories } from '../constants/repositoryShortMockData'
-import { getColumns } from '../constants/tableHelper'
-import { IRepositoryShort } from '../types/repositoryShort'
+import { IRepositoryShort } from '../constants/repositoryShort'
 
 export default function RepositoryListView() {
+  // REACT TABLE
   const tableData: IRepositoryShort[] = React.useMemo(() => mockRepositories, [])
-  const { browseListColumns } = getColumns()
+  const columnHelper = createColumnHelper<IRepositoryShort>()
+  const browseListColumns = [
+    columnHelper.accessor('name', {
+      header: () => 'Name',
+      cell: (info) => <div className="font-bold">{info.getValue()}</div>
+    }),
+    columnHelper.accessor('ownerName', {
+      header: () => 'Owner Name'
+    }),
+    columnHelper.accessor('starCount', {
+      header: () => 'Stars'
+    }),
+    columnHelper.accessor('forkCount', {
+      header: () => 'Forks'
+    }),
+    columnHelper.accessor('issueCount', {
+      header: 'Issues'
+    }),
+    columnHelper.accessor('contributorCount', {
+      header: 'Contributors'
+    }),
+    columnHelper.accessor('pullRequestCount', {
+      header: () => 'Pull Requests'
+    }),
+    columnHelper.accessor('programmingLanguage', {
+      header: () => 'Programming Language'
+    }),
+    columnHelper.accessor('category', {
+      header: () => 'Category'
+    })
+  ]
   const table = useReactTable({
     data: tableData,
     columns: browseListColumns,

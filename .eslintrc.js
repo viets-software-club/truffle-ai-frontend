@@ -32,7 +32,8 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
-    'no-shadow': 'off'
+    'no-shadow': 'off',
+    'react/no-unstable-nested-components': ['error', { allowAsProps: true }]
   },
   env: {
     browser: true,

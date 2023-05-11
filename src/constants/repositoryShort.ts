@@ -1,5 +1,5 @@
 import { ProgrammingLanguages } from './programmingLanguages'
-import { RepositoryCategories } from '../constants/repositoryCategories'
+import { RepositoryCategories } from './repositoryCategories'
 
 export interface IRepositoryShort {
   name: string

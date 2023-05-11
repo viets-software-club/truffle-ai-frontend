@@ -1,6 +1,6 @@
-import { IRepositoryShort } from '@/types/repositoryShort'
-import { ProgrammingLanguages } from '../types/programmingLanguages'
-import { RepositoryCategories } from '../types/repositoryCategories'
+import { IRepositoryShort } from '@/constants/repositoryShort'
+import { ProgrammingLanguages } from './programmingLanguages'
+import { RepositoryCategories } from './repositoryCategories'
 
 export const mockRepositories: IRepositoryShort[] = [
   {
