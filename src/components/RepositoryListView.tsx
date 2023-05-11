@@ -5,6 +5,7 @@ import {
   createColumnHelper
 } from '@tanstack/react-table'
 import React from 'react'
+import { FaAddressBook } from 'react-icons/fa'
 import { mockRepositories } from '../constants/repositoryShortMockData'
 import { IRepositoryShort } from '../constants/repositoryShort'
 
@@ -15,7 +16,12 @@ export default function RepositoryListView() {
   const browseListColumns = [
     columnHelper.accessor('name', {
       header: () => 'Name',
-      cell: (info) => <div className="font-bold">{info.getValue()}</div>
+      cell: (info) => (
+        <div className="font-bold">
+          <FaAddressBook />
+          <p>{info.getValue()}</p>
+        </div>
+      )
     }),
     columnHelper.accessor('ownerName', {
       header: () => 'Owner Name'
