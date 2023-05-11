@@ -12,6 +12,7 @@ import {
   BsPeople,
   VscIssues
 } from 'react-icons/all'
+import ProgrammingLanguageIconRenderer from '@/components/ProgrammingLanguageIconRenderer'
 import { mockRepositories } from '../constants/repositoryShortMockData'
 import { IRepositoryShort } from '../constants/repositoryShort'
 
@@ -74,11 +75,7 @@ export default function RepositoryListView() {
     }),
     columnHelper.accessor('programmingLanguage', {
       header: () => 'Programming Language',
-      cell: (info) => (
-        <p className="text-color-text-primary inline-block rounded-lg border border-border-color bg-bg-secondary-highlighted p-1.5 text-xs">
-          {info.getValue()}
-        </p>
-      )
+      cell: (info) => <ProgrammingLanguageIconRenderer programmingLanguage={info.getValue()} />
     }),
     columnHelper.accessor('category', {
       header: () => 'Category',
@@ -112,9 +109,13 @@ export default function RepositoryListView() {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr
+              key={row.id}
+              className="hover:bg-bg-secondary-highlighted"
+              onClick={() => alert('This will soon open up a detail view page!')}
+            >
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="text-left text-text-primary">
+                <td key={cell.id} className="py-2 text-left text-text-primary">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
