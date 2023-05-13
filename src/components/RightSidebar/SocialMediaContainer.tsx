@@ -1,65 +1,57 @@
+import { FaDiscord, FaTwitter, FaLinkedin, FaSlack } from 'react-icons/fa'
+import SocialMediaItem from './SocialMediaItem'
 
-import SocialMediaItem from './SocialMediaItem';
-import { FaDiscord, FaTwitter, FaLinkedin, FaSlack } from 'react-icons/fa';
-
-interface SocialMediaData
-{
-    name: string;
-    text: string;
-    value: string;
-    growth: string;
-    url: string;
+interface SocialMediaData {
+  name: string
+  text: string
+  value: string
+  growth: string
+  url: string
 }
 
-interface SocialMediaContainerProps
-{
-    socialMediaData: SocialMediaData[];
+interface SocialMediaContainerProps {
+  socialMediaData: SocialMediaData[]
 }
 
-const getIcon = (name: string) =>
-{
-    switch (name.toLowerCase())
-    {
-        case "discord":
-            return FaDiscord;
-        case "twitter":
-            return FaTwitter;
-        case "linkedin":
-            return FaLinkedin;
-        case "slack":
-            return FaSlack;
-        default:
-            return FaDiscord;
-    }
-};
+const getIcon = (name: string) => {
+  switch (name.toLowerCase()) {
+    case 'discord':
+      return FaDiscord
+    case 'twitter':
+      return FaTwitter
+    case 'linkedin':
+      return FaLinkedin
+    case 'slack':
+      return FaSlack
+    default:
+      return FaDiscord
+  }
+}
 
-const SocialMediaContainer = ({ socialMediaData }: SocialMediaContainerProps) =>
-{
-    const handleClick = (url: string) =>
-    {
-        window.open(url, "_blank");
-    };
+const SocialMediaContainer = ({ socialMediaData }: SocialMediaContainerProps) => {
+  const handleClick = (url: string) => {
+    window.open(url, '_blank')
+  }
 
-    return (
-        <div className="py-2.5 font-normal text-14 leading-4 border-border-color border-t border-b border-solid">
-            <h1 className="px-7 py-2.5 text-12 uppercase text-text-secondary">Social Media</h1>
-            {socialMediaData.map((data) =>
-            {
-                const Icon = getIcon(data.name);
-                return (
-                    <SocialMediaItem
-                        key={data.name}
-                        Icon={Icon}
-                        name={data.name}
-                        text={data.text}
-                        value={data.value}
-                        growth={data.growth}
-                        onClick={() => handleClick(data.url)}
-                    />
-                );
-            })}
-        </div>
-    );
-};
+  return (
+    <div className="border-y border-solid border-border-color py-2.5 text-14 font-normal leading-4">
+      <h1 className="px-7 py-2.5 text-12 uppercase text-text-secondary">Social Media</h1>
+      {socialMediaData.map((data) => {
+        const Icon = getIcon(data.name)
+        return (
+          <SocialMediaItem
+            key={data.name}
+            Icon={Icon}
+            name={data.name}
+            text={data.text}
+            value={data.value}
+            growth={data.growth}
+            onClick={() => handleClick(data.url)}
+          />
+        )
+      })}
+    </div>
+  )
+}
 
-export default SocialMediaContainer;
+export default SocialMediaContainer

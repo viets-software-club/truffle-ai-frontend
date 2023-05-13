@@ -1,43 +1,42 @@
-
 import GitHubStatisticItem from '@/components/RightSidebar/GitHubStatisticItem'
-import { ComponentType } from 'react';
+import { ComponentType, ReactNode } from 'react'
 
-interface InformationRowItemData
-{
-    Icon?: ComponentType<{ className?: string }>;
-    IconMetric?: JSX.Element;
-    value: string;
-    growth: string;
+interface InformationRowItemData {
+  Icon?: ComponentType<{ className?: string }>
+  IconMetric?: ReactNode
+  value: string
+  growth: string
 }
 
-interface InformationRowProps
-{
-    statisticsData: InformationRowItemData[];
-    name: string;
-    tags: string[];
+interface InformationRowProps {
+  statisticsData: InformationRowItemData[]
+  name: string
+  tags: string[]
 }
 
-const InformationRow = ({ statisticsData, name, tags }: InformationRowProps) =>
-{
-    return (
-        <div className="py-2 px-2 font-normal text-14 flex flex-row items-center hover:bg-bg-secondary transition-colors duration-100">
-            <h1 className="text-14">{name}</h1>
-            {tags.map((text) => (
-                <p key={text} className="rounded-lg text-12 bg-bg-secondary px-2 py-0.5 mx-1 text-text-secondary font-light">{text}</p>
-            ))}
-            {statisticsData.map((data) => (
-                <GitHubStatisticItem
-                    key={data.value}
-                    Icon={data.Icon}
-                    IconMetric={data.IconMetric}
-                    value={data.value}
-                    growth={data.growth}
-                    padding={false}
-                    hover={false}
-                />
-            ))}
-        </div>
-    );
-};
+const InformationRow = ({ statisticsData, name, tags }: InformationRowProps) => (
+  <div className="flex flex-row items-center p-2 text-14 font-normal transition-colors duration-100 hover:bg-bg-secondary">
+    <h1 className="text-14">{name}</h1>
+    {tags.map((text) => (
+      <p
+        key={text}
+        className="mx-1 rounded-lg bg-bg-secondary px-2 py-0.5 text-12 font-light text-text-secondary"
+      >
+        {text}
+      </p>
+    ))}
+    {statisticsData.map((data) => (
+      <GitHubStatisticItem
+        key={data.value}
+        Icon={data.Icon}
+        IconMetric={data.IconMetric}
+        value={data.value}
+        growth={data.growth}
+        padding={false}
+        hover={false}
+      />
+    ))}
+  </div>
+)
 
-export default InformationRow;
+export default InformationRow

@@ -1,25 +1,29 @@
-import { FunctionComponent, ComponentType } from 'react';
+import { ComponentType } from 'react'
 
-interface MenuItemProps
-{
-    Icon: ComponentType<{ className?: string }>;
-    text: string;
-    onClick: () => void;
-    showIcon?: boolean;
+interface MenuItemProps {
+  Icon: ComponentType<{ className?: string }>
+  text: string
+  onClick: () => void
+  showIcon?: boolean
 }
 
-const MenuItem = ({ Icon, text, onClick, showIcon = true }: MenuItemProps) =>
-{
-    return (
-        <div className="flex flex-col justify-between">
-            <button onClick={onClick} className="inline-flex px-7 py-2.5 hover:bg-bg-secondary transition-colors duration-100">
-                <div className="flex flex-row justify-center items-center gap-[5px]">
-                    {showIcon && <Icon className="text-icon-color w-[14px] h-[14px]" />}
-                    <span className="text-text-primary not-italic font-size-3 text-xs leading-3">{text}</span>
-                </div>
-            </button>
-        </div>
-    );
+const MenuItem = ({ Icon, text, onClick, showIcon }: MenuItemProps) => (
+  <div className="flex flex-col justify-between">
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex px-7 py-2.5 transition-colors duration-100 hover:bg-bg-secondary"
+    >
+      <div className="flex flex-row items-center justify-center gap-[5px]">
+        {showIcon && <Icon className="h-[14px] w-[14px] text-icon-color" />}
+        <span className="text-xs not-italic leading-3 text-text-primary">{text}</span>
+      </div>
+    </button>
+  </div>
+)
+
+MenuItem.defaultProps = {
+  showIcon: true
 }
 
-export default MenuItem;
+export default MenuItem

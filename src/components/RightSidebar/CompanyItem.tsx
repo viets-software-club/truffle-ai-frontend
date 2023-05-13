@@ -1,26 +1,19 @@
-
-
-interface CompanyProps
-{
-    name: string;
-    value: string;
-    growth: string;
+interface CompanyProps {
+  name: string
+  value: string
+  growth: string
 }
 
-const CompanyItem = ({ name, value, growth, }: CompanyProps) =>
-{
-    return (
-        <div className="flex flex-col justify-between">
-            <div className="inline-flex px-7 py-2.5 hover:bg-bg-secondary transition-colors duration-100">
-                <div className="flex flex-row justify-center items-center gap-[15px]">
-                    <span className="text-icon-color not-italic font-size-3 text-xs leading-3">{name}</span>
-                    <span className="text-text-primary not-italic font-size-3 text-xs leading-3 w-6">{value}</span>
-                    <span className="text-icon-color not-italic font-size-3 text-xs leading-3">{growth}</span>
-                </div>
-            </div>
+const CompanyItem = ({ name, value, growth }: CompanyProps) => (
+  <div className="flex flex-col justify-between">
+    <div className="inline-flex px-7 py-2.5 transition-colors duration-100 hover:bg-bg-secondary">
+      <div className="flex flex-row items-center justify-center gap-[15px]">
+        <span className="text-xs not-italic leading-3 text-icon-color">{name}</span>
+        <span className="w-6 text-xs not-italic leading-3 text-text-primary">{value}</span>
+        <span className="text-xs not-italic leading-3 text-icon-color">{growth}</span>
+      </div>
+    </div>
+  </div>
+)
 
-        </div>
-    );
-}
-
-export default CompanyItem;
+export default CompanyItem

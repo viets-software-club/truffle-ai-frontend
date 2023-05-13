@@ -1,31 +1,44 @@
+import { ComponentType, ReactNode } from 'react'
 
-import { ComponentType } from 'react';
-
-interface GitHubStatisticProps
-{
-    Icon?: ComponentType<{ className?: string }>;
-    IconMetric?: JSX.Element;
-    value: string;
-    growth: string;
-    padding: boolean;
-    hover?: boolean;
+interface GitHubStatisticProps {
+  Icon?: ComponentType<{ className?: string }>
+  IconMetric?: ReactNode
+  value: string
+  growth: string
+  padding: boolean
+  hover?: boolean
 }
 
-const GitHubStatisticItem = ({ Icon, value, growth, IconMetric, padding, hover }: GitHubStatisticProps) =>
-{
-    return (
-        <div className="flex flex-col justify-between">
-            <div className={`inline-flex px-7 py-2.5 ${hover ? "hover:bg-bg-secondary transition-colors duration-100" : ""}`}>
-                <div className="flex flex-row justify-center items-center gap-[15px]">
-                    {Icon && <Icon className="text-icon-color w-[14px] h-[14px]" />}
-                    {IconMetric && <>{IconMetric}</>}
-                    <span className={`text-text-primary not-italic font-size-3 text-xs leading-3 ${padding ? "w-6" : ""}`}>{value}</span>
-                    <span className="text-icon-color not-italic font-size-3 text-xs leading-3">{growth}</span>
+const GitHubStatisticItem = ({
+  Icon,
+  value,
+  growth,
+  IconMetric,
+  padding,
+  hover
+}: GitHubStatisticProps) => (
+  <div className="flex flex-col justify-between">
+    <div
+      className={`inline-flex px-7 py-2.5 ${
+        hover ? 'transition-colors duration-100 hover:bg-bg-secondary' : ''
+      }`}
+    >
+      <div className="flex flex-row items-center justify-center gap-[15px]">
+        {Icon && <Icon className="h-[14px] w-[14px] text-icon-color" />}
+        {IconMetric}
+        <span className={`text-xs not-italic leading-3 text-text-primary ${padding ? 'w-6' : ''}`}>
+          {value}
+        </span>
+        <span className="text-xs not-italic leading-3 text-icon-color">{growth}</span>
+      </div>
+    </div>
+  </div>
+)
 
-                </div>
-            </div>
-        </div >
-    );
+GitHubStatisticItem.defaultProps = {
+  Icon: undefined,
+  IconMetric: undefined,
+  hover: true
 }
 
-export default GitHubStatisticItem;
+export default GitHubStatisticItem

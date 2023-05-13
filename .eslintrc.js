@@ -18,8 +18,20 @@ module.exports = {
   parser: '@typescript-eslint/parser',
 
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }]
+    'react/function-component-definition': [
+      'error',
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function'
+      }
+    ],
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.jsx'] }],
+    'import/extensions': ['error', { tsx: 'never' }],
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'error',
+    '@typescript-eslint/no-unused-vars': 'error'
   },
+
   env: {
     browser: true,
     node: false

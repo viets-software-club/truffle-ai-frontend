@@ -1,32 +1,37 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react'
 
-interface ModalProps
-{
-    isOpen: boolean;
-    onClose: () => void;
-    children: ReactNode;
+interface ModalProps {
+  isOpen: boolean
+  onClose: () => void
+  children: ReactNode
 }
 
-const Modal = ({ isOpen, onClose, children }: ModalProps) =>
-{
-    if (!isOpen)
-    {
-        return null;
-    }
+const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+  if (!isOpen) {
+    return null
+  }
 
-    return (
-        <>
-            {/* Overlay */}
-            <div className='fixed z-40 inset-0 bg-black bg-opacity-10' onClick={onClose}></div>
+  return (
+    <>
+      {/* Overlay */}
+      <div
+        className="fixed inset-0 z-40 bg-black opacity-10"
+        onClick={onClose}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            onClose()
+          }
+        }}
+        tabIndex={0}
+        role="button"
+      />
 
-            {/* Modal */}
-            <div className='m-0 z-50'>
-                <div className='bg-bg-secondary'>
-                    {children}
-                </div>
-            </div>
-        </>
-    );
-};
+      {/* Modal */}
+      <div className="z-50 m-0">
+        <div className="bg-bg-secondary">{children}</div>
+      </div>
+    </>
+  )
+}
 
-export default Modal;
+export default Modal
