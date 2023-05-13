@@ -75,7 +75,7 @@ export default function Overview()
 
     return (
         <main className={`${inter.className}`}>
-            <div className="flex">
+            <div className="flex flex-col">
                 {/* Sidebar left */}
                 <div className={`min-h-screen fixed justify-between left-0 top-0 h-screen flex flex-col border-r border-border-color w-56 ${inter.className}`}>
                     <div>
@@ -109,7 +109,7 @@ export default function Overview()
 
 
                 {/* Main content */}
-                <div className="flex-col flex text-text-primary ml-56 w-full">
+                <div className="flex-col flex text-text-primary ml-56">
                     <div className="pl-7 pr-2 py-2.5 border-border-color border-b border-solid text-icon-color">
                         <div className="flex justify-between">
                             <div className="flex-row flex gap-3 items-center">
@@ -146,7 +146,7 @@ export default function Overview()
                                     textFields={[
                                         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore  -> Source: ELI5",
                                         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore  -> Source: Hackernews",
-                                ]}
+                                    ]}
                                 />
                             </div>
                             <div className="flex flex-col px-7 py-2.5">

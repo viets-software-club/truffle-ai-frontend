@@ -88,32 +88,34 @@ const Chart = ({ starData, forkData, issueData }: ChartProps) =>
                 <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }} />
                 {showSecondLine && <Line type="monotone" dataKey="value2" stroke="#82ca9d" />}
             </LineChart>
-            <div className='flex flex-row gap-3 '>
-                <div className='h-2'>
+            <div className='flex flex-col gap-3 '>
+                <div>
                     <Button
                         variant={"normal"}
                         text={showSecondLine ? "Hide Second Line" : "Show Second Line"}
                         onClick={() => setShowSecondLine(!showSecondLine)}
+
                     />
                 </div>
+                <div className='flex flex-row gap-3'>
+                    <div className='flex flex-col'>
+                        <Button variant={"normal"} text={modalValue} Icon={ChevronDown} switchOrder={true} onClick={() => { toggleModal(); }} />
+                        <Modal isOpen={isModalOpen} onClose={toggleModal}>
+                            <Button variant={"noBordernoBG"} text="Stars" fullWidth={true} onClick={() => handleModalValueChange('Stars')} />
+                            <Button variant={"noBordernoBG"} text="Forks" fullWidth={true} onClick={() => handleModalValueChange('Forks')} />
+                            <Button variant={"noBordernoBG"} text="Issues" fullWidth={true} onClick={() => handleModalValueChange('Issues')} />
+                        </Modal>
+                    </div>
 
-                <div className='flex flex-col w-40'>
-                    <Button variant={"normal"} text={modalValue} Icon={ChevronDown} switchOrder={true} onClick={() => { toggleModal(); }} />
-                    <Modal isOpen={isModalOpen} onClose={toggleModal}>
-                        <Button variant={"noBordernoBG"} text="Stars" fullWidth={true} onClick={() => handleModalValueChange('Stars')} />
-                        <Button variant={"noBordernoBG"} text="Forks" fullWidth={true} onClick={() => handleModalValueChange('Forks')} />
-                        <Button variant={"noBordernoBG"} text="Issues" fullWidth={true} onClick={() => handleModalValueChange('Issues')} />
-                    </Modal>
-                </div>
-
-                <div className='flex flex-col w-40'>
-                    <Button variant={"normal"} text={timeframeModalValue} Icon={ChevronDown} switchOrder={true} onClick={() => { setTimeframeModalOpen(true); }} />
-                    <Modal isOpen={timeframeModalOpen} onClose={() => setTimeframeModalOpen(false)}>
-                        <Button variant={"noBordernoBG"} text="1 Month" fullWidth={true} onClick={() => handleTimeframeChange(1)} />
-                        <Button variant={"noBordernoBG"} text="3 Months" fullWidth={true} onClick={() => handleTimeframeChange(3)} />
-                        <Button variant={"noBordernoBG"} text="6 Months" fullWidth={true} onClick={() => handleTimeframeChange(6)} />
-                        <Button variant={"noBordernoBG"} text="1 Year" fullWidth={true} onClick={() => handleTimeframeChange(12)} />
-                    </Modal>
+                    <div className='flex flex-col'>
+                        <Button variant={"normal"} text={timeframeModalValue} Icon={ChevronDown} switchOrder={true} onClick={() => { setTimeframeModalOpen(true); }} />
+                        <Modal isOpen={timeframeModalOpen} onClose={() => setTimeframeModalOpen(false)}>
+                            <Button variant={"noBordernoBG"} text="1 Month" fullWidth={false} onClick={() => handleTimeframeChange(1)} />
+                            <Button variant={"noBordernoBG"} text="3 Months" fullWidth={false} onClick={() => handleTimeframeChange(3)} />
+                            <Button variant={"noBordernoBG"} text="6 Months" fullWidth={false} onClick={() => handleTimeframeChange(6)} />
+                            <Button variant={"noBordernoBG"} text="1 Year" fullWidth={false} onClick={() => handleTimeframeChange(12)} />
+                        </Modal>
+                    </div>
                 </div>
             </div>
         </div >

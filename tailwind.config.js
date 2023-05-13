@@ -9,7 +9,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'radial-gradient': 'radial-gradient(circle at 50% -70%, #191D3B, #191D3B, #191A23)',
       },
       colors: {
         'bg-primary': '#191A23',
@@ -31,6 +32,10 @@ module.exports = {
         '18': '18px',
         '20': '20px',
         '24': '24px',
+        '28': '28px',
+        '32': '32px',
+        '36': '36px',
+
       },
     }
   },
