@@ -1,7 +1,7 @@
 import { FaDiscord, FaTwitter, FaLinkedin, FaSlack } from 'react-icons/fa'
 import SocialMediaItem from './SocialMediaItem'
 
-interface SocialMediaData {
+type SocialMediaData = {
   name: string
   text: string
   value: string
@@ -9,7 +9,7 @@ interface SocialMediaData {
   url: string
 }
 
-interface SocialMediaContainerProps {
+type SocialMediaContainerProps = {
   socialMediaData: SocialMediaData[]
 }
 

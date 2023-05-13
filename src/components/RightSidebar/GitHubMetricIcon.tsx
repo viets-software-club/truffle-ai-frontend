@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 
-interface GitHubMetricIconProps {
+type GitHubMetricIconProps = {
   Icon: ComponentType<{ className?: string }>
   Icon2: ComponentType<{ className?: string }>
 }

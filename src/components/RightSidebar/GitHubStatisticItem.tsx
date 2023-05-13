@@ -1,6 +1,6 @@
 import { ComponentType, ReactNode } from 'react'
 
-interface GitHubStatisticProps {
+type GitHubStatisticProps = {
   Icon?: ComponentType<{ className?: string }>
   IconMetric?: ReactNode
   value: string

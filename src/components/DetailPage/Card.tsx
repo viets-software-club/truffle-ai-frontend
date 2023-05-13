@@ -1,6 +1,6 @@
 import { ComponentType, ReactNode } from 'react'
 
-interface CardProps {
+type CardProps = {
   Icon: ComponentType<{ className?: string }>
   name: string
   button: ReactNode

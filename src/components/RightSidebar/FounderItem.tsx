@@ -1,6 +1,6 @@
 import { FaLinkedin } from 'react-icons/fa'
 
-interface FounderProps {
+type FounderProps = {
   linkedin: boolean
   mail: boolean
   name: string

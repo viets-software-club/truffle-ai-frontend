@@ -1,4 +1,4 @@
-interface CompanyProps {
+type CompanyProps = {
   name: string
   value: string
   growth: string

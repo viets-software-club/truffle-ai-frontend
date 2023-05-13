@@ -1,14 +1,14 @@
 import GitHubStatisticItem from '@/components/RightSidebar/GitHubStatisticItem'
 import { ComponentType, ReactNode } from 'react'
 
-interface InformationRowItemData {
+type InformationRowItemData = {
   Icon?: ComponentType<{ className?: string }>
   IconMetric?: ReactNode
   value: string
   growth: string
 }
 
-interface InformationRowProps {
+type InformationRowProps = {
   statisticsData: InformationRowItemData[]
   name: string
   tags: string[]

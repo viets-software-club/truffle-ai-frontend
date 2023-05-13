@@ -1,7 +1,7 @@
 import GitHubStatisticItem from '@/components/RightSidebar/GitHubStatisticItem'
 import { ComponentType, ReactNode } from 'react'
 
-interface StatisticItemData {
+type StatisticItemData = {
   id: string
   Icon?: ComponentType<{ className?: string }>
   IconMetric?: ReactNode
@@ -9,7 +9,7 @@ interface StatisticItemData {
   growth: string
 }
 
-interface GitHubStatisticsContainerProps {
+type GitHubStatisticsContainerProps = {
   statisticsData: StatisticItemData[]
 }
 

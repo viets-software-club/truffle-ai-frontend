@@ -1,6 +1,6 @@
 import { ComponentType, useMemo } from 'react'
 
-interface ButtonProps {
+type ButtonProps = {
   variant:
     | 'normal'
     | 'highlighted'

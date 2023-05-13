@@ -6,13 +6,13 @@ import { subMonths } from 'date-fns'
 import Button from '../Button'
 import Modal from './Modal'
 
-interface ChartData {
+type ChartData = {
   name: string
   value: number
   value2: number
 }
 
-interface ChartProps {
+type ChartProps = {
   starData: ChartData[]
   forkData: ChartData[]
   issueData: ChartData[]

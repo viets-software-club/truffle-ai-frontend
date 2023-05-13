@@ -1,12 +1,12 @@
 import CompanyItem from './CompanyItem'
 
-interface CompanyData {
+type CompanyData = {
   name: string
   value: string
   growth: string
 }
 
-interface CompanyContainerProps {
+type CompanyContainerProps = {
   companyData: CompanyData[]
 }
 

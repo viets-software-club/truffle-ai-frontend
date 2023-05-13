@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 
-interface SocialMediaProps {
+type SocialMediaProps = {
   Icon: ComponentType<{ className?: string }>
   text: string
   name: string

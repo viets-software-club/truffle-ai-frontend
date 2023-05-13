@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 
-interface MenuItemProps {
+type MenuItemProps = {
   Icon: ComponentType<{ className?: string }>
   text: string
   onClick: () => void

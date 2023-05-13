@@ -1,7 +1,7 @@
 import { StarIcon } from '@primer/octicons-react'
 import Button from '../Button'
 
-interface ProjectInformationProps {
+type ProjectInformationProps = {
   name: string
   eli5: string
   tags: string[]

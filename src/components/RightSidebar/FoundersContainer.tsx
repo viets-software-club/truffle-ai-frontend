@@ -1,6 +1,6 @@
 import FounderItem from './FounderItem'
 
-interface FoundersData {
+type FoundersData = {
   name: string
   linkedin: boolean
   mail: boolean
@@ -8,7 +8,7 @@ interface FoundersData {
   urlMail: string
 }
 
-interface FoundersContainerProps {
+type FoundersContainerProps = {
   foundersData: FoundersData[]
 }
 
