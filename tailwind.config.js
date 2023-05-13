@@ -24,6 +24,14 @@ module.exports = {
         'yellow': '#F2C94C',
         'green': '#4CB782'
       },
+      fontSize: {
+        '12': '12px',
+        '14': '14px',
+        '16': '16px',
+        '18': '18px',
+        '20': '20px',
+        '24': '24px',
+      },
     }
   },
   plugins: []
