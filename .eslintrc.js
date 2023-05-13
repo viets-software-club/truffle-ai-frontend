@@ -1,13 +1,5 @@
 module.exports = {
   root: true,
-  overrides: [
-    {
-      files: ['eslintrc.js'],
-      parserOptions: {
-        sourceType: 'module'
-      }
-    }
-  ],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -24,16 +16,19 @@ module.exports = {
   ],
   plugins: ['@typescript-eslint', 'react', 'react-hooks', 'sonarjs', 'jsx-a11y'],
   parser: '@typescript-eslint/parser',
-
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['error'],
-    'import/extensions': 'off',
-    'import/no-unresolved': 'off',
-    'import/prefer-default-export': 'off',
+    'react/function-component-definition': [
+      'error',
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function'
+      }
+    ],
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.jsx'] }],
+    'import/extensions': ['error', { tsx: 'never' }],
     'no-shadow': 'off',
-    'react/no-unstable-nested-components': ['error', { allowAsProps: true }]
+    '@typescript-eslint/no-shadow': 'error',
+    '@typescript-eslint/no-unused-vars': 'error'
   },
   env: {
     browser: true,
