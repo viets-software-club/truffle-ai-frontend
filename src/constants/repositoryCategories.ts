@@ -1,33 +1,35 @@
-export enum RepositoryCategories {
+enum RepositoryCategories {
   // Developer Tools subcategories
-  CodeEditors = 'Code Editors',
-  VersionControl = 'Version Control',
-  ContinuousIntegration = 'Continuous Integration',
-  TestingFrameworks = 'Testing Frameworks',
-  PackageManagers = 'Package Managers',
-  IDEs = 'Integrated Development Environments',
-  Debuggers = 'Debuggers',
-  Profilers = 'Profilers',
-  BuildTools = 'Build Tools',
-  CodeQuality = 'Code Quality',
+  CODE_EDITORS = 'Code Editors',
+  VERSION_CONTROL = 'Version Control',
+  CONTINUOUS_INTEGRATION = 'Continuous Integration',
+  TESTING_FRAMEWORKS = 'Testing Frameworks',
+  PACKAGE_MANAGERS = 'Package Managers',
+  IDE = 'Integrated Development Environments',
+  DEBUGGERS = 'Debuggers',
+  PROFILERS = 'Profilers',
+  BUILD_TOOLS = 'Build Tools',
+  CODE_QUALITY = 'Code Quality',
 
   // Infrastructure subcategories
-  CloudComputing = 'Cloud Computing',
-  Virtualization = 'Virtualization',
-  Containerization = 'Containerization',
-  Orchestration = 'Orchestration',
-  Monitoring = 'Monitoring',
-  Networking = 'Networking',
-  Databases = 'Databases',
-  LoadBalancing = 'Load Balancing',
+  CLOUD_COMPUTING = 'Cloud Computing',
+  VIRTUALIZATION = 'Virtualization',
+  CONTAINERIZATION = 'Containerization',
+  ORCHESTRATION = 'Orchestration',
+  MONITORING = 'Monitoring',
+  NETWORKING = 'Networking',
+  DATABASES = 'Databases',
+  LOAD_BALANCING = 'Load Balancing',
   CDN = 'Content Delivery Networks',
-  IdentityManagement = 'Identity Management',
+  IDENTITY_MANAGEMENT = 'Identity Management',
 
   // ML/AI subcategories
-  MachineLearning = 'Machine Learning',
-  DeepLearning = 'Deep Learning',
-  NaturalLanguageProcessing = 'Natural Language Processing',
-  ComputerVision = 'Computer Vision',
+  MACHINE_LEARNING = 'Machine Learning',
+  DEEP_LEARNING = 'Deep Learning',
+  NATURAL_LANGUAGE_PROCESSING = 'Natural Language Processing',
+  COMPUTER_VISION = 'Computer Vision',
 
-  Cybersecurity = 'Cybersecurity'
+  CYBERSECURITY = 'Cybersecurity'
 }
+
+export default RepositoryCategories

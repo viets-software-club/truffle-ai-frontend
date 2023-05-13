@@ -1,23 +1,25 @@
-export enum ProgrammingLanguages {
-  JavaScript = 'JavaScript',
-  Python = 'Python',
-  Java = 'Java',
+enum ProgrammingLanguages {
+  JAVASCRIPT = 'JavaScript',
+  PYTHON = 'Python',
+  JAVA = 'Java',
   PHP = 'PHP',
-  CPlusPlus = 'C++',
-  CSharp = 'C#',
+  CPLUSPLUS = 'C++',
+  CSHARP = 'C#',
   C = 'C',
-  TypeScript = 'TypeScript',
-  Ruby = 'Ruby',
-  Swift = 'Swift',
-  Kotlin = 'Kotlin',
-  Go = 'Go',
-  ObjectiveC = 'Objective-C',
+  TYPESCRIPT = 'TypeScript',
+  RUBY = 'Ruby',
+  SWIFT = 'Swift',
+  KOTLIN = 'Kotlin',
+  GO = 'Go',
+  OBJECTIVE_C = 'Objective-C',
   R = 'R',
   MATLAB = 'MATLAB',
-  Scala = 'Scala',
-  Rust = 'Rust',
-  Lua = 'Lua',
-  Dart = 'Dart',
-  Shell = 'Shell',
-  Perl = 'Perl'
+  SCALA = 'Scala',
+  RUST = 'Rust',
+  LUA = 'Lua',
+  DART = 'Dart',
+  SHELL = 'Shell',
+  PERL = 'Perl'
 }
+
+export default ProgrammingLanguages

@@ -1,8 +1,7 @@
-import { IRepositoryShort } from '@/constants/repositoryShort'
-import { ProgrammingLanguages } from './programmingLanguages'
-import { RepositoryCategories } from './repositoryCategories'
+import ProgrammingLanguages from '../constants/programmingLanguages'
+import RepositoryCategories from '../constants/repositoryCategories'
 
-export const mockRepositories: IRepositoryShort[] = [
+const repositories = [
   {
     name: 'axios',
     ownerName: 'axios',
@@ -11,8 +10,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 205,
     contributorCount: 110,
     pullRequestCount: 57,
-    programmingLanguage: ProgrammingLanguages.JavaScript,
-    category: RepositoryCategories.CodeEditors
+    programmingLanguage: ProgrammingLanguages.JAVASCRIPT,
+    category: RepositoryCategories.CODE_EDITORS
   },
   {
     name: 'tensorflow',
@@ -22,8 +21,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 11763,
     contributorCount: 2193,
     pullRequestCount: 1948,
-    programmingLanguage: ProgrammingLanguages.Python,
-    category: RepositoryCategories.MachineLearning
+    programmingLanguage: ProgrammingLanguages.PYTHON,
+    category: RepositoryCategories.MACHINE_LEARNING
   },
   {
     name: 'kubernetes',
@@ -33,8 +32,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 10037,
     contributorCount: 2575,
     pullRequestCount: 1704,
-    programmingLanguage: ProgrammingLanguages.Go,
-    category: RepositoryCategories.Containerization
+    programmingLanguage: ProgrammingLanguages.GO,
+    category: RepositoryCategories.CONTAINERIZATION
   },
   {
     name: 'react',
@@ -44,8 +43,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 1866,
     contributorCount: 1766,
     pullRequestCount: 596,
-    programmingLanguage: ProgrammingLanguages.JavaScript,
-    category: RepositoryCategories.CodeEditors
+    programmingLanguage: ProgrammingLanguages.JAVASCRIPT,
+    category: RepositoryCategories.CODE_EDITORS
   },
   {
     name: 'ansible',
@@ -55,8 +54,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 3460,
     contributorCount: 1289,
     pullRequestCount: 1486,
-    programmingLanguage: ProgrammingLanguages.Python,
-    category: RepositoryCategories.Orchestration
+    programmingLanguage: ProgrammingLanguages.PYTHON,
+    category: RepositoryCategories.ORCHESTRATION
   },
   {
     name: 'pandas',
@@ -66,8 +65,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 1824,
     contributorCount: 845,
     pullRequestCount: 664,
-    programmingLanguage: ProgrammingLanguages.Python,
-    category: RepositoryCategories.Databases
+    programmingLanguage: ProgrammingLanguages.PYTHON,
+    category: RepositoryCategories.DATABASES
   },
   {
     name: 'vscode',
@@ -77,8 +76,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 1742,
     contributorCount: 659,
     pullRequestCount: 1573,
-    programmingLanguage: ProgrammingLanguages.TypeScript,
-    category: RepositoryCategories.IDEs
+    programmingLanguage: ProgrammingLanguages.TYPESCRIPT,
+    category: RepositoryCategories.IDE
   },
   {
     name: 'flask',
@@ -88,8 +87,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 690,
     contributorCount: 406,
     pullRequestCount: 426,
-    programmingLanguage: ProgrammingLanguages.Python,
-    category: RepositoryCategories.PackageManagers
+    programmingLanguage: ProgrammingLanguages.PYTHON,
+    category: RepositoryCategories.PACKAGE_MANAGERS
   },
   {
     name: 'webpack',
@@ -99,8 +98,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 732,
     contributorCount: 342,
     pullRequestCount: 269,
-    programmingLanguage: ProgrammingLanguages.JavaScript,
-    category: RepositoryCategories.BuildTools
+    programmingLanguage: ProgrammingLanguages.JAVASCRIPT,
+    category: RepositoryCategories.BUILD_TOOLS
   },
   {
     name: 'nginx',
@@ -111,7 +110,7 @@ export const mockRepositories: IRepositoryShort[] = [
     contributorCount: 356,
     pullRequestCount: 195,
     programmingLanguage: ProgrammingLanguages.C,
-    category: RepositoryCategories.LoadBalancing
+    category: RepositoryCategories.LOAD_BALANCING
   },
   {
     name: 'kafka',
@@ -121,8 +120,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 2480,
     contributorCount: 845,
     pullRequestCount: 803,
-    programmingLanguage: ProgrammingLanguages.Java,
-    category: RepositoryCategories.Networking
+    programmingLanguage: ProgrammingLanguages.JAVA,
+    category: RepositoryCategories.NETWORKING
   },
   {
     name: 'eslint',
@@ -132,8 +131,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 550,
     contributorCount: 205,
     pullRequestCount: 111,
-    programmingLanguage: ProgrammingLanguages.JavaScript,
-    category: RepositoryCategories.CodeQuality
+    programmingLanguage: ProgrammingLanguages.JAVASCRIPT,
+    category: RepositoryCategories.CODE_QUALITY
   },
   {
     name: 'prometheus',
@@ -143,8 +142,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 710,
     contributorCount: 341,
     pullRequestCount: 365,
-    programmingLanguage: ProgrammingLanguages.Go,
-    category: RepositoryCategories.Monitoring
+    programmingLanguage: ProgrammingLanguages.GO,
+    category: RepositoryCategories.MONITORING
   },
   {
     name: 'mongodb',
@@ -154,8 +153,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 248,
     contributorCount: 177,
     pullRequestCount: 120,
-    programmingLanguage: ProgrammingLanguages.CPlusPlus,
-    category: RepositoryCategories.Databases
+    programmingLanguage: ProgrammingLanguages.CPLUSPLUS,
+    category: RepositoryCategories.DATABASES
   },
   {
     name: 'prettier',
@@ -165,8 +164,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 492,
     contributorCount: 189,
     pullRequestCount: 110,
-    programmingLanguage: ProgrammingLanguages.JavaScript,
-    category: RepositoryCategories.CodeQuality
+    programmingLanguage: ProgrammingLanguages.JAVASCRIPT,
+    category: RepositoryCategories.CODE_QUALITY
   },
   {
     name: 'netty',
@@ -176,8 +175,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 814,
     contributorCount: 307,
     pullRequestCount: 284,
-    programmingLanguage: ProgrammingLanguages.Java,
-    category: RepositoryCategories.Networking
+    programmingLanguage: ProgrammingLanguages.JAVA,
+    category: RepositoryCategories.NETWORKING
   },
   {
     name: 'jupyter',
@@ -187,8 +186,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 711,
     contributorCount: 301,
     pullRequestCount: 164,
-    programmingLanguage: ProgrammingLanguages.Python,
-    category: RepositoryCategories.Databases
+    programmingLanguage: ProgrammingLanguages.PYTHON,
+    category: RepositoryCategories.DATABASES
   },
   {
     name: 'fastapi',
@@ -198,8 +197,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 273,
     contributorCount: 149,
     pullRequestCount: 148,
-    programmingLanguage: ProgrammingLanguages.Python,
-    category: RepositoryCategories.PackageManagers
+    programmingLanguage: ProgrammingLanguages.PYTHON,
+    category: RepositoryCategories.PACKAGE_MANAGERS
   },
   {
     name: 'kibana',
@@ -209,8 +208,8 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 1887,
     contributorCount: 577,
     pullRequestCount: 366,
-    programmingLanguage: ProgrammingLanguages.JavaScript,
-    category: RepositoryCategories.Monitoring
+    programmingLanguage: ProgrammingLanguages.JAVASCRIPT,
+    category: RepositoryCategories.MONITORING
   },
   {
     name: 'next.js',
@@ -220,7 +219,9 @@ export const mockRepositories: IRepositoryShort[] = [
     issueCount: 397,
     contributorCount: 184,
     pullRequestCount: 126,
-    programmingLanguage: ProgrammingLanguages.TypeScript,
-    category: RepositoryCategories.CodeEditors
+    programmingLanguage: ProgrammingLanguages.TYPESCRIPT,
+    category: RepositoryCategories.CODE_EDITORS
   }
 ]
+
+export default repositories

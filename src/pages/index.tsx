@@ -1,12 +1,11 @@
 import { Inter } from 'next/font/google'
-import RepositoryListView from '@/components/RepositoryListView'
+import RepositoryTable from '@/components/RepositoryTable'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
-  return (
-    <main className={`min-h-screen p-24 ${inter.className} bg-bg-primary text-text-primary`}>
-      <RepositoryListView />
-    </main>
-  )
-}
+const Home = () => (
+  <main className={`min-h-screen p-24 ${inter.className} bg-primary text-primary`}>
+    <RepositoryTable />
+  </main>
+)
+export default Home
