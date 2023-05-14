@@ -6,7 +6,15 @@ import SocialMediaContainer from '@/components/RightSidebar/SocialMediaContainer
 import GitHubMetricIcon from '@/components/RightSidebar/GitHubMetricIcon'
 
 import { Inter } from 'next/font/google'
-import { BookOpen, Compass, Bookmark, X, ChevronUp, ChevronDown, Calendar } from 'react-feather'
+import {
+  FiBookOpen as BookOpen,
+  FiCompass as Compass,
+  FiBookmark as Bookmark,
+  FiX as X,
+  FiChevronUp as ChevronUp,
+  FiChevronDown as ChevronDown,
+  FiCalendar as Calendar
+} from 'react-icons/fi'
 import {
   RepoForkedIcon,
   StarIcon,
