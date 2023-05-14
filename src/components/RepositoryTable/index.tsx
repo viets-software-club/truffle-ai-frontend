@@ -5,13 +5,10 @@ import {
   createColumnHelper
 } from '@tanstack/react-table'
 import React from 'react'
-import {
-  AiOutlineFork,
-  AiOutlineStar,
-  BiGitPullRequest,
-  BsPeople,
-  VscIssues
-} from 'react-icons/all'
+import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai'
+import { BsPeople } from 'react-icons/bs'
+import { BiGitPullRequest } from 'react-icons/bi'
+import { VscIssues } from 'react-icons/vsc'
 import ProgrammingLanguages from '@/constants/programmingLanguages'
 import RepositoryCategories from '@/constants/repositoryCategories'
 import respositoriesMock from '../../data/repositoriesMock'
