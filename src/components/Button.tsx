@@ -86,8 +86,8 @@ const Button = ({
 }
 
 Button.defaultProps = {
-  text: '',
-  Icon: undefined,
+  text: null,
+  Icon: null,
   switchOrder: false,
   iconColor: 'text-icon-color',
   textColor: 'text-text-secondary',

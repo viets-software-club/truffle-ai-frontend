@@ -11,7 +11,7 @@ const Card = ({ Icon, name, button, textFields }: CardProps) => (
   <div className="mx-7 my-4 rounded-lg border border-border-color bg-bg-secondary">
     <div className="flex flex-row items-center px-4 pt-4">
       <Icon className="mr-2 text-highlight-color" />
-      <h2 className="">{name}</h2>
+      <h2>{name}</h2>
     </div>
     {textFields.map((text) => (
       <p
