@@ -87,9 +87,7 @@ const browseListColumns = [
   columnHelper.accessor('category', {
     header: () => 'Category',
     cell: (info) => (
-      <p className="inline-block rounded-lg border border-somecolor bg-secondary-highlighted p-1.5 text-xs text-primary">
-        {info.getValue()}
-      </p>
+      <p className="text-primary inline-block rounded-lg border p-1.5 text-xs">{info.getValue()}</p>
     )
   })
 ]
@@ -104,13 +102,13 @@ const RepositoryTable = () => {
     getCoreRowModel: getCoreRowModel()
   })
   return (
-    <div className="flex flex-col rounded-lg bg-secondary p-8">
+    <div className="flex flex-col rounded-lg p-8">
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="text-left font-light text-secondary">
+                <th key={header.id} className="text-secondary text-left font-light">
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
@@ -123,13 +121,14 @@ const RepositoryTable = () => {
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              className="hover:bg-secondary-highlighted"
+              // TODO: Hover
+              className=""
               // TODO
               // eslint-disable-next-line no-alert
               onClick={() => alert('This will soon open up a detail view page!')}
             >
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="py-2 text-left text-primary">
+                <td key={cell.id} className="text-primary py-2 text-left">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
