@@ -31,6 +31,7 @@ import Card from '@/components/DetailPage/Card'
 import ProjectInformation from '@/components/DetailPage/ProjectInformation'
 import Chart from '@/components/DetailPage/Chart'
 import InformationRow from '@/components/InformationRow'
+import ScatterPlot from '@/components/DetailPage/ScatterPlot'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -173,6 +174,7 @@ const Overview = () => {
                 tags={['React', 'Static Site Generation', 'TypeScript']}
               />
               <Chart starData={starData} forkData={forkData} issueData={issueData} />
+              <ScatterPlot />
               <div className="flex flex-row">
                 <Card
                   Icon={FaTwitter}

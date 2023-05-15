@@ -16,7 +16,6 @@ module.exports = {
   ],
   plugins: ['@typescript-eslint', 'react', 'react-hooks', 'sonarjs', 'jsx-a11y'],
   parser: '@typescript-eslint/parser',
-
   rules: {
     'react/function-component-definition': [
       'error',
