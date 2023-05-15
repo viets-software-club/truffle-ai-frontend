@@ -8,6 +8,9 @@ type FoundersData = {
   urlMail: string
 }
 
+const generateMailTemplate = (founderName: string) =>
+  `?subject=Interested%20In%20Product&body=Dear%20${founderName},%0D%0A%0D%0Anice%20to%20meet%20you.%20I%20am%20interested%20in%20your%20product.%0D%0A%0D%0ABest%20Regards,%0D%0A%0D%0AMax%20Mustermann`
+
 type FoundersContainerProps = {
   foundersData: FoundersData[]
 }
@@ -27,7 +30,7 @@ const FoundersContainer = ({ foundersData: socialMediaData }: FoundersContainerP
           mail={data.mail}
           name={data.name}
           onClickLinkedIn={() => handleClick(data.urlLinkedIn)}
-          onClickMail={() => handleClick(data.urlMail)}
+          onClickMail={() => handleClick(data.urlMail + generateMailTemplate(data.name))}
         />
       ))}
     </div>
