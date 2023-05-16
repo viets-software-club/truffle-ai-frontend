@@ -23,16 +23,16 @@ import IntegrationsContainer from '@/components/RightSidebar/IntegrationsContain
 import CompanyContainer from '@/components/RightSidebar/CompanyContainer'
 import Button from '@/components/Button'
 import { FaTwitter, FaHackerNews } from 'react-icons/fa'
-import Card from '@/pages/DetailPage/Card'
-import ProjectInformation from '@/pages/DetailPage/ProjectInformation'
-import Chart from '@/pages/DetailPage/Chart'
+import Card from '@/components/DetailPage/Card'
+import ProjectInformation from '@/components/DetailPage/ProjectInformation'
+import Chart from '@/components/DetailPage/Chart'
 import InformationRow from '@/components/InformationRow'
-import ScatterPlot from '@/pages/DetailPage/ScatterPlot'
+import ScatterPlot from '@/components/DetailPage/ScatterPlot'
 import LeftSidebar from '@/components/LeftSidebar'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const Overview = () => {
+const Details = () => {
   const handleClick = () => {
     // eslint-disable-next-line no-alert
     alert('Under construction!')
@@ -208,4 +208,4 @@ const Overview = () => {
     </main>
   )
 }
-export default Overview
+export default Details

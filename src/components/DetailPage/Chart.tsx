@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 import { FiChevronDown as ChevronDown } from 'react-icons/fi'
 import { subMonths } from 'date-fns'
-import Button from '../../components/Button'
+import Button from '../Button'
 import Modal from './Modal'
 
 type ChartData = {

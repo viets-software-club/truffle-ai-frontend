@@ -16,12 +16,12 @@ const Loading = () => {
         if (oldProgress === 100) {
           clearInterval(timer)
           // eslint-disable-next-line no-void
-          void router.push('/overview')
+          void router.push('/')
           return 100
         }
         return oldProgress + 0.5
       })
-    }, 30)
+    }, 10)
 
     return () => {
       clearInterval(timer)
