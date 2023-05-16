@@ -26,7 +26,8 @@ const ProjectInformation = ({ name, eli5, tags }: ProjectInformationProps) => (
         text="Bookmark"
         Icon={StarIcon}
         onClick={() => {
-          console.log('clicked')
+          // eslint-disable-next-line no-alert
+          alert('Bookmark clicked!')
         }}
         textColor="text-gray-100"
         iconColor="text-gray-100"

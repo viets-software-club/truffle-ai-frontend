@@ -4,9 +4,10 @@ type GitHubStatisticProps = {
   Icon?: ComponentType<{ className?: string }>
   IconMetric?: ReactNode
   value: string
-  growth: string
+  growth?: string
   paddingOn: boolean
-  hover?: boolean
+  outerPaddingOn?: boolean
+  hoverOn?: boolean
 }
 
 const GitHubStatisticItem = ({
@@ -15,21 +16,22 @@ const GitHubStatisticItem = ({
   growth,
   IconMetric,
   paddingOn,
-  hover
+  outerPaddingOn,
+  hoverOn
 }: GitHubStatisticProps) => (
   <div className="flex flex-col justify-between">
     <div
-      className={`inline-flex px-7 py-2.5 ${
-        hover ? 'transition-colors duration-100 hover:bg-gray-850' : ''
+      className={`inline-flex ${outerPaddingOn ? 'px-7' : ''} py-2.5 ${
+        hoverOn ? 'transition-colors duration-100 hover:bg-gray-850' : ''
       }`}
     >
-      <div className="flex flex-row items-center justify-center gap-[15px]">
+      <div className="flex flex-row items-center justify-center gap-[10px]">
         {Icon && <Icon className="h-[14px] w-[14px] text-gray-500" />}
         {IconMetric}
         <span className={`text-xs not-italic leading-3 text-gray-100 ${paddingOn ? 'w-6' : ''}`}>
           {value}
         </span>
-        <span className="text-xs not-italic leading-3 text-gray-500">{growth}</span>
+        {growth && <span className="text-xs not-italic leading-3 text-gray-500">{growth}</span>}
       </div>
     </div>
   </div>
@@ -38,7 +40,9 @@ const GitHubStatisticItem = ({
 GitHubStatisticItem.defaultProps = {
   Icon: undefined,
   IconMetric: undefined,
-  hover: true
+  growth: undefined,
+  outerPaddingOn: true,
+  hoverOn: true
 }
 
 export default GitHubStatisticItem

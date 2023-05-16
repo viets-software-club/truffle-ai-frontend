@@ -11,8 +11,8 @@ import { BiGitPullRequest } from 'react-icons/bi'
 import { VscIssues } from 'react-icons/vsc'
 import ProgrammingLanguages from '@/constants/programmingLanguages'
 import RepositoryCategories from '@/constants/repositoryCategories'
+import GitHubStatisticItem from '@/components/RightSidebar/GitHubStatisticItem'
 import respositoriesMock from '../../data/repositoriesMock'
-import ProgrammingLanguageIcon from '../ProgrammingLanguageIcon'
 
 type Repository = {
   name: string
@@ -30,64 +30,86 @@ const columnHelper = createColumnHelper<Repository>()
 const browseListColumns = [
   columnHelper.accessor('name', {
     header: () => 'Name',
-    cell: (info) => <p className="font-bold">{info.getValue()}</p>
+    cell: (info) => <p className="text-14 font-bold">{info.getValue()}</p>
   }),
   columnHelper.accessor('ownerName', {
-    header: () => 'Owner Name'
+    header: () => 'Owner',
+    cell: (info) => <p className="text-14">{info.getValue()}</p>
   }),
   columnHelper.accessor('starCount', {
     header: () => 'Stars',
     cell: (info) => (
-      <div className="flex flex-row items-center space-x-1 text-green">
-        <AiOutlineStar />
-        <p>{info.getValue()}</p>
-      </div>
+      <GitHubStatisticItem
+        Icon={AiOutlineStar}
+        paddingOn={false}
+        outerPaddingOn={false}
+        hoverOn={false}
+        value={info.getValue().toString()}
+      />
     )
   }),
   columnHelper.accessor('forkCount', {
     header: () => 'Forks',
     cell: (info) => (
-      <div className="flex flex-row items-center space-x-1 text-red">
-        <AiOutlineFork />
-        <p>{info.getValue()}</p>
-      </div>
+      <GitHubStatisticItem
+        Icon={AiOutlineFork}
+        paddingOn={false}
+        outerPaddingOn={false}
+        hoverOn={false}
+        value={info.getValue().toString()}
+      />
     )
   }),
   columnHelper.accessor('issueCount', {
     header: 'Issues',
     cell: (info) => (
-      <div className="flex flex-row items-center space-x-1">
-        <VscIssues />
-        <p>{info.getValue()}</p>
-      </div>
+      <GitHubStatisticItem
+        Icon={VscIssues}
+        paddingOn={false}
+        outerPaddingOn={false}
+        hoverOn={false}
+        value={info.getValue().toString()}
+      />
     )
   }),
   columnHelper.accessor('contributorCount', {
     header: 'Contributors',
     cell: (info) => (
-      <div className="flex flex-row items-center space-x-1">
-        <BsPeople />
-        <p>{info.getValue()}</p>
-      </div>
+      <GitHubStatisticItem
+        Icon={BsPeople}
+        paddingOn={false}
+        outerPaddingOn={false}
+        hoverOn={false}
+        value={info.getValue().toString()}
+      />
     )
   }),
   columnHelper.accessor('pullRequestCount', {
     header: () => 'Pull Requests',
     cell: (info) => (
-      <div className="flex flex-row items-center space-x-1">
-        <BiGitPullRequest />
-        <p>{info.getValue()}</p>
-      </div>
+      <GitHubStatisticItem
+        Icon={BiGitPullRequest}
+        paddingOn={false}
+        outerPaddingOn={false}
+        hoverOn={false}
+        value={info.getValue().toString()}
+      />
     )
   }),
   columnHelper.accessor('programmingLanguage', {
-    header: () => 'Programming Language',
-    cell: (info) => <ProgrammingLanguageIcon programmingLang={info.getValue()} />
+    header: () => 'Language',
+    cell: (info) => (
+      <p className="inline-block rounded-lg bg-gray-800 px-2 py-0.5 text-12 font-light text-gray-300">
+        {info.getValue()}
+      </p>
+    )
   }),
   columnHelper.accessor('category', {
     header: () => 'Category',
     cell: (info) => (
-      <p className="inline-block rounded-lg border p-1.5 text-xs">{info.getValue()}</p>
+      <p className="inline-block rounded-lg bg-gray-800 px-2 py-0.5 text-12 font-light text-gray-300">
+        {info.getValue()}
+      </p>
     )
   })
 ]
@@ -102,7 +124,7 @@ const RepositoryTable = () => {
     getCoreRowModel: getCoreRowModel()
   })
   return (
-    <div className="flex flex-col rounded-lg p-8">
+    <div className="flex flex-col rounded-lg bg-gray-850 p-8">
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -121,9 +143,7 @@ const RepositoryTable = () => {
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              // TODO: Hover
-              className=""
-              // TODO
+              className="cursor-pointer hover:bg-gray-800"
               // eslint-disable-next-line no-alert
               onClick={() => alert('This will soon open up a detail view page!')}
             >

@@ -34,7 +34,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 const Overview = () => {
   const handleClick = () => {
-    console.log('Menu item clicked')
+    // eslint-disable-next-line no-alert
+    alert('Under construction!')
   }
 
   const starData = [
@@ -160,14 +161,14 @@ const Overview = () => {
               <SocialMediaContainer
                 socialMediaData={[
                   {
-                    name: 'Discord',
+                    name: 'Discord ',
                     text: 'Followers',
                     value: '101k',
                     growth: '+2k',
                     url: 'https://discord.com'
                   },
                   {
-                    name: 'Twitter',
+                    name: 'Twitter ',
                     text: 'Followers',
                     value: '200k',
                     growth: '+1k',
@@ -196,7 +197,7 @@ const Overview = () => {
               <CompanyContainer
                 companyData={[
                   { name: 'Total Funding', value: '$1.2M', growth: '+$0.2M' },
-                  { name: 'Contr./Employee', value: '1.3', growth: '+0.2' }
+                  { name: 'Contributions / Employee', value: '1.3', growth: '+0.2' }
                 ]}
               />
               <IntegrationsContainer />

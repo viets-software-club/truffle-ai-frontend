@@ -45,33 +45,17 @@ const Button = ({
     )
   }, [Icon, text, switchOrder, iconColor, textColor])
 
-  let buttonStyle = ''
+  const variantToButtonStyle = new Map([
+    ['normal', 'bg-gray-850 border border-gray-800 px-4 py-2'],
+    ['normalHighlighted', 'bg-gray-700 border border-gray-800 px-4 py-2'],
+    ['noBG', 'border border-gray-800 px-4 py-2'],
+    ['noBordernoBG', ' px-4 py-2'],
+    ['highlighted', 'bg-indigo-500 px-4 py-2'],
+    ['onlyIcon', 'bg-gray-850 border border-gray-800 px-1.5 py-1.5'],
+    ['onlyIconnoBordernoBG', '']
+  ])
 
-  switch (variant) {
-    case 'normal':
-      buttonStyle = 'bg-gray-850 border border-gray-800 px-4 py-2'
-      break
-    case 'normalHighlighted':
-      buttonStyle = 'bg-gray-700 border border-gray-800 px-4 py-2'
-      break
-    case 'noBG':
-      buttonStyle = 'border border-gray-800 px-4 py-2'
-      break
-    case 'noBordernoBG':
-      buttonStyle = ' px-4 py-2'
-      break
-    case 'highlighted':
-      buttonStyle = 'bg-indigo-500 px-4 py-2'
-      break
-    case 'onlyIcon':
-      buttonStyle = 'bg-gray-850 border border-gray-800 px-1.5 py-1.5'
-      break
-    case 'onlyIconnoBordernoBG':
-      buttonStyle = ''
-      break
-    default:
-      buttonStyle = ''
-  }
+  let buttonStyle = variantToButtonStyle.get(variant) || ''
   buttonStyle += fullWidth ? ' w-full' : ''
 
   return (

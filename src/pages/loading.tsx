@@ -1,30 +1,22 @@
 /* eslint-disable no-console */
 
 import { Inter } from 'next/font/google'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Loading = () => {
   const [progress, setProgress] = useState(0)
-  async function navigate() {
-    await router.push('/overview')
-  }
+  const router = useRouter()
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
         if (oldProgress === 100) {
           clearInterval(timer)
-          navigate().then(
-            () => {
-              console.log('Navigation successful!')
-            },
-            () => {
-              console.error('Navigation failed with error:')
-            }
-          )
+          // eslint-disable-next-line no-void
+          void router.push('/overview')
           return 100
         }
         return oldProgress + 0.5
@@ -34,7 +26,7 @@ const Loading = () => {
     return () => {
       clearInterval(timer)
     }
-  }, [])
+  })
 
   return (
     <main className={`${inter.className} flex min-h-screen flex-col`}>
