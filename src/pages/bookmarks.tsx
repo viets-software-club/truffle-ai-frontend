@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google'
+
 import RepositoryTable from '@/components/RepositoryTable'
 import LeftSidebar from '@/components/LeftSidebar'
 

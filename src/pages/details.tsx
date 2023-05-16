@@ -1,9 +1,4 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-
-import GitHubStatisticsContainer from '@/components/RightSidebar/GitHubStatsContainer'
-import SocialMediaContainer from '@/components/RightSidebar/SocialMediaContainer'
-import GitHubMetricIcon from '@/components/RightSidebar/GitHubMetricIcon'
-
 import { Inter } from 'next/font/google'
 import {
   FiX as X,
@@ -11,6 +6,7 @@ import {
   FiChevronDown as ChevronDown,
   FiCalendar as Calendar
 } from 'react-icons/fi'
+import { FaTwitter, FaHackerNews } from 'react-icons/fa'
 import {
   RepoForkedIcon,
   StarIcon,
@@ -18,17 +14,20 @@ import {
   PeopleIcon,
   PersonIcon
 } from '@primer/octicons-react'
-import FoundersContainer from '@/components/RightSidebar/FoundersContainer'
-import IntegrationsContainer from '@/components/RightSidebar/IntegrationsContainer'
-import CompanyContainer from '@/components/RightSidebar/CompanyContainer'
+
 import Button from '@/components/Button'
-import { FaTwitter, FaHackerNews } from 'react-icons/fa'
 import Card from '@/components/DetailPage/Card'
-import ProjectInformation from '@/components/DetailPage/ProjectInformation'
 import Chart from '@/components/DetailPage/Chart'
+import CompanyContainer from '@/components/RightSidebar/CompanyContainer'
+import FoundersContainer from '@/components/RightSidebar/FoundersContainer'
+import GitHubMetricIcon from '@/components/RightSidebar/GitHubMetricIcon'
+import GitHubStatisticsContainer from '@/components/RightSidebar/GitHubStatsContainer'
+import ProjectInformation from '@/components/DetailPage/ProjectInformation'
 import InformationRow from '@/components/InformationRow'
-import ScatterPlot from '@/components/DetailPage/ScatterPlot'
+import IntegrationsContainer from '@/components/RightSidebar/IntegrationsContainer'
 import LeftSidebar from '@/components/LeftSidebar'
+import ScatterPlot from '@/components/DetailPage/ScatterPlot'
+import SocialMediaContainer from '@/components/RightSidebar/SocialMediaContainer'
 
 const inter = Inter({ subsets: ['latin'] })
 

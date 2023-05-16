@@ -1,9 +1,10 @@
+import { useRouter } from 'next/router'
 import {
   FiBookOpen as BookOpen,
   FiCompass as Compass,
   FiBookmark as Bookmark
 } from 'react-icons/fi'
-import { useRouter } from 'next/router'
+
 import MenuItem from './MenuItem'
 
 const LeftSidebar = () => {

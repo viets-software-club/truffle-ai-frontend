@@ -1,4 +1,5 @@
 import { FaSlack } from 'react-icons/fa'
+
 import Button from '../Button'
 
 const IntegrationsContainer = () => {

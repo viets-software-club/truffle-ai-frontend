@@ -13,6 +13,7 @@ import {
   Label,
   LabelList
 } from 'recharts'
+
 import Modal from './Modal'
 import Button from '../Button'
 

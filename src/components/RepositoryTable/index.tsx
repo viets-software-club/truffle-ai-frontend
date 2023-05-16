@@ -9,9 +9,11 @@ import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai'
 import { BsPeople } from 'react-icons/bs'
 import { BiGitPullRequest } from 'react-icons/bi'
 import { VscIssues } from 'react-icons/vsc'
+
 import ProgrammingLanguages from '@/constants/programmingLanguages'
 import RepositoryCategories from '@/constants/repositoryCategories'
 import GitHubStatisticItem from '@/components/RightSidebar/GitHubStatisticItem'
+
 import respositoriesMock from '../../data/repositoriesMock'
 
 type Repository = {

@@ -1,5 +1,6 @@
-import GitHubStatisticItem from '@/components/RightSidebar/GitHubStatisticItem'
 import { ComponentType, ReactNode } from 'react'
+
+import GitHubStatisticItem from '@/components/RightSidebar/GitHubStatisticItem'
 
 type InformationRowItemData = {
   Icon?: ComponentType<{ className?: string }>

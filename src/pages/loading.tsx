@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
-
-import { Inter } from 'next/font/google'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 

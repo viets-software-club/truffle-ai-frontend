@@ -1,4 +1,5 @@
 import { FaDiscord, FaTwitter, FaLinkedin, FaSlack } from 'react-icons/fa'
+
 import SocialMediaItem from './SocialMediaItem'
 
 type SocialMediaData = {
