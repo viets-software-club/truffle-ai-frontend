@@ -124,7 +124,7 @@ const RepositoryTable = () => {
     getCoreRowModel: getCoreRowModel()
   })
   return (
-    <div className="flex flex-col rounded-lg bg-gray-850 p-8">
+    <div className="flex flex-col rounded-lg">
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -148,7 +148,7 @@ const RepositoryTable = () => {
               onClick={() => alert('This will soon open up a detail view page!')}
             >
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="py-2 text-left">
+                <td key={cell.id} className="p-2 text-left">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
