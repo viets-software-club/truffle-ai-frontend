@@ -87,7 +87,7 @@ const browseListColumns = [
   columnHelper.accessor('category', {
     header: () => 'Category',
     cell: (info) => (
-      <p className="text-primary inline-block rounded-lg border p-1.5 text-xs">{info.getValue()}</p>
+      <p className="textPrimary inline-block rounded-lg border p-1.5 text-xs">{info.getValue()}</p>
     )
   })
 ]
@@ -108,7 +108,7 @@ const RepositoryTable = () => {
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="text-secondary text-left font-light">
+                <th key={header.id} className="textSecondary text-left font-light">
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
@@ -128,7 +128,7 @@ const RepositoryTable = () => {
               onClick={() => alert('This will soon open up a detail view page!')}
             >
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="text-primary py-2 text-left">
+                <td key={cell.id} className="textPrimary py-2 text-left">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

@@ -11,8 +11,8 @@ type CompanyContainerProps = {
 }
 
 const CompanyContainer = ({ companyData: socialMediaData }: CompanyContainerProps) => (
-  <div className="border-y border-solid border-border-color py-2.5 text-14 font-normal leading-4">
-    <h1 className="px-7 py-2.5 text-12 uppercase text-text-secondary">Company</h1>
+  <div className="border-y border-solid border-border py-2.5 text-14 font-normal leading-4">
+    <h1 className="px-7 py-2.5 text-12 uppercase text-textSecondary">Company</h1>
     {socialMediaData.map((data) => (
       <CompanyItem key={data.name} name={data.name} value={data.value} growth={data.growth} />
     ))}

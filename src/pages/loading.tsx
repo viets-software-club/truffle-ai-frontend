@@ -41,15 +41,15 @@ const Loading = () => {
       <div className="flex grow flex-col items-center justify-between bg-radial-gradient">
         <div />
         <div className="flex flex-col items-center">
-          <div className="mb-4 text-36 font-semibold text-text-primary">TruffleAI</div>
-          <div className="h-1 w-48 overflow-hidden rounded-full bg-border-color">
+          <div className="mb-4 text-36 font-semibold text-textPrimary">TruffleAI</div>
+          <div className="h-1 w-48 overflow-hidden rounded-full bg-border">
             <div
               style={{ width: `${progress}%` }}
-              className="h-full bg-icon-color transition-all ease-out"
+              className="h-full bg-icon transition-all ease-out"
             />
           </div>
         </div>
-        <div className="self-center pb-4 text-12 text-text-secondary">
+        <div className="self-center pb-4 text-12 text-textSecondary">
           © 2023 La Famiglia x Rostlab
         </div>
       </div>

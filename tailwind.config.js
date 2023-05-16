@@ -12,19 +12,6 @@ module.exports = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'radial-gradient': 'radial-gradient(circle at 50% -70%, #191D3B, #191D3B, #191A23)'
       },
-      // colors: {
-      //   'bg-primary': '#191A23',
-      //   'text-primary': '#EEEFFC',
-      //   'border-color': '#2C2D3C',
-      //   'text-secondary': '#D2D3E0',
-      //   'bg-secondary': '#1F2130',
-      //   'icon-color': '#858699',
-      //   'bg-secondary-highlighted': '#26273B',
-      //   'highlight-color': '#575BC7',
-      //   'red': '#EB5757',
-      //   'yellow': '#F2C94C',
-      //   'green': '#4CB782'
-      // },
       fontSize: {
         12: '12px',
         14: '14px',
@@ -46,14 +33,15 @@ module.exports = {
         purple: '#BB87FC',
         blue: '#4EA7FC',
         green: '#4CB782',
-        'bg-primary': '#191A23',
-        'text-primary': '#EEEFFC',
-        'border-color': '#2C2D3C',
-        'text-secondary': '#D2D3E0',
-        'bg-secondary': '#1F2130',
-        'icon-color': '#858699',
-        'bg-secondary-highlighted': '#26273B',
-        'highlight-color': '#575BC7',
+        highlight: '#575BC7',
+        icon: '#858699',
+        border: '#2C2D3C',
+        bgPrimary: '#191A23',
+        bgSecondary: '#1F2130',
+        bgSecondaryHighlighted: '#26273B',
+        textPrimary: '#EEEFFC',
+        textSecondary: '#D2D3E0',
+
         indigo: {
           50: '#EEF2FF',
           100: '#E0E7FF',

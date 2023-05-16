@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 import { FiChevronDown as ChevronDown } from 'react-icons/fi'
 import { subMonths } from 'date-fns'
-import Button from '../Button'
+import Button from '../../components/Button'
 import Modal from './Modal'
 
 type ChartData = {
@@ -66,7 +66,7 @@ const Chart = ({ starData, forkData, issueData }: ChartProps) => {
   }, [])
 
   return (
-    <div className="flex flex-row border-b border-border-color px-7 py-8">
+    <div className="flex flex-row border-b border-border px-7 py-8">
       <LineChart
         width={500}
         height={300}

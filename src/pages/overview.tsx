@@ -1,15 +1,11 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 
 import GitHubStatisticsContainer from '@/components/RightSidebar/GitHubStatsContainer'
-import MenuItem from '@/components/MenuItem'
 import SocialMediaContainer from '@/components/RightSidebar/SocialMediaContainer'
 import GitHubMetricIcon from '@/components/RightSidebar/GitHubMetricIcon'
 
 import { Inter } from 'next/font/google'
 import {
-  FiBookOpen as BookOpen,
-  FiCompass as Compass,
-  FiBookmark as Bookmark,
   FiX as X,
   FiChevronUp as ChevronUp,
   FiChevronDown as ChevronDown,
@@ -27,11 +23,12 @@ import IntegrationsContainer from '@/components/RightSidebar/IntegrationsContain
 import CompanyContainer from '@/components/RightSidebar/CompanyContainer'
 import Button from '@/components/Button'
 import { FaTwitter, FaHackerNews } from 'react-icons/fa'
-import Card from '@/components/DetailPage/Card'
-import ProjectInformation from '@/components/DetailPage/ProjectInformation'
-import Chart from '@/components/DetailPage/Chart'
+import Card from '@/pages/DetailPage/Card'
+import ProjectInformation from '@/pages/DetailPage/ProjectInformation'
+import Chart from '@/pages/DetailPage/Chart'
 import InformationRow from '@/components/InformationRow'
-import ScatterPlot from '@/components/DetailPage/ScatterPlot'
+import ScatterPlot from '@/pages/DetailPage/ScatterPlot'
+import LeftSidebar from '@/components/LeftSidebar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -96,67 +93,17 @@ const Overview = () => {
     <main className={`${inter.className}`}>
       <div className="flex flex-col">
         {/* Sidebar left */}
-        <div
-          className={`fixed left-0 top-0 flex h-screen min-h-screen w-56 flex-col justify-between border-r border-border-color ${inter.className}`}
-        >
-          <div>
-            <div className="flex w-full items-center justify-between px-7 py-2.5 text-text-primary">
-              <span className="mr-2">TruffleAI</span>
-              <div className="h-[30px] w-[30px] rounded-[5px] bg-gray-500" />
-            </div>
-
-            <div className="border-t border-solid border-border-color py-2.5 text-14 font-normal leading-4 text-text-primary">
-              <h1 className="px-7 py-2.5 ">Overview</h1>
-              <div className="px-2">
-                <MenuItem Icon={Compass} text="All projects" onClick={handleClick} showIcon />
-                <MenuItem Icon={Bookmark} text="Saved projects" onClick={handleClick} showIcon />
-              </div>
-            </div>
-            <div className="border-t border-solid border-border-color py-2.5 text-14 font-normal leading-4 text-text-primary">
-              <h1 className="px-7 py-2.5 ">Saved searches</h1>
-              <div className="px-2">
-                <MenuItem
-                  Icon={Compass}
-                  text="JavaScript Frameworks"
-                  onClick={handleClick}
-                  showIcon={false}
-                />
-                <MenuItem
-                  Icon={Bookmark}
-                  text="Static Site Generators"
-                  onClick={handleClick}
-                  showIcon={false}
-                />
-                <MenuItem
-                  Icon={Bookmark}
-                  text="Infrastructure"
-                  onClick={handleClick}
-                  showIcon={false}
-                />
-                <MenuItem Icon={Bookmark} text="Dev Tools" onClick={handleClick} showIcon={false} />
-                <MenuItem
-                  Icon={Bookmark}
-                  text="Machine Learning"
-                  onClick={handleClick}
-                  showIcon={false}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-solid border-border-color">
-            <MenuItem Icon={BookOpen} text="Help & Support" onClick={handleClick} showIcon />
-          </div>
-        </div>
+        <LeftSidebar />
 
         {/* Main content */}
-        <div className="ml-56 flex flex-col text-text-primary">
-          <div className="border-b border-solid border-border-color py-2.5 pl-7 pr-2 text-icon-color">
+        <div className="ml-56 flex flex-col text-textPrimary">
+          <div className="border-b border-solid border-border py-2.5 pl-7 pr-2 text-icon">
             <div className="flex justify-between">
               <div className="flex flex-row items-center gap-3">
                 <Button variant="onlyIconnoBordernoBG" onClick={handleClick} Icon={X} />
                 <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronUp} />
                 <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronDown} />
-                <p className="text-14 text-text-secondary">3/12</p>
+                <p className="text-14 text-textSecondary">3/12</p>
               </div>
               <Button
                 variant="normal"
@@ -208,7 +155,7 @@ const Overview = () => {
             </div>
 
             {/* Sidebar right */}
-            <div className="h-full w-1/5 border-l border-solid border-border-color">
+            <div className="h-full w-1/5 border-l border-solid border-border">
               <GitHubStatisticsContainer statisticsData={statisticsData} />
               <SocialMediaContainer
                 socialMediaData={[

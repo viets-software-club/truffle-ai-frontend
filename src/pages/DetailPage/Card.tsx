@@ -8,16 +8,13 @@ type CardProps = {
 }
 
 const Card = ({ Icon, name, button, textFields }: CardProps) => (
-  <div className="mx-7 my-4 rounded-lg border border-border-color bg-bg-secondary">
+  <div className="mx-7 my-4 rounded-lg border border-border bg-bgSecondary">
     <div className="flex flex-row items-center px-4 pt-4">
-      <Icon className="mr-2 text-highlight-color" />
+      <Icon className="mr-2 text-highlight" />
       <h2>{name}</h2>
     </div>
     {textFields.map((text) => (
-      <p
-        key={text}
-        className="border-b border-border-color p-4 text-12 font-light text-text-secondary"
-      >
+      <p key={text} className="border-b border-border p-4 text-12 font-light text-textSecondary">
         {text}
       </p>
     ))}

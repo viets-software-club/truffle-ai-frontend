@@ -15,12 +15,12 @@ type InformationRowProps = {
 }
 
 const InformationRow = ({ statisticsData, name, tags }: InformationRowProps) => (
-  <div className="flex flex-row items-center p-2 text-14 font-normal transition-colors duration-100 hover:bg-bg-secondary">
+  <div className="flex flex-row items-center p-2 text-14 font-normal transition-colors duration-100 hover:bg-bgSecondary">
     <h1 className="text-14">{name}</h1>
     {tags.map((text) => (
       <p
         key={text}
-        className="mx-1 rounded-lg bg-bg-secondary px-2 py-0.5 text-12 font-light text-text-secondary"
+        className="mx-1 rounded-lg bg-bgSecondary px-2 py-0.5 text-12 font-light text-textSecondary"
       >
         {text}
       </p>

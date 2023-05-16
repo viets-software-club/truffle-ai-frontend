@@ -24,8 +24,8 @@ const Button = ({
   text,
   Icon,
   switchOrder,
-  iconColor = 'text-icon-color',
-  textColor = 'text-text-secondary',
+  iconColor = 'text-icon',
+  textColor = 'text-textSecondary',
   fullWidth
 }: ButtonProps) => {
   const contentLayout = useMemo(() => {
@@ -49,22 +49,22 @@ const Button = ({
 
   switch (variant) {
     case 'normal':
-      buttonStyle = 'bg-bg-secondary border border-border-color px-4 py-2'
+      buttonStyle = 'bg-bgSecondary border border-border px-4 py-2'
       break
     case 'normalHighlighted':
-      buttonStyle = 'bg-bg-secondary-highlighted border border-border-color px-4 py-2'
+      buttonStyle = 'bg-bgSecondaryHighlighted border border-border px-4 py-2'
       break
     case 'noBG':
-      buttonStyle = 'border border-border-color px-4 py-2'
+      buttonStyle = 'border border-border px-4 py-2'
       break
     case 'noBordernoBG':
       buttonStyle = ' px-4 py-2'
       break
     case 'highlighted':
-      buttonStyle = 'bg-highlight-color px-4 py-2'
+      buttonStyle = 'bg-highlight px-4 py-2'
       break
     case 'onlyIcon':
-      buttonStyle = 'bg-bg-secondary border border-border-color px-1.5 py-1.5'
+      buttonStyle = 'bg-bgSecondary border border-border px-1.5 py-1.5'
       break
     case 'onlyIconnoBordernoBG':
       buttonStyle = ''
@@ -78,7 +78,7 @@ const Button = ({
     <button
       type="button"
       onClick={onClick}
-      className={`flex items-center rounded-[5px] transition-colors duration-100 hover:bg-bg-secondary-highlighted ${buttonStyle}`}
+      className={`bgPrimary flex items-center rounded-[5px] transition-colors duration-100 hover:bg-bgSecondaryHighlighted ${buttonStyle}`}
     >
       {contentLayout}
     </button>
@@ -89,8 +89,8 @@ Button.defaultProps = {
   text: null,
   Icon: null,
   switchOrder: false,
-  iconColor: 'text-icon-color',
-  textColor: 'text-text-secondary',
+  iconColor: 'text-icon',
+  textColor: 'text-textSecondary',
   fullWidth: false
 }
 

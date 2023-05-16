@@ -14,8 +14,8 @@ type GitHubStatisticsContainerProps = {
 }
 
 const GitHubStatisticsContainer = ({ statisticsData }: GitHubStatisticsContainerProps) => (
-  <div className="border-y border-solid border-border-color py-2.5 text-14 font-normal leading-4">
-    <h1 className="px-7 py-2.5 text-12 uppercase text-text-secondary">Github Stats</h1>
+  <div className="border-y border-solid border-border py-2.5 text-14 font-normal leading-4">
+    <h1 className="px-7 py-2.5 text-12 uppercase text-textSecondary">Github Stats</h1>
     {statisticsData.map((data) => (
       <GitHubStatisticItem
         key={data.id}

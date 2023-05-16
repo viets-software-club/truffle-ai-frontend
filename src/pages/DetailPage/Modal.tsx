@@ -28,7 +28,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
 
       {/* Modal */}
       <div className="z-50 m-0">
-        <div className="bg-bg-secondary">{children}</div>
+        <div className="bg-bgSecondary">{children}</div>
       </div>
     </>
   )
