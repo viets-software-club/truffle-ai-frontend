@@ -33,7 +33,7 @@ const InformationRow = ({ statisticsData, name, tags }: InformationRowProps) => 
         value={data.value}
         growth={data.growth}
         paddingOn={false}
-        hover={false}
+        hoverOn={false}
       />
     ))}
   </div>
