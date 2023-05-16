@@ -18,8 +18,8 @@ const FoundersContainer = ({ foundersData: socialMediaData }: FoundersContainerP
   }
 
   return (
-    <div className="border-y border-solid border-border py-2.5 text-14 font-normal leading-4">
-      <h1 className="px-7 py-2.5 text-12 uppercase text-textSecondary">Founders</h1>
+    <div className="border-y border-solid border-gray-800 py-2.5 text-14 font-normal leading-4">
+      <h1 className="px-7 py-2.5 text-12 uppercase text-gray-300">Founders</h1>
       {socialMediaData.map((data) => (
         <FounderItem
           key={data.name}

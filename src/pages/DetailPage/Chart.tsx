@@ -66,7 +66,7 @@ const Chart = ({ starData, forkData, issueData }: ChartProps) => {
   }, [])
 
   return (
-    <div className="flex flex-row border-b border-border px-7 py-8">
+    <div className="flex flex-row border-b border-gray-800 px-7 py-8">
       <LineChart
         width={500}
         height={300}

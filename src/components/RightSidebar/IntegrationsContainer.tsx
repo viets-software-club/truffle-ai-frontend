@@ -8,10 +8,10 @@ const IntegrationsContainer = () => {
   }
 
   return (
-    <div className="border-y border-solid border-border py-2.5 text-14 font-normal leading-4">
-      <h1 className="px-7 py-2.5 text-12 uppercase text-textSecondary">Integrations</h1>
+    <div className="border-y border-solid border-gray-800 py-2.5 text-14 font-normal leading-4">
+      <h1 className="px-7 py-2.5 text-12 uppercase text-gray-300">Integrations</h1>
       <div className="flex flex-col justify-between">
-        <div className="inline-flex px-7 py-2.5 transition-colors duration-100 hover:bg-bgSecondary">
+        <div className="inline-flex px-7 py-2.5 transition-colors duration-100 hover:bg-gray-850">
           <div className="flex flex-row items-center justify-center gap-[15px]">
             <Button variant="normal" onClick={handleClick} text="Add to CRM" />
             <button type="button" onClick={handleClick}>

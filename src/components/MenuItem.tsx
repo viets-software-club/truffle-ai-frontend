@@ -12,11 +12,11 @@ const MenuItem = ({ Icon, text, onClick, showIcon }: MenuItemProps) => (
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex px-7 py-2.5 transition-colors duration-100 hover:bg-bgSecondary"
+      className="inline-flex px-7 py-2.5 transition-colors duration-100 hover:bg-gray-850"
     >
       <div className="flex flex-row items-center justify-center gap-[5px]">
-        {showIcon && <Icon className="h-[14px] w-[14px] text-icon" />}
-        <span className="text-xs not-italic leading-3 text-textPrimary">{text}</span>
+        {showIcon && <Icon className="h-[14px] w-[14px] text-gray-500" />}
+        <span className="text-xs not-italic leading-3 text-gray-100">{text}</span>
       </div>
     </button>
   </div>

@@ -5,10 +5,10 @@ import LeftSidebar from '@/components/LeftSidebar'
 const inter = Inter({ subsets: ['latin'] })
 
 const Home = () => (
-  <main className={`min-h-screen p-24 ${inter.className} bg-bgPrimary text-textPrimary`}>
+  <main className={`min-h-screen p-24 ${inter.className} bg-gray-900 text-gray-100`}>
     <div className="flex flex-col">
       <LeftSidebar />
-      <div className="ml-56 flex flex-col text-textPrimary">
+      <div className="ml-56 flex flex-col text-gray-100">
         <RepositoryTable />
       </div>
     </div>

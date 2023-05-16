@@ -15,12 +15,12 @@ type InformationRowProps = {
 }
 
 const InformationRow = ({ statisticsData, name, tags }: InformationRowProps) => (
-  <div className="flex flex-row items-center p-2 text-14 font-normal transition-colors duration-100 hover:bg-bgSecondary">
+  <div className="flex flex-row items-center p-2 text-14 font-normal transition-colors duration-100 hover:bg-gray-850">
     <h1 className="text-14">{name}</h1>
     {tags.map((text) => (
       <p
         key={text}
-        className="mx-1 rounded-lg bg-bgSecondary px-2 py-0.5 text-12 font-light text-textSecondary"
+        className="mx-1 rounded-lg bg-gray-850 px-2 py-0.5 text-12 font-light text-gray-300"
       >
         {text}
       </p>
@@ -32,7 +32,7 @@ const InformationRow = ({ statisticsData, name, tags }: InformationRowProps) => 
         IconMetric={data.IconMetric}
         value={data.value}
         growth={data.growth}
-        padding={false}
+        paddingOn={false}
         hover={false}
       />
     ))}
