@@ -230,6 +230,7 @@ const Overview = () => {
                 foundersData={[
                   {
                     name: 'John Doe',
+                    companyName: 'The Best Company',
                     linkedin: true,
                     mail: true,
                     urlLinkedIn: 'https://linkedin.com',
@@ -237,6 +238,7 @@ const Overview = () => {
                   },
                   {
                     name: 'Jane Doe',
+                    companyName: 'The Best Company',
                     linkedin: true,
                     mail: true,
                     urlLinkedIn: 'https://linkedin.com',
