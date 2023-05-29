@@ -3,7 +3,7 @@ import GithubStatItem from './GithubStatItem'
 import SocialMediaItem from './SocialMediaItem'
 import FounderItem from './FounderItem'
 import CompanyItem from './CompanyItem'
-import css from './index.module.sass'
+import css from './Box.module.sass'
 
 type Props = {
   title: string
