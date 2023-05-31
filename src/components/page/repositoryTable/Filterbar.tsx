@@ -17,6 +17,7 @@ const FilterBar = () => (
           textColor="white"
         />
       </div>
+      <div />
     </div>
     <div className="flex flex-row items-center">
       <p className="text-14">10</p>
