@@ -31,6 +31,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => {
   ]
 
   const sortClassName = 'flex items-center bg-blue-500 text-white'
+  const [projectName, setProjectName] = useState('')
 
   return (
     <div className="flex flex-row justify-between border-b border-gray-800 px-6 pb-3.5">
@@ -163,7 +164,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => {
           </Transition>
         </Menu>
 
-        <div className="inline-block">
+        {/*          <div className="inline-block">
           <Button
             onClick={nullFunc}
             variant="highlighted"
@@ -173,7 +174,49 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => {
             iconColor="white"
             textColor="white"
           />
-        </div>
+        </div>  */}
+
+        <div className="mb-8 flex flex-row space-x-2">{/* Dropdown */}</div>
+        <Menu as="div" className="relative inline-block text-left">
+          <div>
+            <div>
+              <Menu.Button className="flex flex-row items-center space-x-2 rounded-[5px] border border-gray-800 bg-gray-850 px-3 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
+                <AiOutlinePlus />
+                <p>Add Project</p>
+              </Menu.Button>
+            </div>
+          </div>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="w-70 absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-gray-700 shadow-lg ring-1 focus:outline-none">
+              <div className="p-4">
+                <h3 className="mb-4 text-lg font-medium">Add Project</h3>
+                <input
+                  type="text"
+                  placeholder="github.com/"
+                  value={projectName}
+                  onChange={(e) => setProjectName(e.target.value)}
+                  className="mb-4 border border-gray-300 bg-gray-700 px-4 py-2 text-white"
+                />
+                <div className="flex justify-end">
+                  <Menu.Button
+                    className="flex flex-row items-center space-x-2 rounded-[5px] border border-gray-800 bg-gray-850 px-3 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700"
+                    onClick={nullFunc}
+                  >
+                    Add Project
+                  </Menu.Button>
+                </div>
+              </div>
+            </Menu.Items>
+          </Transition>
+        </Menu>
       </div>
     </div>
   )
