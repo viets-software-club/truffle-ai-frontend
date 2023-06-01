@@ -4,16 +4,18 @@ type ModalProps = {
   isOpen: boolean
   onClose: () => void
   children: ReactNode
+  isInModal?: boolean
 }
 
-const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+const Modal = ({ isOpen, onClose, children, isInModal }: ModalProps) => {
   if (!isOpen) return null
+  const modalStyle = isInModal ? '' : 'fixed inset-0 bg-opacity-10'
 
   return (
     <>
       {/* Overlay */}
       <div
-        className="fixed inset-0 z-40 bg-black opacity-10"
+        className={`${modalStyle} z-40  bg-black `}
         onClick={onClose}
         onKeyDown={(event) => {
           if (event.key === 'Enter' || event.key === ' ') {
@@ -30,6 +32,10 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       </div>
     </>
   )
+}
+
+Modal.defaultProps = {
+  isInModal: false
 }
 
 export default Modal

@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from 'react'
+import { Fragment, ReactNode, useCallback, useState } from 'react'
 import { Column } from '@tanstack/react-table'
 import { VscSettings } from 'react-icons/vsc'
 import { TbColumns2 } from 'react-icons/tb'
@@ -7,10 +7,13 @@ import { RiCheckboxBlankLine, RiCheckboxFill } from 'react-icons/ri'
 import { Menu, Transition } from '@headlessui/react'
 import Button from '@/components/pure/Button'
 import { Repository } from './columns'
+import FilterRow from './FilterRow'
+import { Filter } from './Filterbar'
 
 type TopBarProps = {
   columns: Column<Repository, unknown>[]
   nullFunc: () => void
+  addFilter: (filter: Filter) => void
 }
 
 const timeFrameOptions = [
@@ -38,118 +41,156 @@ const TransitionMenuItems = ({ children }: TransitionMenuItemsProps) => (
   </Transition>
 )
 
-const TopBar = ({ columns, nullFunc }: TopBarProps) => (
-  <div className="flex flex-row justify-between border-b border-gray-800 px-6 pb-3.5">
-    {/* Filter, Sort, Edit Columns buttons */}
-    <div className="flex flex-row gap-3">
-      <Menu as="div" className="relative inline-block text-left">
-        <div>
-          <Menu.Button className="flex flex-row items-center space-x-2 rounded-[5px] border border-gray-800 bg-gray-850 px-3 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
-            <AiOutlineCalendar />
-            <p>Select timeframe</p>
-          </Menu.Button>
-        </div>
+const TopBar = ({ columns, nullFunc, addFilter }: TopBarProps) => {
+  const [property, setProperty] = useState('Column')
+  const [condition, setCondition] = useState('Condition')
+  const [value, setValue] = useState(0)
 
-        <TransitionMenuItems>
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg ring-1 focus:outline-none">
-            <div className="py-1">
-              {timeFrameOptions.map((option) => (
-                <Menu.Item key={option.value}>
-                  {/* @TODO Change time frame */}
-                  <button
-                    type="button"
-                    className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
-                  >
-                    <p className="text-14 text-gray-100">{option.label}</p>
-                  </button>
-                </Menu.Item>
-              ))}
-            </div>
-          </Menu.Items>
-        </TransitionMenuItems>
-      </Menu>
+  // Handle add filter callback
+  const handleAddFilter = useCallback(() => {
+    addFilter({
+      property,
+      condition,
+      value
+    })
+    setProperty('Column')
+    setCondition('Condition')
+    setValue(0)
+  }, [property, condition, value, addFilter])
 
-      <div className="inline-block">
-        <Button
-          onClick={nullFunc}
-          variant="filter"
-          text="Add Filter"
-          Icon={AiOutlinePlus}
-          order="ltr"
-          iconColor="white"
-          textColor="white"
-        />
-      </div>
-    </div>
+  return (
+    <div className="flex flex-row justify-between border-b border-gray-800 px-6 pb-3.5">
+      {/* Filter, Sort, Edit Columns buttons */}
+      <div className="flex flex-row gap-3">
+        <Menu as="div" className="relative inline-block text-left">
+          <div>
+            <Menu.Button className="flex flex-row items-center space-x-2 rounded-[5px] border border-gray-800 bg-gray-850 px-3 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
+              <AiOutlineCalendar />
+              <p>Select timeframe</p>
+            </Menu.Button>
+          </div>
 
-    <div className="flex flex-row gap-3">
-      <div className="inline-block">
-        <Button
-          onClick={nullFunc}
-          variant="normal"
-          text="Sort"
-          Icon={VscSettings}
-          order="ltr"
-          iconColor="white"
-          textColor="white"
-        />
-      </div>
-
-      <div className="mb-8 flex flex-row space-x-2">{/* Dropdown */}</div>
-
-      <Menu as="div" className="relative inline-block text-left">
-        <div>
-          <Menu.Button className="flex flex-row items-center space-x-2 rounded-[5px] border border-gray-800 bg-gray-850 px-3 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
-            <TbColumns2 />
-
-            <p>Edit Columns</p>
-          </Menu.Button>
-        </div>
-
-        <TransitionMenuItems>
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg ring-1 focus:outline-none">
-            <div className="py-1">
-              {columns.map((column) => (
-                <Menu.Item key={column.id}>
-                  <button
-                    type="button"
-                    onClick={() => column.toggleVisibility()}
-                    className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
-                  >
-                    {column.getIsVisible() ? (
-                      <RiCheckboxFill className="text-indigo-600" />
-                    ) : (
-                      <RiCheckboxBlankLine />
-                    )}
-
-                    <p
-                      className={
-                        column.getIsVisible() ? 'text-14 text-gray-100' : 'text-14 text-gray-400'
-                      }
+          <TransitionMenuItems>
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg ring-1 focus:outline-none">
+              <div className="py-1">
+                {timeFrameOptions.map((option) => (
+                  <Menu.Item key={option.value}>
+                    {/* @TODO Change time frame */}
+                    <button
+                      type="button"
+                      className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
                     >
-                      {typeof column.columnDef.header === 'string' ? column.columnDef.header : ''}
-                    </p>
-                  </button>
-                </Menu.Item>
-              ))}
-            </div>
-          </Menu.Items>
-        </TransitionMenuItems>
-      </Menu>
+                      <p className="text-14 text-gray-100">{option.label}</p>
+                    </button>
+                  </Menu.Item>
+                ))}
+              </div>
+            </Menu.Items>
+          </TransitionMenuItems>
+        </Menu>
 
-      <div className="inline-block">
-        <Button
-          onClick={nullFunc}
-          variant="highlighted"
-          text="Add Project"
-          Icon={AiOutlinePlus}
-          order="ltr"
-          iconColor="white"
-          textColor="white"
-        />
+        <div className="inline-block">
+          <Menu as="div" className="relative inline-block text-left">
+            <div>
+              <Menu.Button className="flex flex-row items-center space-x-2 rounded-[5px] border border-dashed border-gray-800 px-3 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
+                <AiOutlinePlus />
+                <p>Add Filter</p>
+              </Menu.Button>
+            </div>
+
+            <TransitionMenuItems>
+              <Menu.Items className="absolute left-0 z-10 mt-2 origin-top-right rounded-md bg-gray-700 shadow-lg ring-1 focus:outline-none">
+                <div className="py-1">
+                  <div className="flex flex-col gap-3 px-4 py-2">
+                    <FilterRow
+                      property={property}
+                      condition={condition}
+                      value={value}
+                      setProperty={setProperty}
+                      setCondition={setCondition}
+                      setValue={setValue}
+                    />
+                    {/* <FilterRow filter={filter} setFilter={handleFilterChange} /> */}
+                    <div>
+                      <Button variant="highlighted" text="Add" onClick={handleAddFilter} />
+                    </div>
+                  </div>
+                </div>
+              </Menu.Items>
+            </TransitionMenuItems>
+          </Menu>
+        </div>
+      </div>
+
+      <div className="flex flex-row gap-3">
+        <div className="inline-block">
+          <Button
+            onClick={nullFunc}
+            variant="normal"
+            text="Sort"
+            Icon={VscSettings}
+            order="ltr"
+            iconColor="white"
+            textColor="white"
+          />
+        </div>
+
+        <div className="mb-8 flex flex-row space-x-2">{/* Dropdown */}</div>
+
+        <Menu as="div" className="relative inline-block text-left">
+          <div>
+            <Menu.Button className="flex flex-row items-center space-x-2 rounded-[5px] border border-gray-800 bg-gray-850 px-3 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
+              <TbColumns2 />
+
+              <p>Edit Columns</p>
+            </Menu.Button>
+          </div>
+
+          <TransitionMenuItems>
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg ring-1 focus:outline-none">
+              <div className="py-1">
+                {columns.map((column) => (
+                  <Menu.Item key={column.id}>
+                    <button
+                      type="button"
+                      onClick={() => column.toggleVisibility()}
+                      className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
+                    >
+                      {column.getIsVisible() ? (
+                        <RiCheckboxFill className="text-indigo-600" />
+                      ) : (
+                        <RiCheckboxBlankLine />
+                      )}
+
+                      <p
+                        className={
+                          column.getIsVisible() ? 'text-14 text-gray-100' : 'text-14 text-gray-400'
+                        }
+                      >
+                        {typeof column.columnDef.header === 'string' ? column.columnDef.header : ''}
+                      </p>
+                    </button>
+                  </Menu.Item>
+                ))}
+              </div>
+            </Menu.Items>
+          </TransitionMenuItems>
+        </Menu>
+
+        <div className="inline-block">
+          <Button
+            onClick={nullFunc}
+            variant="highlighted"
+            text="Add Project"
+            Icon={AiOutlinePlus}
+            order="ltr"
+            iconColor="white"
+            textColor="white"
+          />
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default TopBar
