@@ -9,8 +9,9 @@ import columns from '@/components/pure/ProjectsTable/columns'
 import Chart from '@/components/page/details/Chart'
 import Table from '@/components/page/overview/Table'
 import TopBar from '@/components/page/overview/TopBar'
-import FilterBar from '@/components/page/overview/Filterbar'
+import FilterBar, { Filter } from '@/components/page/overview/Filterbar'
 import Page from '@/components/side-effects/Page'
+import { useState } from 'react'
 
 const nullFunc = () => null
 
@@ -23,6 +24,9 @@ const Compare = () => {
   const [{ data, fetching, error }] = useTrendingProjectsQuery()
   const projects = data?.projectCollection?.edges?.map((edge) => edge.node) as Project[]
 
+  const [filters, setFilters] = useState<Filter[]>([])
+  const [selectedSortItem, setSelectedSortItem] = useState<string | null>(null)
+
   // Initialize TanStack table
   const table = useReactTable({
     data: projects,
@@ -34,12 +38,41 @@ const Compare = () => {
   if (fetching) return <Loading message="Getting trending projects for you..." />
   if (!projects || projects.length === 0 || error) return <Error />
 
+  const removeFilter = (filterToRemove: Filter) => {
+    setFilters((x) => x.filter((filter) => filter !== filterToRemove))
+    console.log(filterToRemove)
+  }
+
+  const addFilter = (filter: Filter) => {
+    setFilters((x) => [...x, filter])
+    console.log(filters)
+  }
+
+  const handleSortClick = (item: string) => {
+    setSelectedSortItem(item)
+  }
+
+  const removeSort = () => {
+    setSelectedSortItem(null)
+  }
+
   return (
     <Page>
       <div className="flex w-full flex-col">
-        <TopBar columns={table.getAllLeafColumns()} nullFunc={nullFunc} />
+        <TopBar
+          columns={table.getAllLeafColumns()}
+          selectedSortItem={selectedSortItem}
+          nullFunc={nullFunc}
+          addFilter={addFilter}
+          handleSortClick={handleSortClick}
+        />
 
-        <FilterBar />
+        <FilterBar
+          filters={filters}
+          selectedSortItem={selectedSortItem}
+          removeFilter={removeFilter}
+          removeSort={removeSort}
+        />
 
         <div className="flex flex-row items-center justify-between px-6 pt-3.5">
           <div className="flex flex-col">
