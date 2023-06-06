@@ -126,27 +126,27 @@ const Chart = ({ datasets }: ChartProps) => {
                 bottom: 5
               }}
             >
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#2C2D3C" />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="gray" />
 
               <XAxis
                 dataKey="date"
                 type="number"
                 tick={{ fontSize: '12', fontWeight: 'light' }}
                 tickFormatter={formatDate}
-                stroke="#858699"
+                stroke="gray"
                 allowDataOverflow
                 domain={['dataMin', 'dataMax']}
               />
 
               <YAxis
-                label={{ value: 'Stars', dy: -125, dx: 25, fontSize: '12', fill: '#858699' }}
+                label={{ value: 'Stars', dy: -125, dx: 25, fontSize: '12', fill: 'gray' }}
                 tick={{ fontSize: '12', fontWeight: 'light' }}
-                stroke="#858699"
+                stroke="gray"
                 tickFormatter={formatNumber}
                 domain={[0, 'dataMax']}
               />
 
-              <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#858699', strokeWidth: 1 }} />
+              <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'white', strokeWidth: 1 }} />
 
               <Legend wrapperStyle={{ fontSize: '12px' }} />
 
@@ -160,7 +160,7 @@ const Chart = ({ datasets }: ChartProps) => {
                   dataKey="count"
                   name={dataset.name}
                   type="monotone"
-                  stroke="#8884d8"
+                  stroke="white"
                   dot={false}
                   activeDot={{ r: 4 }}
                 />
