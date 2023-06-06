@@ -1,12 +1,12 @@
+import { useState } from 'react'
 import { useReactTable, getCoreRowModel } from '@tanstack/react-table'
-import { Project, useTrendingProjectsQuery } from '@/graphql/generated/gql'
 import Error from '@/components/pure/Error'
 import Loading from '@/components/pure/Loading'
 import Table from '@/components/page/overview/Table'
 import TopBar from '@/components/page/overview/TopBar'
 import columns from '@/components/pure/ProjectsTable/columns'
 import FilterBar, { Filter } from '@/components/page/overview/Filterbar'
-import { useState } from 'react'
+import { Project, useTrendingProjectsQuery } from '@/graphql/generated/gql'
 
 const nullFunc = () => null
 
@@ -30,12 +30,10 @@ const ProjectsTable = () => {
 
   const removeFilter = (filterToRemove: Filter) => {
     setFilters((x) => x.filter((filter) => filter !== filterToRemove))
-    console.log(filterToRemove)
   }
 
   const addFilter = (filter: Filter) => {
     setFilters((x) => [...x, filter])
-    console.log(filters)
   }
 
   const handleSortClick = (item: string) => {
