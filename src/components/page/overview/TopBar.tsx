@@ -162,7 +162,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => {
           />
         </div>
       </div>
-      <InputModal isOpen={isModalOpen} onClose={handleCloseModal}>
+      <InputModal isOpen={isModalOpen} onClose={handleCloseModal} modalHeader="Add Project">
         <input
           type="text"
           placeholder="Enter project Url"

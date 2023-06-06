@@ -6,12 +6,13 @@ type ModalProps = {
   isOpen: boolean
   onClose: () => void
   children: ReactNode
+  modalHeader: string
 }
 
 /**
  * Simple modal (incl. overlay)
  */
-const InputModal = ({ isOpen, onClose, children }: ModalProps) => {
+const InputModal = ({ isOpen, onClose, children, modalHeader }: ModalProps) => {
   if (!isOpen) return null
 
   return (
@@ -22,7 +23,7 @@ const InputModal = ({ isOpen, onClose, children }: ModalProps) => {
           <div className="float-right flex">
             <Button onClick={onClose} variant="onlyIconNoBorderNoBG" Icon={AiOutlineClose} />
           </div>
-          <h2 className="mb-4 text-lg font-bold text-white">Add Project</h2>
+          <h2 className="mb-4 text-lg font-bold text-white">{modalHeader}</h2>
           {children}
         </div>
       </div>
