@@ -48,6 +48,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => {
   }
 
   const handleCloseModal = () => {
+    setValue('')
     setIsModalOpen(false)
   }
 
@@ -165,7 +166,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => {
         <input
           type="text"
           placeholder="Enter project Url"
-          className="mb-4 w-full rounded-lg bg-gray-200 px-3 py-2"
+          className="mb-4 w-full rounded-lg bg-gray-800 px-3 py-2"
           value={value}
           onChange={handleChange}
         />
@@ -173,7 +174,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => {
           <Button
             onClick={nullFunc}
             variant="highlighted"
-            text="Add Project"
+            text="Save"
             Icon={AiOutlinePlus}
             order="ltr"
             iconColor="white"

@@ -19,7 +19,7 @@ const InputModal = ({ isOpen, onClose, children, modalHeader }: ModalProps) => {
     <>
       {/* Overlay */}
       <div className="absolute right-4 top-20 w-96">
-        <div className="rounded-lg bg-gray-800 p-6 shadow-lg">
+        <div className="rounded-lg bg-gray-600 p-6 shadow-lg">
           <div className="float-right flex">
             <Button onClick={onClose} variant="onlyIconNoBorderNoBG" Icon={AiOutlineClose} />
           </div>
