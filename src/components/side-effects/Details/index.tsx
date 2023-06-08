@@ -46,10 +46,8 @@ const Details = ({ id }: DetailsProps) => {
       // Find the current project's index in the array
       const index = projects.findIndex((project) => project.id === id)
       setCurrentProjectIndex(index)
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      if (index > 0) setPreviousProjectId(projects[index - 1].id)
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      if (index < projects.length - 1) setNextProjectId(projects[index + 1].id)
+      if (index > 0) setPreviousProjectId(projects[index - 1].id as string)
+      if (index < projects.length - 1) setNextProjectId(projects[index + 1].id as string)
     }
   }, [projects])
 
