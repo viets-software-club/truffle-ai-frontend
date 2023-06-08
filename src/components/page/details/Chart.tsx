@@ -157,7 +157,10 @@ const Chart = ({ datasets }: ChartProps) => {
                 domain={[0, 'dataMax']}
               />
 
-              <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'white', strokeWidth: 1 }} />
+              <Tooltip
+                content={<CustomTooltip />}
+                cursor={{ stroke: grayColors['100'], strokeWidth: 1 }}
+              />
 
               <Legend wrapperStyle={{ fontSize: '12px' }} />
 
@@ -171,7 +174,7 @@ const Chart = ({ datasets }: ChartProps) => {
                   dataKey="count"
                   name={dataset.name}
                   type="monotone"
-                  stroke="white"
+                  stroke={grayColors['100']}
                   dot={false}
                   activeDot={{ r: 4 }}
                 />
