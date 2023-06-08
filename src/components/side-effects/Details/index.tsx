@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
   FiX as X,
@@ -16,10 +16,9 @@ import Error from '@/components/pure/Error'
 import Chart from '@/components/page/details/Chart'
 import ProjectInformation from '@/components/page/details/ProjectInformation'
 import RightSidebar from '@/components/page/details/RightSidebar'
-import { Project, useProjectDetailsQuery } from '@/graphql/generated/gql'
+import { Project, useProjectDetailsQuery, useTrendingProjectsQuery } from '@/graphql/generated/gql'
 import { hackerNewsListMock, tweetListMock } from '@/data/detailPageMocks'
 
-// @TODO Implement handler for navigation
 const handleClick = () => ''
 
 // @TODO Update social media buttons
@@ -36,6 +35,23 @@ type DetailsProps = {
  */
 const Details = ({ id }: DetailsProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [{ data: tpData }] = useTrendingProjectsQuery()
+  const projects = tpData?.projectCollection?.edges?.map((edge) => edge.node) as Project[]
+  const [currentProjectIndex, setCurrentProjectIndex] = useState<number>()
+  const [previousProjectId, setPreviousProjectId] = useState<string>()
+  const [nextProjectId, setNextProjectId] = useState<string>()
+
+  useEffect(() => {
+    if (projects) {
+      // Find the current project's index in the array
+      const index = projects.findIndex((project) => project.id === id)
+      setCurrentProjectIndex(index)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      if (index > 0) setPreviousProjectId(projects[index - 1].id)
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      if (index < projects.length - 1) setNextProjectId(projects[index + 1].id)
+    }
+  }, [projects])
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
@@ -63,13 +79,20 @@ const Details = ({ id }: DetailsProps) => {
             <X key="2" className="h-4 w-4 text-gray-500" />
           </Link>
 
-          <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronUp} />
-          <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronDown} />
+          {previousProjectId && (
+            <Link href={`/details/${previousProjectId}`}>
+              <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronUp} />
+            </Link>
+          )}
+          {nextProjectId && (
+            <Link href={`/details/${nextProjectId}`}>
+              <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronDown} />
+            </Link>
+          )}
 
-          {/* @TODO Make values dynamic */}
           <div className="flex flex-row items-center">
-            <p className="text-14 text-white">10&nbsp;</p>
-            <p className="text-14 text-gray-500">/&nbsp;25</p>
+            <p className="text-14 text-white">{currentProjectIndex}&nbsp;</p>
+            <p className="text-14 text-gray-500">/&nbsp;{projects?.length}</p>
           </div>
         </div>
 
