@@ -89,13 +89,14 @@ const Details = ({ id }: DetailsProps) => {
             <X key="2" className="h-4 w-4 text-gray-500" />
           </Link>
 
-          {previousProjectId && (
-            <Link href={`/details/${previousProjectId}`}>
+          {nextProjectId && (
+            <Link href={`/details/${nextProjectId}`}>
               <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronUp} />
             </Link>
           )}
-          {nextProjectId && (
-            <Link href={`/details/${nextProjectId}`}>
+
+          {previousProjectId && (
+            <Link href={`/details/${previousProjectId}`}>
               <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronDown} />
             </Link>
           )}
