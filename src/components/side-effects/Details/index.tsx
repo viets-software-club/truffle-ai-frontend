@@ -35,6 +35,7 @@ type DetailsProps = {
  */
 const Details = ({ id }: DetailsProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  // @TODO Make list of projects dependent on where the user came from (trending, bookmarked, etc.). Can probably be achieved by passing a parameter indicating which of the mentioned pages came last according to the browser history
   const [{ data: tpData }] = useTrendingProjectsQuery()
   const projects = tpData?.projectCollection?.edges?.map((edge) => edge.node) as Project[]
   const [currentProjectIndex, setCurrentProjectIndex] = useState<number>()
@@ -42,14 +43,25 @@ const Details = ({ id }: DetailsProps) => {
   const [nextProjectId, setNextProjectId] = useState<string>()
 
   useEffect(() => {
-    if (projects) {
-      // Find the current project's index in the array
-      const index = projects.findIndex((project) => project.id === id)
-      setCurrentProjectIndex(index)
-      if (index > 0) setPreviousProjectId(projects[index - 1].id as string)
-      if (index < projects.length - 1) setNextProjectId(projects[index + 1].id as string)
+    const updateProjectIndices = (currentId: string, projectList: Project[]) => {
+      const currentIndex = projectList.findIndex((project) => project.id === currentId)
+
+      const newPreviousProjectId =
+        currentIndex > 0 ? (projectList[currentIndex - 1].id as string) : undefined
+      const newNextProjectId =
+        currentIndex < projectList.length - 1
+          ? (projectList[currentIndex + 1].id as string)
+          : undefined
+
+      setCurrentProjectIndex(currentIndex)
+      setPreviousProjectId(newPreviousProjectId)
+      setNextProjectId(newNextProjectId)
     }
-  }, [projects])
+
+    if (projects) {
+      updateProjectIndices(id, projects)
+    }
+  }, [projects, id])
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
@@ -89,7 +101,9 @@ const Details = ({ id }: DetailsProps) => {
           )}
 
           <div className="flex flex-row items-center">
-            <p className="text-14 text-white">{currentProjectIndex}&nbsp;</p>
+            <p className="text-14 text-white">
+              {currentProjectIndex !== undefined ? currentProjectIndex + 1 : '0'}&nbsp;
+            </p>
             <p className="text-14 text-gray-500">/&nbsp;{projects?.length}</p>
           </div>
         </div>
