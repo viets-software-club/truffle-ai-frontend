@@ -40,6 +40,8 @@ const GithubStatItem = ({
 
   const gap = largeGap ? 'gap-[10px]' : 'gap-[5px]'
 
+  /* ToDo refactor to use sass module, need help with this dynamic classes */
+
   return (
     <div className="flex flex-col justify-between">
       <div

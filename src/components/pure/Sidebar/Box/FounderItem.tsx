@@ -1,5 +1,6 @@
 import { AiFillMail } from 'react-icons/ai'
 import { FaLinkedin } from 'react-icons/fa'
+import css from './FounderItem.module.sass'
 
 type FounderProps = {
   name: string
@@ -29,18 +30,18 @@ PS: if you have time, please check out my blog post on Building a Defensible ML 
 }
 
 const FounderItem = ({ name, mail, linkedin, company }: FounderProps) => (
-  <div className="flex flex-col justify-between">
-    <div className="inline-flex px-7 py-2.5">
-      <div className="flex flex-row items-center justify-center gap-[15px]">
-        <span className="text-xs not-italic leading-3 text-gray-500">{name}</span>
+  <div className={css.FounderItem}>
+    <div className={css.FounderItem__content}>
+      <div className={css.FounderItem__info}>
+        <span className={css.FounderItem__name}>{name}</span>
         {linkedin && (
           <a href={linkedin} target="_blank" rel="noreferrer">
-            <FaLinkedin className="h-[14px] w-[14px] text-gray-500" />
+            <FaLinkedin className={css.FounderItem__linkedin} />
           </a>
         )}
         {mail && (
           <a href={emailTemplate(mail, name, company)} target="_blank" rel="noreferrer">
-            <AiFillMail className="h-[14px] w-[14px] text-gray-500" />
+            <AiFillMail className={css.FounderItem__mail} />
           </a>
         )}
       </div>
