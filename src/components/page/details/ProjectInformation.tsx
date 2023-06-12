@@ -50,6 +50,7 @@ const ProjectInformation = ({ image, url, name, eli5, tags }: ProjectInformation
         }}
         order="ltr"
         textColor="text-gray-100"
+        tabIndex={0}
       />
     </div>
 

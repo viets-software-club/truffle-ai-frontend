@@ -87,6 +87,7 @@ const Chart = ({ datasets }: ChartProps) => {
                 onClick={() => {
                   toggleModal()
                 }}
+                tabIndex={0}
               />
 
               <Modal isOpen={isModalOpen} onClose={toggleModal}>
@@ -97,6 +98,7 @@ const Chart = ({ datasets }: ChartProps) => {
                     text={item}
                     fullWidth
                     onClick={() => handleModalValueChange(item)}
+                    tabIndex={-1}
                   />
                 ))}
               </Modal>
@@ -111,6 +113,7 @@ const Chart = ({ datasets }: ChartProps) => {
                 onClick={() => {
                   setTimeframeModalOpen(true)
                 }}
+                tabIndex={-2}
               />
 
               <Modal isOpen={timeframeModalOpen} onClose={() => setTimeframeModalOpen(false)}>
@@ -121,6 +124,7 @@ const Chart = ({ datasets }: ChartProps) => {
                     text={option.label}
                     fullWidth
                     onClick={() => handleTimeframeChange(option.value)}
+                    tabIndex={-3}
                   />
                 ))}
               </Modal>

@@ -24,7 +24,7 @@ const SocialMediaItem = ({ icon, text, name, value, growth, onClick }: SocialMed
     <div className="flex flex-col justify-between">
       <div className="inline-flex px-7 py-2.5">
         <div className="flex flex-row items-center justify-center gap-[15px]">
-          <button type="button" onClick={onClick}>
+          <button type="button" onClick={onClick} tabIndex={0}>
             <Icon className="h-[14px] w-[14px] text-gray-500" />
           </button>
 

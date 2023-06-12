@@ -59,6 +59,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => (
                   <button
                     type="button"
                     className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
+                    tabIndex={0}
                   >
                     <p className="text-14 text-gray-100">{option.label}</p>
                   </button>
@@ -77,6 +78,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => (
           Icon={AiOutlinePlus}
           order="ltr"
           textColor="white"
+          tabIndex={-1}
         />
       </div>
     </div>
@@ -90,6 +92,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => (
           Icon={VscSettings}
           order="ltr"
           textColor="white"
+          tabIndex={-2}
         />
       </div>
 
@@ -110,6 +113,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => (
                     type="button"
                     onClick={() => column.toggleVisibility()}
                     className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
+                    tabIndex={-3}
                   >
                     {column.getIsVisible() ? (
                       <RiCheckboxFill className="text-indigo-600" />
@@ -141,6 +145,7 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => (
           order="ltr"
           iconColor="white"
           textColor="white"
+          tabIndex={-4}
         />
       </div>
     </div>

@@ -15,6 +15,7 @@ type ButtonProps = {
   iconColor?: string
   textColor?: string
   fullWidth?: boolean
+  tabIndex: number
 }
 
 const baseClassNames = `flex items-center rounded-[5px] transition-colors duration-100 hover:bg-gray-700`
@@ -38,7 +39,8 @@ const Button = ({
   order,
   iconColor = 'text-gray-500',
   textColor = 'text-gray-300',
-  fullWidth
+  fullWidth,
+  tabIndex
 }: ButtonProps) => {
   const classNames = `${baseClassNames} ${variantToButtonVariantClassNames.get(variant) ?? ''} ${
     fullWidth ? 'w-full' : ''
@@ -58,7 +60,7 @@ const Button = ({
   const contentNode = order === 'ltr' ? [iconNode, textNode] : [textNode, iconNode]
 
   return (
-    <button type="button" onClick={onClick} className={classNames}>
+    <button type="button" onClick={onClick} className={classNames} tabIndex={tabIndex}>
       {contentNode}
     </button>
   )

@@ -24,7 +24,14 @@ const handleClick = () => ''
 
 // @TODO Update social media buttons
 const SomeButton = (
-  <Button Icon={FiArrowUpRight} variant="normal" onClick={handleClick} text="Open" order="ltr" />
+  <Button
+    Icon={FiArrowUpRight}
+    variant="normal"
+    onClick={handleClick}
+    text="Open"
+    order="ltr"
+    tabIndex={0}
+  />
 )
 
 type DetailsProps = {
@@ -63,8 +70,8 @@ const Details = ({ id }: DetailsProps) => {
             <X key="2" className="h-4 w-4 text-gray-500" />
           </Link>
 
-          <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronUp} />
-          <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronDown} />
+          <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronUp} tabIndex={-1} />
+          <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronDown} tabIndex={-2} />
 
           {/* @TODO Make values dynamic */}
           <div className="flex flex-row items-center">
@@ -80,12 +87,31 @@ const Details = ({ id }: DetailsProps) => {
             text="This week"
             Icon={Calendar}
             order="ltr"
+            tabIndex={-3}
           />
 
           <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-            <Button variant="noBorderNoBG" text="Today" fullWidth onClick={handleClick} />
-            <Button variant="noBorderNoBG" text="This Week" fullWidth onClick={handleClick} />
-            <Button variant="noBorderNoBG" text="This Month" fullWidth onClick={handleClick} />
+            <Button
+              variant="noBorderNoBG"
+              text="Today"
+              fullWidth
+              onClick={handleClick}
+              tabIndex={-4}
+            />
+            <Button
+              variant="noBorderNoBG"
+              text="This Week"
+              fullWidth
+              onClick={handleClick}
+              tabIndex={-5}
+            />
+            <Button
+              variant="noBorderNoBG"
+              text="This Month"
+              fullWidth
+              onClick={handleClick}
+              tabIndex={-6}
+            />
           </Modal>
         </div>
       </div>

@@ -54,6 +54,7 @@ const Compare = () => {
             Icon={FiChevronDown}
             order="ltr"
             textColor="white"
+            tabIndex={0}
           />
         </div>
       </div>
@@ -82,6 +83,7 @@ const Compare = () => {
             Icon={AiOutlinePlus}
             order="ltr"
             textColor="white"
+            tabIndex={-1}
           />
         </div>
       </div>

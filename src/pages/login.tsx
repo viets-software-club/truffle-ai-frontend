@@ -6,6 +6,7 @@ import { useUser, useSessionContext, useSupabaseClient } from '@supabase/auth-he
 import Button from '@/components/pure/Button'
 import Error from '@/components/pure/Error'
 import Loading from '@/components/pure/Loading'
+import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -55,30 +56,38 @@ const Login = () => {
   if (isLoading) return <Loading />
 
   return (
-    <main className={`${inter.className} flex min-h-screen flex-col`}>
-      {isError ? (
-        <Error title="Error" message="Something went wrong. Please try again." />
-      ) : (
-        <div className="flex grow flex-col items-center justify-between bg-radial-gradient">
-          <div />
+    <>
+      <Head>
+        <title>Login</title>
+      </Head>
+      <main className={`${inter.className} flex min-h-screen flex-col`}>
+        {isError ? (
+          <Error title="Error" message="Something went wrong. Please try again." />
+        ) : (
+          <div className="flex grow flex-col items-center justify-between bg-radial-gradient">
+            <div />
 
-          <div className="flex flex-col items-center space-y-4">
-            <div className="mb-4 text-36 font-semibold text-gray-100">Welcome to TruffleAI</div>
-            <Button
-              text="Continue with Google"
-              Icon={AiOutlineGoogle}
-              order="ltr"
-              iconColor="white"
-              textColor="white"
-              onClick={handleSignInWithGoogle}
-              variant="highlighted"
-            />
+            <div className="flex flex-col items-center space-y-4">
+              <div className="mb-4 text-36 font-semibold text-gray-100">Welcome to TruffleAI</div>
+              <Button
+                text="Continue with Google"
+                Icon={AiOutlineGoogle}
+                order="ltr"
+                iconColor="white"
+                textColor="white"
+                onClick={handleSignInWithGoogle}
+                variant="highlighted"
+                tabIndex={0}
+              />
+            </div>
+
+            <div className="self-center pb-4 text-12 text-gray-300">
+              © 2023 La Famiglia x Rostlab
+            </div>
           </div>
-
-          <div className="self-center pb-4 text-12 text-gray-300">© 2023 La Famiglia x Rostlab</div>
-        </div>
-      )}
-    </main>
+        )}
+      </main>
+    </>
   )
 }
 
