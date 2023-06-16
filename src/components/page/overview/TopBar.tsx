@@ -6,7 +6,7 @@ import { AiOutlinePlus, AiOutlineCalendar } from 'react-icons/ai'
 import { RiCheckboxBlankLine, RiCheckboxFill } from 'react-icons/ri'
 import { Menu, Transition } from '@headlessui/react'
 import Button from '@/components/pure/Button'
-import { Project } from '@/graphql/generated/gql'
+import { Project, useAddProjectByUrlMutation } from '@/graphql/generated/gql'
 import InputModal from '@/components/pure/InputModal'
 
 type TopBarProps = {
@@ -41,19 +41,35 @@ const TransitionMenuItems = ({ children }: TransitionMenuItemsProps) => (
 
 const TopBar = ({ columns, nullFunc }: TopBarProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [value, setValue] = useState('')
-
+  const [projectUrl, setProjectUrl] = useState('')
+  const [showResults, setShowResults] = useState(false)
+  const [{ data }, addProjectByUrlMutation] = useAddProjectByUrlMutation()
+  const [isError, setIsError] = useState(false)
   const handleOpenModal = () => {
     setIsModalOpen(true)
   }
 
   const handleCloseModal = () => {
-    setValue('')
+    setShowResults(false)
+    setProjectUrl('')
     setIsModalOpen(false)
   }
 
   const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
-    setValue(e.target.value)
+    setProjectUrl(e.target.value)
+  }
+
+  const handleAddProject = () => {
+    setShowResults(false)
+    addProjectByUrlMutation({ url: projectUrl })
+      .then(() => {
+        setShowResults(true)
+      })
+      .catch(() => {
+        // Handle any errors that occurred during the mutation
+        setShowResults(true)
+        setIsError(true)
+      })
   }
 
   return (
@@ -165,17 +181,24 @@ const TopBar = ({ columns, nullFunc }: TopBarProps) => {
       <InputModal isOpen={isModalOpen} onClose={handleCloseModal} modalHeader="Add Project">
         <input
           type="text"
-          placeholder="Enter project Url"
+          placeholder="github.com/truffle-ai-frontend"
           className="mb-4 w-full rounded-lg bg-gray-800 px-3 py-2"
-          value={value}
+          value={projectUrl}
           onChange={handleChange}
         />
+        {showResults &&
+          data?.addProjectByUrl !== undefined &&
+          (isError || !data.addProjectByUrl ? (
+            <span className="pl-1 text-red">Can not add project</span>
+          ) : (
+            <span className="pl-2 text-green">Project was added successfully</span>
+          ))}
+
         <div className="flex justify-end">
           <Button
-            onClick={nullFunc}
+            onClick={handleAddProject}
             variant="highlighted"
             text="Save"
-            Icon={AiOutlinePlus}
             order="ltr"
             iconColor="white"
             textColor="white"
