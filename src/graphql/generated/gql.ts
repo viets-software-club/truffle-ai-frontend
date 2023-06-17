@@ -1099,6 +1099,7 @@ export type ProjectDetailsQuery = {
         githubUrl?: string | null
         websiteUrl?: string | null
         starHistory?: Array<any | null> | null
+        languages?: Array<any | null> | null
         owningPerson?: any | null
         owningOrganization?: any | null
         associatedPerson?: {
@@ -1192,6 +1193,7 @@ export const ProjectDetailsDocument = gql`
           githubUrl
           websiteUrl
           starHistory
+          languages
           owningPerson
           owningOrganization
           associatedPerson {
