@@ -63,7 +63,7 @@ const RightSidebar = ({ project }: Props) => (
               aria-label="Add to CRM"
             />
 
-            <button type="button" onClick={() => null} tabIndex={-1} aria-label="Slack">
+            <button type="button" onClick={() => null} tabIndex={0} aria-label="Slack">
               <FaSlack className="h-[14px] w-[14px]" />
             </button>
           </div>

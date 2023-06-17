@@ -44,9 +44,7 @@ const FilterFormModal = ({ filter, removeFilter, updateFilter }: FilterFormModal
     <Menu.Item key={op}>
       <button
         type="button"
-        className={`flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600 ${
-          selectedOperator === op ? 'bg-gray-600' : ''
-        }`}
+        className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
         onClick={() => {
           setSelectedOperator(op)
           updateFilter({ ...filter, operator: op })

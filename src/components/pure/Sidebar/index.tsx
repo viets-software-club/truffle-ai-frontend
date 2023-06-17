@@ -24,7 +24,7 @@ const Sidebar = ({ footer, ...props }: SidebarProps) => (
       {/* Top bar with title and profile modal button */}
       <div className="flex h-[59px] w-full items-center justify-between px-7 text-gray-100">
         <Link href="/">
-          <span className="mr-2 text-18 font-medium" aria-label="Home">
+          <span className="mr-2 text-18 font-medium" aria-label="Overview">
             {props.title}
           </span>
         </Link>

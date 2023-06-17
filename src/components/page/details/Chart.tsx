@@ -164,7 +164,7 @@ const Chart = ({ datasets, multipleLines }: ChartProps) => {
                       text={option.label}
                       fullWidth
                       onClick={handleTimeframeChange(option.value)}
-                      tabIndex={-1}
+                      tabIndex={0}
                     />
                   ))}
                 </Modal>
@@ -175,7 +175,7 @@ const Chart = ({ datasets, multipleLines }: ChartProps) => {
                   text="Normalize Data"
                   fullWidth
                   onClick={handleDataNormalization}
-                  tabIndex={-2}
+                  tabIndex={0}
                 />
               </div>
             </div>

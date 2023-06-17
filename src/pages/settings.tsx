@@ -5,7 +5,7 @@ import Head from 'next/head'
 const Settings = () => (
   <Page>
     <Head>
-      <title>settings</title>
+      <title>Settings</title>
     </Head>
     <div
       className="flex h-[60px] flex-row items-center justify-between border-b border-gray-800 px-6"

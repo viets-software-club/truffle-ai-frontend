@@ -8,11 +8,10 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<string, string>)
     return (
       <div className="rounded border border-gray-800 bg-gray-900 p-2 text-xs text-white">
         <p>{formatDate(label as string)}</p>
-        {payload.map((item, index) => (
+        {payload.map((item) => (
           <div
             key={item.name}
             className="flex flex-row justify-between"
-            tabIndex={index + 1}
             role="listitem"
             aria-label={item.name}
           >

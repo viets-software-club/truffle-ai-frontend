@@ -30,13 +30,8 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       />
 
       {/* Modal */}
-      <div className="z-50 m-0" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div className="absolute bg-gray-850">
-          <h2 id="modal-title" className="sr-only">
-            Modal Title
-          </h2>
-          {children}
-        </div>
+      <div className="z-50 m-0" role="dialog" aria-modal="true">
+        <div className="absolute bg-gray-850">{children}</div>
       </div>
     </>
   )

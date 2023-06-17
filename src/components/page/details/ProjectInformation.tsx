@@ -18,7 +18,7 @@ const ProjectInformation = ({ image, url, name, eli5, tags }: ProjectInformation
     <div className="mb-6 flex flex-row items-center justify-between">
       <div className="flex flex-row items-center">
         <div className="relative mr-4 h-8 w-8 overflow-hidden rounded-[5px] bg-gray-600">
-          <Image src={image} alt="Logo" fill sizes="32px" />
+          <Image src={image} alt="logo" fill sizes="32px" />
         </div>
 
         <a href={url} target="_blank" rel="noreferrer">

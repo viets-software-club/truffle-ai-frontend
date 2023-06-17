@@ -60,14 +60,6 @@ const Item = ({
       onMouseLeave={() => setIsHovered(false)}
       role="button"
       tabIndex={0}
-      onClick={() => {
-        // Handle click event
-      }}
-      onKeyDown={(event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          // Handle key press event
-        }
-      }}
     >
       {/* Only add URL parameter if item links to compare or details page */}
       <Link href={path + (['/details', '/compare'].includes(path) ? `/${id}` : '')}>
@@ -105,22 +97,12 @@ const Item = ({
                 className="cursor-pointer text-gray-500"
                 tabIndex={0}
                 role="button"
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    // Handle key press event
-                  }
-                }}
               />
               <MdClose
                 onClick={handleDelete}
                 className="cursor-pointer text-gray-500"
                 tabIndex={0}
                 role="button"
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    // Handle key press event
-                  }
-                }}
               />
             </div>
           )}
