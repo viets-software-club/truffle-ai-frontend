@@ -112,6 +112,7 @@ const TopBar = ({ columns, nullFunc, addFilter, filters, comparePage }: TopBarPr
                       type="button"
                       onClick={column.getToggleVisibilityHandler()}
                       className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
+                      tabIndex={0}
                     >
                       {column.getIsVisible() ? (
                         <RiCheckboxFill className="text-indigo-600" />
@@ -165,7 +166,6 @@ const TopBar = ({ columns, nullFunc, addFilter, filters, comparePage }: TopBarPr
                     <Menu.Item key={column.id}>
                       <button
                         type="button"
-                        className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
                         onClick={() =>
                           addFilter({
                             column,
@@ -175,6 +175,8 @@ const TopBar = ({ columns, nullFunc, addFilter, filters, comparePage }: TopBarPr
                                 : NumberTableFilterOperator.EQUALS
                           })
                         }
+                        className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
+                        tabIndex={0}
                       >
                         {column.columnDef.header === 'Name' ? (
                           <IoTextOutline className="text-gray-500" />
@@ -208,6 +210,8 @@ const TopBar = ({ columns, nullFunc, addFilter, filters, comparePage }: TopBarPr
             Icon={AiOutlineSortAscending}
             order="ltr"
             textColor="white"
+            tabIndex={0}
+            aria-label="Sorting"
           />
         </div>
       </div>
@@ -222,6 +226,8 @@ const TopBar = ({ columns, nullFunc, addFilter, filters, comparePage }: TopBarPr
             order="ltr"
             iconColor="white"
             textColor="white"
+            tabIndex={0}
+            aria-label="Add Project"
           />
         </div>
       </div>

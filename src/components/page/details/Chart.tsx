@@ -152,6 +152,8 @@ const Chart = ({ datasets, multipleLines }: ChartProps) => {
                     setTimeframeModalOpen(true)
                   }}
                   tabIndex={0}
+                  aria-haspopup="true"
+                  aria-expanded={timeframeModalOpen}
                 />
 
                 <Modal isOpen={timeframeModalOpen} onClose={() => setTimeframeModalOpen(false)}>

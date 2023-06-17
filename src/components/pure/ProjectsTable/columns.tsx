@@ -19,7 +19,7 @@ const columns = [
       enableColumnFilter: false,
       cell: (info) => (
         <div className="relative ml-2 h-6 w-6 overflow-hidden rounded-[5px]">
-          <Image src={info.getValue() as string} alt="logo" fill sizes="24px" />
+          <Image src={info.getValue() as string} alt="logo" fill sizes="24px" aria-label="Logo" />
         </div>
       )
     }
@@ -38,9 +38,19 @@ const columns = [
         const [owner, name] = info.getValue().split(' / ')
         return (
           <div>
-            <span className="text-14 font-medium text-gray-500">{owner.slice(0, 15)} /&nbsp;</span>
+            <span
+              className="text-14 font-medium text-gray-500"
+              aria-label={`Owner: ${owner.slice(0, 15)}`}
+            >
+              {owner.slice(0, 15)} /&nbsp;
+            </span>
             {owner.length > 16 && <span className="text-14 text-gray-500">...</span>}
-            <span className="text-14 font-bold">{name.slice(0, 31)}</span>
+            <span
+              className="text-14 font-bold"
+              aria-label={`Repository name: ${name.slice(0, 31)}`}
+            >
+              {name.slice(0, 31)}
+            </span>
             {name.length > 32 && <span className="text-14">...</span>}
           </div>
         )

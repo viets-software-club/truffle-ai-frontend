@@ -48,7 +48,7 @@ const GithubStatItem = ({
         }`}
       >
         <div className={`flex flex-row items-center justify-center ${gap}`}>
-          {Icon && <Icon className={`h-[14px] w-[14px] ${color}`} />}
+          {Icon && <Icon className={`h-[14px] w-[14px] ${color}`} aria-hidden="true" />}
           {IconMetric}
           <span className={`text-xs not-italic leading-3 ${paddingOn ? 'w-6' : ''} ${color}`}>
             {formatNumber(value)}

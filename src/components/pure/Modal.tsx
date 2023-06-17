@@ -26,11 +26,17 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
         tabIndex={0}
         // Treat the overlay as a button for accessibility purposes
         role="button"
+        aria-label="Close Modal"
       />
 
       {/* Modal */}
-      <div className="z-50 m-0">
-        <div className="absolute bg-gray-850">{children}</div>
+      <div className="z-50 m-0" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div className="absolute bg-gray-850">
+          <h2 id="modal-title" className="sr-only">
+            Modal Title
+          </h2>
+          {children}
+        </div>
       </div>
     </>
   )

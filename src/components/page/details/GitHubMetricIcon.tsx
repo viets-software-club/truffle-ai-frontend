@@ -11,11 +11,13 @@ type GitHubMetricIconProps = {
  * @param {React.ElementType} Icon2 - The second icon component to display.
  */
 const GitHubMetricIcon = ({ Icon, Icon2 }: GitHubMetricIconProps) => (
-  <div className="relative h-4 w-4">
+  <div className="relative h-4 w-4" role="button" tabIndex={0} aria-label="Toggle">
     <Icon className="absolute left-0 top-0 z-10 h-2 w-2 text-white" />
     <div
       className="absolute mb-[3px] ml-[3px] h-[1px] w-3 origin-bottom-left -rotate-45 rounded-full bg-white"
       style={{ bottom: '0', left: '0' }}
+      role="presentation"
+      aria-hidden="true"
     />
     <Icon2 className="absolute bottom-0 right-0 z-10 h-2 w-2 text-white" />
   </div>

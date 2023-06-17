@@ -32,6 +32,8 @@ const FilterFormModal = ({ filter, removeFilter, updateFilter }: FilterFormModal
           setSelectedOperator(op)
           updateFilter({ ...filter, operator: op })
         }}
+        aria-label={`Select operator ${op}`}
+        role="menuitem"
       >
         <p className="text-14 text-gray-100">{op}</p>
       </button>
@@ -42,11 +44,17 @@ const FilterFormModal = ({ filter, removeFilter, updateFilter }: FilterFormModal
     <Menu.Item key={op}>
       <button
         type="button"
-        className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
+        className={`flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600 ${
+          selectedOperator === op ? 'bg-gray-600' : ''
+        }`}
         onClick={() => {
           setSelectedOperator(op)
           updateFilter({ ...filter, operator: op })
         }}
+        tabIndex={0}
+        aria-current={selectedOperator === op ? 'true' : undefined}
+        aria-label={`Select operator ${op}`}
+        role="menuitem"
       >
         <p className="text-14 text-gray-100">{op}</p>
       </button>
@@ -62,7 +70,13 @@ const FilterFormModal = ({ filter, removeFilter, updateFilter }: FilterFormModal
       <Popover as="div" className="relative inline-block text-left">
         {({ open }) => (
           <>
-            <Popover.Button className={filterAppliedClassNames}>
+            <Popover.Button
+              className={filterAppliedClassNames}
+              tabIndex={0}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : 'false'}
+              aria-label="Toggle Filter Dropdown"
+            >
               <div className="flex flex-row items-center space-x-1">
                 {filter.column.columnDef.header === 'Name' ? (
                   <IoTextOutline className="text-gray-500" />
@@ -87,6 +101,9 @@ const FilterFormModal = ({ filter, removeFilter, updateFilter }: FilterFormModal
                 className={`absolute right-0 z-40 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg focus:outline-none ${
                   open ? 'block' : 'hidden'
                 }`}
+                aria-label="Filter Dropdown"
+                role="menu"
+                aria-labelledby="filter-dropdown-label"
               >
                 {/* Whole expanded dropdown */}
                 <div className="p-2">
@@ -100,7 +117,13 @@ const FilterFormModal = ({ filter, removeFilter, updateFilter }: FilterFormModal
                           : ''}
                       </p>
                       <Menu as="div">
-                        <Menu.Button className="flex flex-row items-center space-x-1 text-14 text-gray-500">
+                        <Menu.Button
+                          className="flex flex-row items-center space-x-1 text-14 text-gray-500"
+                          tabIndex={0}
+                          aria-haspopup="true"
+                          aria-expanded={open ? 'true' : 'false'}
+                          aria-label="Select Operator"
+                        >
                           <p className="text-14 font-medium text-gray-300">{selectedOperator}</p>
                           <ChevronDownIcon className="text-gray-500" />
                         </Menu.Button>
@@ -113,7 +136,10 @@ const FilterFormModal = ({ filter, removeFilter, updateFilter }: FilterFormModal
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute right-0 z-40 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg focus:outline-none">
+                          <Menu.Items
+                            className="absolute right-0 z-40 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg focus:outline-none"
+                            aria-label="Operator Options"
+                          >
                             <div className="py-1">
                               {filter.column.columnDef.header === 'Name'
                                 ? stringFilterOptions
@@ -127,6 +153,8 @@ const FilterFormModal = ({ filter, removeFilter, updateFilter }: FilterFormModal
                       onClick={() => removeFilter(filter)}
                       variant="onlyIconNoBorderNoBG"
                       Icon={TbTrash}
+                      tabIndex={0}
+                      aria-label="Remove Filter"
                     />
                   </div>
                   <div className="mt-2">
@@ -139,6 +167,7 @@ const FilterFormModal = ({ filter, removeFilter, updateFilter }: FilterFormModal
                         setValue(e.target.value)
                         updateFilter({ ...filter, value: e.target.value })
                       }}
+                      aria-label="Filter Value Input"
                     />
                   </div>
                 </div>

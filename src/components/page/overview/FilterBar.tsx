@@ -19,7 +19,12 @@ const FilterBar = ({
   <div className="flex flex-row justify-between border-b border-gray-800 px-6 py-2.5">
     <div className="flex flex-row gap-3">
       {filters.map((filter: TableFilter) => (
-        <FilterFormModal filter={filter} removeFilter={removeFilter} updateFilter={updateFilter} />
+        <FilterFormModal
+          filter={filter}
+          removeFilter={removeFilter}
+          updateFilter={updateFilter}
+          aria-label="Filter"
+        />
       ))}
     </div>
 

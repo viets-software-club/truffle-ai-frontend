@@ -131,12 +131,18 @@ const Compare = () => {
             Icon={AiOutlinePlus}
             order="ltr"
             textColor="white"
-            tabIndex={-1}
+            tabIndex={0}
+            aria-label="Add project to compare"
           />
         </div>
       </div>
 
-      <Table table={table} filters={filters} setFilteredRowCount={setFilteredRowCount} />
+      <Table
+        table={table}
+        filters={filters}
+        setFilteredRowCount={setFilteredRowCount}
+        aria-label="Comparison table"
+      />
     </div>
   )
 }

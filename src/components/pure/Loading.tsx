@@ -14,10 +14,14 @@ const Loading = ({ message }: LoadingProps) => (
 
     <div className="flex flex-col items-center">
       <Logo className="h-10 w-10" />
-      <p className="pt-6">{message || 'Loading...'}</p>
+      <p className="pt-6" role="status" aria-live="assertive">
+        {message || 'Loading...'}
+      </p>
     </div>
 
-    <div className="self-center pb-4 text-12 text-gray-300">© 2023 La Famiglia x Rostlab</div>
+    <div className="self-center pb-4 text-12 text-gray-300" aria-label="Copyright">
+      © 2023 La Famiglia x Rostlab
+    </div>
   </div>
 )
 

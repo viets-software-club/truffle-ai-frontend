@@ -24,13 +24,18 @@ const Sidebar = ({ footer, ...props }: SidebarProps) => (
       {/* Top bar with title and profile modal button */}
       <div className="flex h-[59px] w-full items-center justify-between px-7 text-gray-100">
         <Link href="/">
-          <span className="mr-2 text-18 font-medium">{props.title}</span>
+          <span className="mr-2 text-18 font-medium" aria-label="Home">
+            {props.title}
+          </span>
         </Link>
 
         {/* The profile button opens a dropdown menu with options */}
         <Menu as="div" className="relative inline-block text-left">
           <div>
-            <Menu.Button className="flex h-[30px] w-[30px] flex-row items-center rounded-[5px] border border-gray-800 bg-gray-850 px-2 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
+            <Menu.Button
+              className="flex h-[30px] w-[30px] flex-row items-center rounded-[5px] border border-gray-800 bg-gray-850 px-2 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700"
+              aria-label="Profile Menu"
+            >
               <UserIcon className="text-gray-500" />
             </Menu.Button>
           </div>
@@ -64,7 +69,9 @@ const Sidebar = ({ footer, ...props }: SidebarProps) => (
       {props.children}
     </div>
 
-    <footer className="border-t border-solid border-gray-800 p-2">{footer}</footer>
+    <footer className="border-t border-solid border-gray-800 p-2" role="contentinfo">
+      {footer}
+    </footer>
   </aside>
 )
 

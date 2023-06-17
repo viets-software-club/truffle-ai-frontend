@@ -96,13 +96,25 @@ const Details = ({ id }: DetailsProps) => {
 
           {nextProjectId && (
             <Link href={`/details/${nextProjectId}`}>
-              <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronUp} tabIndex={-1} />
+              <Button
+                variant="onlyIcon"
+                onClick={handleClick}
+                Icon={ChevronUp}
+                tabIndex={0}
+                aria-label="Next Project"
+              />
             </Link>
           )}
 
           {previousProjectId && (
             <Link href={`/details/${previousProjectId}`}>
-              <Button variant="onlyIcon" onClick={handleClick} Icon={ChevronDown} tabIndex={-2} />
+              <Button
+                variant="onlyIcon"
+                onClick={handleClick}
+                Icon={ChevronDown}
+                tabIndex={0}
+                aria-label="Previous Project"
+              />
             </Link>
           )}
 
@@ -127,6 +139,7 @@ const Details = ({ id }: DetailsProps) => {
             url={project.githubUrl as string}
             eli5={project.eli5 || project.about || 'No description'}
             tags={project.languages || []}
+            aria-label="Project Information"
           />
 
           <Chart
@@ -140,6 +153,7 @@ const Details = ({ id }: DetailsProps) => {
               }
             ]}
             multipleLines={false}
+            aria-label="Project Stars"
           />
 
           {/* @TODO Add real data */}
@@ -149,12 +163,14 @@ const Details = ({ id }: DetailsProps) => {
               name="Top Tweets"
               button={SomeButton}
               textFields={tweetListMock}
+              aria-label="Top Tweets"
             />
             <Card
               Icon={FaHackerNews}
               name="Community Sentiment"
               button={SomeButton}
               textFields={hackerNewsListMock}
+              aria-label="Community Sentiment"
             />
           </div>
         </div>

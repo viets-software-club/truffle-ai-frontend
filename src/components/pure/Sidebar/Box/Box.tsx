@@ -11,8 +11,12 @@ type Props = {
 
 const SidebarBox = ({ title, children }: Props) => (
   <div className="border-t border-solid border-gray-800 py-3 text-14 font-normal leading-4">
-    <h3 className="px-7 py-2 text-12 font-medium uppercase text-gray-500">{title}</h3>
-    {children}
+    <h3 className="px-7 py-2 text-12 font-medium uppercase text-gray-500" id="section-title">
+      {title}
+    </h3>
+    <div role="region" aria-labelledby="section-title">
+      {children}
+    </div>
   </div>
 )
 

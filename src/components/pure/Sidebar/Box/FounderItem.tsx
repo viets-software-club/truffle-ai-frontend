@@ -34,12 +34,22 @@ const FounderItem = ({ name, mail, linkedin, company }: FounderProps) => (
       <div className="flex flex-row items-center justify-center gap-[15px]">
         <span className="text-xs not-italic leading-3 text-gray-500">{name}</span>
         {linkedin && (
-          <a href={linkedin} target="_blank" rel="noreferrer">
+          <a
+            href={linkedin}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${name}'s LinkedIn profile`}
+          >
             <FaLinkedin className="h-[14px] w-[14px] text-gray-500" />
           </a>
         )}
         {mail && (
-          <a href={emailTemplate(mail, name, company)} target="_blank" rel="noreferrer">
+          <a
+            href={emailTemplate(mail, name, company)}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Email ${name}`}
+          >
             <AiFillMail className="h-[14px] w-[14px] text-gray-500" />
           </a>
         )}

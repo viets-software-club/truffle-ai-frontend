@@ -58,13 +58,24 @@ const Item = ({
       } rounded-md hover:bg-gray-800`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      role="button"
+      tabIndex={0}
+      onClick={() => {
+        // Handle click event
+      }}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          // Handle key press event
+        }
+      }}
     >
       {/* Only add URL parameter if item links to compare or details page */}
       <Link href={path + (['/details', '/compare'].includes(path) ? `/${id}` : '')}>
         <div className="inline-flex w-full items-center justify-between py-2.5 pl-7">
           <div
-            className={`flex flex-row items-center justify-center gap-[5px] 
-          ${secondaryItem ? 'ml-2' : ''} overflow-hidden`}
+            className={`flex flex-row items-center justify-center gap-[5px] ${
+              secondaryItem ? 'ml-2' : ''
+            } overflow-hidden`}
           >
             {showIcon && <Icon className="h-[14px] w-[14px] text-gray-500" />}
 
@@ -75,6 +86,7 @@ const Item = ({
                 value={value}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                tabIndex={0}
               />
             ) : (
               <span
@@ -88,8 +100,28 @@ const Item = ({
 
           {isHovered && editable && (
             <div className="flex space-x-1 pr-1">
-              <MdCreate onClick={handleEdit} className="cursor-pointer text-gray-500" />
-              <MdClose onClick={handleDelete} className="cursor-pointer text-gray-500" />
+              <MdCreate
+                onClick={handleEdit}
+                className="cursor-pointer text-gray-500"
+                tabIndex={0}
+                role="button"
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    // Handle key press event
+                  }
+                }}
+              />
+              <MdClose
+                onClick={handleDelete}
+                className="cursor-pointer text-gray-500"
+                tabIndex={0}
+                role="button"
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    // Handle key press event
+                  }
+                }}
+              />
             </div>
           )}
         </div>
