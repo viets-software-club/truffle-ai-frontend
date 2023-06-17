@@ -1,24 +1,23 @@
-import { Fragment, ReactNode, SetStateAction, useState } from 'react'
+import { Fragment, ReactNode, useState } from 'react'
+import { Menu, Transition } from '@headlessui/react'
 import { Column } from '@tanstack/react-table'
 import { TbColumns2 } from 'react-icons/tb'
 import {
   AiOutlineCalendar,
   AiOutlineFilter,
   AiOutlineNumber,
-  AiOutlinePlus,
   AiOutlineSortAscending
 } from 'react-icons/ai'
 import { RiCheckboxBlankLine, RiCheckboxFill } from 'react-icons/ri'
-import { Menu, Transition } from '@headlessui/react'
-import Button from '@/components/pure/Button'
-import { Project, useAddProjectByUrlMutation } from '@/graphql/generated/gql'
-import InputModal from '@/components/pure/InputModal'
 import { IoTextOutline } from 'react-icons/io5'
+import Button from '@/components/pure/Button'
 import {
   NumberTableFilterOperator,
   StringTableFilterOperator,
   TableFilter
 } from '@/components/page/overview/TableFilter'
+import AddProject from '@/components/side-effects/AddProject'
+import { Project } from '@/graphql/generated/gql'
 
 type TopBarProps = {
   columns: Column<Project, unknown>[]
@@ -58,38 +57,7 @@ const TransitionMenuItems = ({ children }: TransitionMenuItemsProps) => (
 const TopBar = ({ columns, nullFunc, addFilter, filters, comparePage }: TopBarProps) => {
   const [open, setOpen] = useState(false)
   const [selectedTimeFrame, setSelectedTimeFrame] = useState(timeFrameOptions[1])
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [projectUrl, setProjectUrl] = useState('')
-  const [showResults, setShowResults] = useState(false)
-  const [{ data }, addProjectByUrlMutation] = useAddProjectByUrlMutation()
-  const [isError, setIsError] = useState(false)
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setShowResults(false)
-    setProjectUrl('')
-    setIsModalOpen(false)
-  }
-
-  const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
-    setProjectUrl(e.target.value)
-  }
-
-  const handleAddProject = () => {
-    setShowResults(false)
-    addProjectByUrlMutation({ url: projectUrl })
-      .then(() => {
-        setShowResults(true)
-      })
-      .catch(() => {
-        // Handle any errors that occurred during the mutation
-        setShowResults(true)
-        setIsError(true)
-      })
-  }
   return (
     <div className="flex h-[60px] flex-row items-center justify-between border-b border-gray-800 px-6">
       {/* Filter, Sort, Edit Columns buttons */}
@@ -233,6 +201,7 @@ const TopBar = ({ columns, nullFunc, addFilter, filters, comparePage }: TopBarPr
             </Menu.Items>
           </TransitionMenuItems>
         </Menu>
+
         <div className="inline-block">
           <Button
             onClick={nullFunc}
@@ -245,46 +214,7 @@ const TopBar = ({ columns, nullFunc, addFilter, filters, comparePage }: TopBarPr
         </div>
       </div>
 
-      <div className="flex flex-row gap-3">
-        <div className="inline-block">
-          <Button
-            onClick={handleOpenModal}
-            variant="highlighted"
-            text="Add Project"
-            Icon={AiOutlinePlus}
-            order="ltr"
-            iconColor="white"
-            textColor="white"
-          />
-        </div>
-      </div>
-      <InputModal isOpen={isModalOpen} onClose={handleCloseModal} modalHeader="Add Project">
-        <input
-          type="text"
-          placeholder="github.com/truffle-ai-frontend"
-          className="mb-4 w-full rounded-lg bg-gray-800 px-3 py-2"
-          value={projectUrl}
-          onChange={handleChange}
-        />
-        {showResults &&
-          data?.addProjectByUrl !== undefined &&
-          (isError || !data.addProjectByUrl ? (
-            <span className="pl-1 text-red">Can not add project</span>
-          ) : (
-            <span className="pl-2 text-green">Project was added successfully</span>
-          ))}
-
-        <div className="flex justify-end">
-          <Button
-            onClick={handleAddProject}
-            variant="highlighted"
-            text="Save"
-            order="ltr"
-            iconColor="white"
-            textColor="white"
-          />
-        </div>
-      </InputModal>
+      <AddProject />
     </div>
   )
 }
