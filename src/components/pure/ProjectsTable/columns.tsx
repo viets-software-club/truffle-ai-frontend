@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { createColumnHelper } from '@tanstack/react-table'
 import { AiOutlineFork, AiOutlineStar } from 'react-icons/ai'
 import { BsPeople } from 'react-icons/bs'
@@ -6,32 +5,54 @@ import { VscIssues } from 'react-icons/vsc'
 import GitHubStatisticItem from '@/components/pure/Sidebar/Box/GithubStatItem'
 import { Project } from '@/graphql/generated/gql'
 import formatNumber from '@/util/formatNumber'
-import Logo from '@/assets/logo.svg'
+import Image from 'next/image'
 
 const columnHelper = createColumnHelper<Project>()
 
-// @TODO Format large numbers
-// @TODO Make columns sortable, filterable, dynamic
+// @TODO Make columns sortable, filterable
 const columns = [
-  columnHelper.accessor(() => '', {
-    header: 'Logo',
-    // @TODO Add real logo
-    // @TODO Fix next image types
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    cell: () => <Image src={Logo} alt="logo" className="ml-2 h-5 w-5" />
-  }),
-  // @TODO Adjust for user owners
+  // Logo column definition
   columnHelper.accessor(
-    ({ organization, name }) => `${organization?.login || 'user'} / ${name as string}`.slice(0, 32),
+    ({ organization, associatedPerson }) => organization?.avatarUrl || associatedPerson?.avatarUrl,
+    {
+      header: 'Logo',
+      enableColumnFilter: false,
+      cell: (info) => (
+        <div className="relative ml-2 h-6 w-6 overflow-hidden rounded-[5px]">
+          <Image src={info.getValue() as string} alt="logo" fill sizes="24px" />
+        </div>
+      )
+    }
+  ),
+
+  // @TODO Adjust for user owners
+  // Name column definition
+  columnHelper.accessor(
+    ({ organization, associatedPerson, name }) =>
+      `${(organization?.login || associatedPerson?.login) as string} / ${name as string}`,
     {
       id: 'nameWithOwner',
       header: 'Name',
-      cell: (info) => <p className="text-14 font-bold">{info.getValue()}</p>
+      enableColumnFilter: true,
+      cell: (info) => {
+        const [owner, name] = info.getValue().split(' / ')
+        return (
+          <div>
+            <span className="text-14 font-medium text-gray-500">{owner.slice(0, 15)} /&nbsp;</span>
+            {owner.length > 16 && <span className="text-14 text-gray-500">...</span>}
+            <span className="text-14 font-bold">{name.slice(0, 31)}</span>
+            {name.length > 32 && <span className="text-14">...</span>}
+          </div>
+        )
+      }
     }
   ),
   // @TODO Add tags column
+  // Stars column definition
   columnHelper.accessor('starCount', {
+    id: 'Stars',
     header: 'Stars',
+    enableColumnFilter: true,
     cell: (info) => (
       <GitHubStatisticItem
         Icon={AiOutlineStar}
@@ -42,8 +63,10 @@ const columns = [
       />
     )
   }),
+  // Issues column definition
   columnHelper.accessor('issueCount', {
     header: 'Issues',
+    enableColumnFilter: true,
     cell: (info) => (
       <GitHubStatisticItem
         Icon={VscIssues}
@@ -54,8 +77,10 @@ const columns = [
       />
     )
   }),
+  // Forks column definition
   columnHelper.accessor('forkCount', {
     header: 'Forks',
+    enableColumnFilter: true,
     cell: (info) => (
       <GitHubStatisticItem
         Icon={AiOutlineFork}
@@ -66,8 +91,10 @@ const columns = [
       />
     )
   }),
+  // Contributors column definition
   columnHelper.accessor('contributorCount', {
     header: 'Contrib.',
+    enableColumnFilter: true,
     cell: (info) => (
       <GitHubStatisticItem
         Icon={BsPeople}
@@ -78,14 +105,18 @@ const columns = [
       />
     )
   }),
+  // Forks per Contributor column definition
   columnHelper.accessor((project) => (project.forkCount || 0) / (project.contributorCount || 1), {
     id: 'forksPerContributor',
-    header: 'Forks/ Contr.',
+    header: 'Forks/Contrib.',
+    enableColumnFilter: true,
     cell: (info) => <p className="text-14">{formatNumber(info.getValue())}</p>
   }),
+  // Issues per Contributor column definition
   columnHelper.accessor((project) => (project.issueCount || 0) / (project.contributorCount || 1), {
     id: 'issuesPerContributor',
-    header: 'Issues/ Contr.',
+    header: 'Issues/Contrib.',
+    enableColumnFilter: true,
     cell: (info) => <p className="text-14">{formatNumber(info.getValue())}</p>
   })
 ]
