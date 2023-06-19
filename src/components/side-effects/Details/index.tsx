@@ -4,7 +4,8 @@ import {
   FiX as X,
   FiChevronUp as ChevronUp,
   FiChevronDown as ChevronDown,
-  FiArrowUpRight
+  FiArrowUpRight,
+  FiChevronDown
 } from 'react-icons/fi'
 import { FaTwitter, FaHackerNews } from 'react-icons/fa'
 import Loading from '@/components/pure/Loading'
@@ -16,6 +17,8 @@ import ProjectInformation from '@/components/page/details/ProjectInformation'
 import RightSidebar from '@/components/page/details/RightSidebar'
 import { Project, useProjectDetailsQuery, useTrendingProjectsQuery } from '@/graphql/generated/gql'
 import { hackerNewsListMock, tweetListMock } from '@/data/detailPageMocks'
+import { Menu } from '@headlessui/react'
+import { TransitionMenuItems } from '@/components/page/overview/TopBar'
 
 const handleClick = () => ''
 
@@ -40,6 +43,7 @@ const Details = ({ id }: DetailsProps) => {
   const [currentProjectIndex, setCurrentProjectIndex] = useState<number>()
   const [previousProjectId, setPreviousProjectId] = useState<string>()
   const [nextProjectId, setNextProjectId] = useState<string>()
+  const [selectedMetric, setSelectedMetric] = useState('Stars')
 
   const updateProjectIndices = (currentId: string, projectList: Project[]) => {
     const currentIndex = projectList.findIndex((project) => project.id === currentId)
@@ -122,18 +126,54 @@ const Details = ({ id }: DetailsProps) => {
             tags={project.languages || []}
           />
 
-          <Chart
-            datasets={[
-              {
-                id: project.id as string,
-                name: project.name as string,
-                data: project.starHistory as React.ComponentProps<
-                  typeof Chart
-                >['datasets'][0]['data']
-              }
-            ]}
-            multipleLines={false}
-          />
+          <div className="flex flex-col items-end">
+            <Menu as="div" className="relative inline-block pr-7 pt-7">
+              <Menu.Button className="flex h-[30px] flex-row items-center space-x-1 rounded-[5px] border border-gray-800 bg-gray-850 px-2 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
+                <FiChevronDown className="text-gray-500" />
+                <p className="leading-none">{selectedMetric}</p>
+              </Menu.Button>
+
+              <TransitionMenuItems>
+                <Menu.Items
+                  static
+                  className="absolute right-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg focus:outline-none"
+                >
+                  <div className="py-1">
+                    {['Stars', 'Forks'].map((metric) => (
+                      <Menu.Item key={metric}>
+                        <button
+                          type="button"
+                          onClick={() => setSelectedMetric(metric)}
+                          className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
+                        >
+                          <p>{metric}</p>
+                        </button>
+                      </Menu.Item>
+                    ))}
+                  </div>
+                </Menu.Items>
+              </TransitionMenuItems>
+            </Menu>
+
+            <Chart
+              datasets={[
+                {
+                  id: project.id as string,
+                  name: project.name as string,
+                  data:
+                    selectedMetric === 'Stars'
+                      ? (project.starHistory as React.ComponentProps<
+                          typeof Chart
+                        >['datasets'][0]['data'])
+                      : (project.forkHistory as React.ComponentProps<
+                          typeof Chart
+                        >['datasets'][1]['data'])
+                }
+              ]}
+              multipleLines={false}
+              selectedMetric={selectedMetric}
+            />
+          </div>
 
           {/* @TODO Add real data */}
           <div className="flex flex-row gap-4 border-t border-solid border-gray-800 py-2 pl-7 pr-3">

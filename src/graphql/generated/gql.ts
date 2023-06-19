@@ -962,6 +962,7 @@ export type ProjectInsertInput = {
   pullRequestCount?: InputMaybe<Scalars['Int']>
   starCount?: InputMaybe<Scalars['Int']>
   starHistory?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>
+  forkHistory?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>
   websiteUrl?: InputMaybe<Scalars['String']>
 }
 
@@ -1017,6 +1018,7 @@ export type ProjectUpdateInput = {
   pullRequestCount?: InputMaybe<Scalars['Int']>
   starCount?: InputMaybe<Scalars['Int']>
   starHistory?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>
+  forkHistory?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>
   websiteUrl?: InputMaybe<Scalars['String']>
 }
 
@@ -1270,6 +1272,7 @@ export type ProjectDetailsQuery = {
         githubUrl?: string | null
         websiteUrl?: string | null
         starHistory?: Array<any | null> | null
+        forkHistory?: Array<any | null> | null
         languages?: Array<any | null> | null
         owningPerson?: any | null
         owningOrganization?: any | null
@@ -1314,6 +1317,7 @@ export type TrendingProjectsQuery = {
         githubUrl?: string | null
         websiteUrl?: string | null
         starHistory?: Array<any | null> | null
+        forkHistory?: Array<any | null> | null
         owningPerson?: any | null
         owningOrganization?: any | null
         isTrendingDaily?: boolean | null
@@ -1366,6 +1370,7 @@ export const ProjectDetailsDocument = gql`
           githubUrl
           websiteUrl
           starHistory
+          forkHistory
           languages
           owningPerson
           owningOrganization
