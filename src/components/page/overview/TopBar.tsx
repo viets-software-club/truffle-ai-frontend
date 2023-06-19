@@ -58,7 +58,6 @@ const TopBar = ({
   tableSort,
   setTableSort
 }: TopBarProps) => {
-  const [open, setOpen] = useState(false)
   const [selectedTimeFrame, setSelectedTimeFrame] = useState(timeFrameOptions[1])
 
   const visibleColumnTextStyle = 'text-14 text-gray-100'
@@ -99,10 +98,7 @@ const TopBar = ({
         )}
 
         <Menu as="div" className="relative inline-block text-left">
-          <Menu.Button
-            onClick={() => setOpen(!open)}
-            className="flex h-[30px] flex-row items-center space-x-2 rounded-[5px] border border-gray-800 bg-gray-850 px-2 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700"
-          >
+          <Menu.Button className="flex h-[30px] flex-row items-center space-x-2 rounded-[5px] border border-gray-800 bg-gray-850 px-2 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
             <TbColumns2 className="text-gray-500" />
             <p className="leading-none">Edit Columns</p>
           </Menu.Button>

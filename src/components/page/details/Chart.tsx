@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import resolveConfig from 'tailwindcss/resolveConfig'
 import {
   LineChart,
@@ -58,6 +58,7 @@ type ChartProps = {
     }[]
   }[]
   multipleLines: boolean
+  selectedMetric: string
 }
 
 type DataPoint = {
@@ -74,13 +75,13 @@ const filterDataByTimeframe = (data: DataPoint[], months: number) => {
 /**
  * Linechart with one or more datasets
  * @param {ChartProps} datasets - The datasets to be displayed on the chart.
+ * @param {boolean} multipleLines - Whether to display multiple lines or not.
+ * @param {string} selectedMetric - The selected metric.
  */
 
-const Chart = ({ datasets, multipleLines }: ChartProps) => {
+const Chart = ({ datasets, multipleLines, selectedMetric }: ChartProps) => {
   const [timeframeModalOpen, setTimeframeModalOpen] = useState(false)
   const [timeframeModalValue, setTimeframeModalValue] = useState('Select timeframe')
-  //   const [modalValue, setModalValue] = useState('Select Value')
-  //   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const [chartDataOriginal] = useState<ChartProps['datasets']>([...datasets])
   const [chartData, setChartData] = useState(chartDataOriginal)
@@ -133,6 +134,10 @@ const Chart = ({ datasets, multipleLines }: ChartProps) => {
     },
     [chartDataOriginal]
   )
+
+  useEffect(() => {
+    setChartData([...datasets])
+  }, [datasets])
 
   return (
     <div className="flex w-full flex-row px-7 py-8">
@@ -199,7 +204,13 @@ const Chart = ({ datasets, multipleLines }: ChartProps) => {
               />
 
               <YAxis
-                label={{ value: 'Stars', dy: -125, dx: 25, fontSize: '12', fill: 'gray' }}
+                label={{
+                  value: { selectedMetric },
+                  dy: -125,
+                  dx: 25,
+                  fontSize: '12',
+                  fill: 'gray'
+                }}
                 tick={{ fontSize: '12', fontWeight: 'light' }}
                 stroke={grayColors['500']}
                 tickFormatter={formatNumber}

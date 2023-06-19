@@ -875,6 +875,7 @@ export type Project = Node & {
   pullRequestCount?: Maybe<Scalars['Int']>
   starCount?: Maybe<Scalars['Int']>
   starHistory?: Maybe<Array<Maybe<Scalars['JSON']>>>
+  forkHistory?: Maybe<Array<Maybe<Scalars['JSON']>>>
   websiteUrl?: Maybe<Scalars['String']>
 }
 

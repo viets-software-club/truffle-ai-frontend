@@ -8,11 +8,12 @@ import Loading from '@/components/pure/Loading'
 import defaultColumns from '@/components/pure/ProjectsTable/columns'
 import Chart from '@/components/page/details/Chart'
 import Table from '@/components/page/overview/Table'
-import TopBar from '@/components/page/overview/TopBar'
+import TopBar, { TransitionMenuItems } from '@/components/page/overview/TopBar'
 import FilterBar from '@/components/page/overview/FilterBar'
 import { Project, useTrendingProjectsQuery } from '@/graphql/generated/gql'
 import { TableFilter } from '@/components/page/overview/TableFilter'
 import { TableSort } from '@/components/page/overview/TableSort'
+import { Menu } from '@headlessui/react'
 
 /**
  * Compare projects component
@@ -26,6 +27,7 @@ const Compare = () => {
   const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([])
   const [filters, setFilters] = useState<TableFilter[]>([])
   const [tableSort, setTableSort] = useState<TableSort | null>(null)
+  const [selectedMetric, setSelectedMetric] = useState('Stars')
 
   // Fetch data from Supabase using generated Urql hook
   const [{ data: urqlData, fetching, error }] = useTrendingProjectsQuery()
@@ -99,15 +101,33 @@ const Compare = () => {
           <h1 className="text-24 font-medium">Infrastructure</h1>
         </div>
 
-        <div>
-          <Button
-            variant="normal"
-            text="Stars"
-            Icon={FiChevronDown}
-            order="ltr"
-            textColor="white"
-          />
-        </div>
+        <Menu as="div" className="relative inline-block text-left">
+          <Menu.Button className="flex h-[30px] flex-row items-center space-x-1 rounded-[5px] border border-gray-800 bg-gray-850 px-2 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
+            <FiChevronDown className="text-gray-500" />
+            <p className="leading-none">{selectedMetric}</p>
+          </Menu.Button>
+
+          <TransitionMenuItems>
+            <Menu.Items
+              static
+              className="absolute right-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg focus:outline-none"
+            >
+              <div className="py-1">
+                {['Stars', 'Forks'].map((metric) => (
+                  <Menu.Item key={metric}>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedMetric(metric)}
+                      className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
+                    >
+                      <p>{metric}</p>
+                    </button>
+                  </Menu.Item>
+                ))}
+              </div>
+            </Menu.Items>
+          </TransitionMenuItems>
+        </Menu>
       </div>
 
       {/* @TODO Remove slice to put all projects into chart */}
@@ -115,9 +135,13 @@ const Compare = () => {
         datasets={data.map((project) => ({
           id: project.id as string,
           name: project.name as string,
-          data: project.starHistory as React.ComponentProps<typeof Chart>['datasets'][0]['data']
+          data:
+            selectedMetric === 'Stars'
+              ? (project.starHistory as React.ComponentProps<typeof Chart>['datasets'][0]['data'])
+              : (project.forkHistory as React.ComponentProps<typeof Chart>['datasets'][1]['data'])
         }))}
         multipleLines
+        selectedMetric={selectedMetric}
       />
 
       <div className="flex flex-row items-center justify-between px-6 py-3.5">
