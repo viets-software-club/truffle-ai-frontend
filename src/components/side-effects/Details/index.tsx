@@ -126,8 +126,8 @@ const Details = ({ id }: DetailsProps) => {
             tags={project.languages || []}
           />
 
-          <div className="flex flex-col items-end">
-            <Menu as="div" className="relative inline-block pr-7 pt-7">
+          <div className="flex flex-col items-start">
+            <Menu as="div" className="relative inline-block pl-7 pt-7">
               <Menu.Button className="flex h-[30px] flex-row items-center space-x-1 rounded-[5px] border border-gray-800 bg-gray-850 px-2 py-1.5 text-14 transition-colors duration-100 hover:bg-gray-700">
                 <FiChevronDown className="text-gray-500" />
                 <p className="leading-none">{selectedMetric}</p>
@@ -136,7 +136,7 @@ const Details = ({ id }: DetailsProps) => {
               <TransitionMenuItems>
                 <Menu.Items
                   static
-                  className="absolute right-0 z-10 mt-2 w-44 origin-top-right rounded-md bg-gray-700 shadow-lg focus:outline-none"
+                  className="absolute z-10 mt-2 w-24 rounded-md bg-gray-700 shadow-lg focus:outline-none"
                 >
                   <div className="py-1">
                     {['Stars', 'Forks'].map((metric) => (
@@ -144,7 +144,7 @@ const Details = ({ id }: DetailsProps) => {
                         <button
                           type="button"
                           onClick={() => setSelectedMetric(metric)}
-                          className="flex w-44 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
+                          className="flex w-24 flex-row items-center space-x-2 px-4 py-2 hover:bg-gray-600"
                         >
                           <p>{metric}</p>
                         </button>

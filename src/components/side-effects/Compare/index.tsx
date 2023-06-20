@@ -70,7 +70,7 @@ const Compare = () => {
 
   // Display loading/ error messages conditionally
   if (fetching) return <Loading message="Getting saved projects for you..." />
-  if (data.length === 0 || error) return <Error />
+  if (!data || data.length === 0 || error) return <Error />
 
   return (
     <div className="flex w-full flex-col">

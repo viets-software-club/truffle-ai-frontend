@@ -140,8 +140,8 @@ const Chart = ({ datasets, multipleLines, selectedMetric }: ChartProps) => {
   }, [datasets])
 
   return (
-    <div className="flex w-full flex-row px-7 py-8">
-      {datasets.length === 0 ? (
+    <div className="flex w-full flex-row p-6">
+      {!datasets || datasets.length === 0 ? (
         <p>No data</p>
       ) : (
         <div className="flex w-full flex-col gap-3">
@@ -205,7 +205,7 @@ const Chart = ({ datasets, multipleLines, selectedMetric }: ChartProps) => {
 
               <YAxis
                 label={{
-                  value: { selectedMetric },
+                  value: selectedMetric,
                   dy: -125,
                   dx: 25,
                   fontSize: '12',
@@ -228,6 +228,7 @@ const Chart = ({ datasets, multipleLines, selectedMetric }: ChartProps) => {
 
               {chartData
                 .sort((a, b) => {
+                  if (!a.data || !b.data) return 0
                   const lastDataPointA = a.data[a.data.length - 1]?.count || 0
                   const lastDataPointB = b.data[b.data.length - 1]?.count || 0
                   return lastDataPointB - lastDataPointA
@@ -235,10 +236,14 @@ const Chart = ({ datasets, multipleLines, selectedMetric }: ChartProps) => {
                 .map((dataset, index) => (
                   <Line
                     key={dataset.id}
-                    data={dataset.data.map((item) => ({
-                      ...item,
-                      date: new Date(item.date).getTime()
-                    }))}
+                    data={
+                      dataset.data
+                        ? dataset.data.map((item) => ({
+                            ...item,
+                            date: new Date(item.date).getTime()
+                          }))
+                        : []
+                    }
                     dataKey="count"
                     name={dataset.name}
                     type="monotone"
