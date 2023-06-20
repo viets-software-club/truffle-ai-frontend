@@ -5,7 +5,6 @@ import {
   ColumnOrderState,
   getFilteredRowModel
 } from '@tanstack/react-table'
-import { FiChevronDown } from 'react-icons/fi'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { FaSlack } from 'react-icons/fa'
 import Error from '@/components/pure/Error'
@@ -152,9 +151,6 @@ const Compare = () => {
         </div>
       </div>
 
-      <div>
-        <Button variant="normal" text="Stars" Icon={FiChevronDown} order="ltr" textColor="white" />
-      </div>
       {!fetching && !error && data.length > 0 && (
         <>
           <Chart
