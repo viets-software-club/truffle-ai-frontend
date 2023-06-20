@@ -16,8 +16,8 @@ import Button from '@/components/pure/Button'
 import Modal from '@/components/pure/Modal'
 import formatDate from '@/util/formatDate'
 import formatNumber from '@/util/formatNumber'
+import { Project } from '@/graphql/generated/gql'
 import tailwindConfig from '../../../../tailwind.config'
-
 // The following 3 statements are needed in order to be able to use our Tailwind classes inside JS objects of the recharts library
 const fullConfig = resolveConfig(tailwindConfig)
 
@@ -50,8 +50,8 @@ const TimeframeOptions = [
 
 type ChartProps = {
   datasets: {
-    id: string
-    name: string
+    id: Project['id']
+    name: Project['name']
     data: {
       date: string
       count: number
