@@ -87,7 +87,6 @@ const ProjectsTable = () => {
         .filter((item): item is number => item !== undefined && item !== null)
         .sort((a, b) => a - b)
 
-      // Find the index that represents the bottom 10% (rounding down)
       const bottomTenPercentIndex = Math.ceil(sortedData.length / 10) - 1
       if (bottomTenPercentIndex >= 0 && sortedData.length > 0) {
         result[field] = sortedData[bottomTenPercentIndex]

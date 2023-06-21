@@ -10,7 +10,6 @@ import { FaSlack } from 'react-icons/fa'
 import Error from '@/components/pure/Error'
 import Button from '@/components/pure/Button'
 import Loading from '@/components/pure/Loading'
-import defaultColumns from '@/components/side-effects/ProjectsTable/columns'
 import Chart from '@/components/page/details/Chart'
 import Table from '@/components/page/overview/Table'
 import TopBar from '@/components/page/overview/TopBar'
@@ -24,6 +23,7 @@ import {
 } from '@/graphql/generated/gql'
 import Banner from '@/components/page/settings/Banner'
 import sendSlackNotification from '@/util/sendSlackNotification'
+import createColumns from '@/components/side-effects/ProjectsTable/columns'
 
 /**
  * Compare projects component
@@ -31,13 +31,77 @@ import sendSlackNotification from '@/util/sendSlackNotification'
 // @TODO Get id from props to fetch category title & projects from DB
 const Compare = () => {
   const [data, setData] = useState<Project[]>([])
-  const [columns] = useState(() => [...defaultColumns])
   const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([])
   const [filters, setFilters] = useState<ProjectFilter>(defaultFilters)
   const [sorting, setSorting] = useState<ProjectOrderBy | null>(defaultSort)
   const [columnVisibility, setColumnVisibility] = useState({})
   const [slackLoading, setSlackLoading] = useState(false)
   const [notificationStatus, setNotificationStatus] = useState<'success' | 'error' | ''>('')
+
+  const [topTenPercent, setTopTenPercent] = useState<{ [key in keyof Project]?: number | null }>({})
+  const [bottomTenPercent, setBottomTenPercent] = useState<{
+    [key in keyof Project]?: number | null
+  }>({})
+
+  const [columns, setColumns] = useState(() => createColumns(bottomTenPercent, topTenPercent))
+
+  const getTopTenPercent = (projects: Project[]) => {
+    const numericFields: (keyof Project)[] = [
+      'contributorCount',
+      'forkCount',
+      'issueCount',
+      'pullRequestCount',
+      'starCount'
+    ]
+
+    const result: { [key in keyof Project]?: number | null } = {}
+
+    numericFields.forEach((field) => {
+      const sortedData = projects
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        .map((item) => item[field])
+        .filter((item): item is number => item !== undefined && item !== null)
+        .sort((a, b) => b - a)
+
+      const topTenPercentIndex = Math.ceil(sortedData.length / 10) - 1
+      if (topTenPercentIndex >= 0 && sortedData.length > 0) {
+        result[field] = sortedData[topTenPercentIndex]
+      } else {
+        result[field] = null
+      }
+    })
+
+    return result
+  }
+
+  const getBottomTenPercent = (projects: Project[]) => {
+    const numericFields: (keyof Project)[] = [
+      'contributorCount',
+      'forkCount',
+      'issueCount',
+      'pullRequestCount',
+      'starCount'
+    ]
+
+    const result: { [key in keyof Project]?: number | null } = {}
+
+    numericFields.forEach((field) => {
+      const sortedData = projects
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        .map((item) => item[field])
+        .filter((item): item is number => item !== undefined && item !== null)
+        .sort((a, b) => a - b)
+
+      const bottomTenPercentIndex = Math.ceil(sortedData.length / 10) - 1
+      if (bottomTenPercentIndex >= 0 && sortedData.length > 0) {
+        result[field] = sortedData[bottomTenPercentIndex]
+      } else {
+        result[field] = null
+      }
+    })
+
+    return result
+  }
 
   const updateFilters = (filter: ProjectFilter) => {
     setFilters(filter)
@@ -55,8 +119,20 @@ const Compare = () => {
   useEffect(() => {
     if (urqlData) {
       setData(urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[])
+      setTopTenPercent(
+        getTopTenPercent(urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[])
+      )
+      setBottomTenPercent(
+        getBottomTenPercent(
+          urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[]
+        )
+      )
     }
   }, [urqlData])
+
+  useEffect(() => {
+    setColumns(() => createColumns(bottomTenPercent, topTenPercent))
+  }, [bottomTenPercent, topTenPercent])
 
   // Initialize TanStack table
   const table = useReactTable({

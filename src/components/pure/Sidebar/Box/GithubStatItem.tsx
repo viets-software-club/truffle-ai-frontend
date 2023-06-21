@@ -33,8 +33,6 @@ const GithubStatItem = ({
   largeGap
 }: GithubStatItemProps) => {
   let color = Color.DEFAULT
-  console.log(greenValue)
-  console.log(redValue)
   if (greenValue !== undefined && value >= greenValue) {
     color = Color.GREEN
   } else if (redValue !== undefined && value <= redValue) {
