@@ -38,7 +38,7 @@ const ProjectsTable = () => {
     [key in keyof Project]?: number | null
   }>({})
 
-  const [columns] = useState(() => createColumns(bottomTenPercent, topTenPercent))
+  const [columns, setColumns] = useState(() => createColumns(bottomTenPercent, topTenPercent))
 
   const getTopTenPercent = (projects: Project[]) => {
     const numericFields: (keyof Project)[] = [
@@ -121,6 +121,10 @@ const ProjectsTable = () => {
       )
     }
   }, [urqlData])
+
+  useEffect(() => {
+    setColumns(() => createColumns(bottomTenPercent, topTenPercent))
+  }, [bottomTenPercent, topTenPercent])
 
   // Initialize TanStack table
   const table = useReactTable({

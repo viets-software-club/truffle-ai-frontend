@@ -11,8 +11,6 @@ import Image from 'next/image'
 type TenPercent = { [key in keyof Project]?: number | null }
 
 const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) => {
-  console.log(topTenPercent)
-  console.log(bottomTenPercent)
   const columnHelper = createColumnHelper<Project>()
   return [
     // Logo column definition
@@ -64,6 +62,8 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           outerPaddingOn={false}
           hoverOn={false}
           value={info.getValue() as number}
+          greenValue={topTenPercent.starCount as number}
+          redValue={bottomTenPercent.starCount as number}
         />
       )
     }),
@@ -79,6 +79,8 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           outerPaddingOn={false}
           hoverOn={false}
           value={info.getValue() as number}
+          greenValue={topTenPercent.issueCount as number}
+          redValue={bottomTenPercent.issueCount as number}
         />
       )
     }),
@@ -111,6 +113,8 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           outerPaddingOn={false}
           hoverOn={false}
           value={info.getValue() as number}
+          greenValue={topTenPercent.contributorCount as number}
+          redValue={bottomTenPercent.contributorCount as number}
         />
       )
     }),
