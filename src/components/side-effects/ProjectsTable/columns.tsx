@@ -62,42 +62,8 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           outerPaddingOn={false}
           hoverOn={false}
           value={info.getValue() as number}
-          greenValue={topTenPercent.starCount as number}
-          redValue={bottomTenPercent.starCount as number}
-        />
-      )
-    }),
-    // Issues column definition
-    columnHelper.accessor('issueCount', {
-      id: 'Issues',
-      header: 'Issues',
-      enableColumnFilter: true,
-      cell: (info) => (
-        <GitHubStatisticItem
-          Icon={VscIssues}
-          paddingOn={false}
-          outerPaddingOn={false}
-          hoverOn={false}
-          value={info.getValue() as number}
-          greenValue={topTenPercent.issueCount as number}
-          redValue={bottomTenPercent.issueCount as number}
-        />
-      )
-    }),
-    // Forks column definition
-    columnHelper.accessor('forkCount', {
-      id: 'Forks',
-      header: 'Forks',
-      enableColumnFilter: true,
-      cell: (info) => (
-        <GitHubStatisticItem
-          Icon={AiOutlineFork}
-          paddingOn={false}
-          outerPaddingOn={false}
-          hoverOn={false}
-          value={info.getValue() as number}
-          greenValue={topTenPercent.forkCount as number}
-          redValue={bottomTenPercent.forkCount as number}
+          greenValue={bottomTenPercent.starCount as number}
+          redValue={topTenPercent.starCount as number}
         />
       )
     }),
@@ -113,32 +79,15 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           outerPaddingOn={false}
           hoverOn={false}
           value={info.getValue() as number}
-          greenValue={topTenPercent.contributorCount as number}
-          redValue={bottomTenPercent.contributorCount as number}
+          greenValue={bottomTenPercent.contributorCount as number}
+          redValue={topTenPercent.contributorCount as number}
         />
       )
     }),
-    // Forks per Contributor column definition
-    columnHelper.accessor((project) => (project.forkCount || 0) / (project.contributorCount || 1), {
-      id: 'Forks/Contrib.',
-      header: 'Forks/Contrib.',
-      enableColumnFilter: true,
-      cell: (info) => <p className="text-14">{formatNumber(info.getValue())}</p>
-    }),
-    // Issues per Contributor column definition
-    columnHelper.accessor(
-      (project) => (project.issueCount || 0) / (project.contributorCount || 1),
-      {
-        id: 'Issues/Contrib.',
-        header: 'Issues/Contrib.',
-        enableColumnFilter: true,
-        cell: (info) => <p className="text-14">{formatNumber(info.getValue())}</p>
-      }
-    ),
     // PR column definition
     columnHelper.accessor('pullRequestCount', {
       id: 'PR',
-      header: 'PR',
+      header: 'PRs',
       enableColumnFilter: true,
       cell: (info) => (
         <GitHubStatisticItem
@@ -147,8 +96,61 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           outerPaddingOn={false}
           hoverOn={false}
           value={info.getValue() as number}
+          greenValue={bottomTenPercent.pullRequestCount as number}
+          redValue={topTenPercent.pullRequestCount as number}
         />
       )
+    }),
+    // Issues column definition
+    columnHelper.accessor('issueCount', {
+      id: 'Issues',
+      header: 'Issues',
+      enableColumnFilter: true,
+      cell: (info) => (
+        <GitHubStatisticItem
+          Icon={VscIssues}
+          paddingOn={false}
+          outerPaddingOn={false}
+          hoverOn={false}
+          value={info.getValue() as number}
+          greenValue={bottomTenPercent.issueCount as number}
+          redValue={topTenPercent.issueCount as number}
+        />
+      )
+    }),
+    // Issues per Contributor column definition
+    columnHelper.accessor(
+      (project) => (project.issueCount || 0) / (project.contributorCount || 1),
+      {
+        id: 'Issues/Contrib.',
+        header: 'I/Contrib.',
+        enableColumnFilter: true,
+        cell: (info) => <p className="text-14">{formatNumber(info.getValue())}</p>
+      }
+    ),
+    // Forks column definition
+    columnHelper.accessor('forkCount', {
+      id: 'Forks',
+      header: 'Forks',
+      enableColumnFilter: true,
+      cell: (info) => (
+        <GitHubStatisticItem
+          Icon={AiOutlineFork}
+          paddingOn={false}
+          outerPaddingOn={false}
+          hoverOn={false}
+          value={info.getValue() as number}
+          greenValue={bottomTenPercent.forkCount as number}
+          redValue={topTenPercent.forkCount as number}
+        />
+      )
+    }),
+    // Forks per Contributor column definition
+    columnHelper.accessor((project) => (project.forkCount || 0) / (project.contributorCount || 1), {
+      id: 'Forks/Contrib.',
+      header: 'F/Contrib.',
+      enableColumnFilter: true,
+      cell: (info) => <p className="text-14">{formatNumber(info.getValue())}</p>
     })
   ]
 }
