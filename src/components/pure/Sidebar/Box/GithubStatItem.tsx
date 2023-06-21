@@ -6,6 +6,7 @@ enum Color {
   GREEN = 'text-green',
   RED = 'text-red'
 }
+
 type GithubStatItemProps = {
   Icon?: IconComponentType
   IconMetric?: ReactNode
@@ -32,9 +33,11 @@ const GithubStatItem = ({
   largeGap
 }: GithubStatItemProps) => {
   let color = Color.DEFAULT
-  if (greenValue !== undefined && value > greenValue) {
+  console.log(greenValue)
+  console.log(redValue)
+  if (greenValue !== undefined && value >= greenValue) {
     color = Color.GREEN
-  } else if (redValue !== undefined && value < redValue) {
+  } else if (redValue !== undefined && value <= redValue) {
     color = Color.RED
   }
 
