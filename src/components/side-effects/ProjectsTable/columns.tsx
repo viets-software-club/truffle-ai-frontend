@@ -60,44 +60,9 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           Icon={AiOutlineStar}
           paddingOn={false}
           outerPaddingOn={false}
-          hoverOn={false}
           value={info.getValue() as number}
           greenValue={bottomTenPercent.starCount as number}
           redValue={topTenPercent.starCount as number}
-        />
-      )
-    }),
-    // Contributors column definition
-    columnHelper.accessor('contributorCount', {
-      id: 'Contrib.',
-      header: 'Contrib.',
-      enableColumnFilter: true,
-      cell: (info) => (
-        <GitHubStatisticItem
-          Icon={BsPeople}
-          paddingOn={false}
-          outerPaddingOn={false}
-          hoverOn={false}
-          value={info.getValue() as number}
-          greenValue={bottomTenPercent.contributorCount as number}
-          redValue={topTenPercent.contributorCount as number}
-        />
-      )
-    }),
-    // PR column definition
-    columnHelper.accessor('pullRequestCount', {
-      id: 'PR',
-      header: 'PRs',
-      enableColumnFilter: true,
-      cell: (info) => (
-        <GitHubStatisticItem
-          Icon={GoGitPullRequest}
-          paddingOn={false}
-          outerPaddingOn={false}
-          hoverOn={false}
-          value={info.getValue() as number}
-          greenValue={bottomTenPercent.pullRequestCount as number}
-          redValue={topTenPercent.pullRequestCount as number}
         />
       )
     }),
@@ -111,23 +76,12 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           Icon={VscIssues}
           paddingOn={false}
           outerPaddingOn={false}
-          hoverOn={false}
           value={info.getValue() as number}
           greenValue={bottomTenPercent.issueCount as number}
           redValue={topTenPercent.issueCount as number}
         />
       )
     }),
-    // Issues per Contributor column definition
-    columnHelper.accessor(
-      (project) => (project.issueCount || 0) / (project.contributorCount || 1),
-      {
-        id: 'Issues/Contrib.',
-        header: 'I/Contrib.',
-        enableColumnFilter: true,
-        cell: (info) => <p className="text-14">{formatNumber(info.getValue())}</p>
-      }
-    ),
     // Forks column definition
     columnHelper.accessor('forkCount', {
       id: 'Forks',
@@ -138,19 +92,60 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           Icon={AiOutlineFork}
           paddingOn={false}
           outerPaddingOn={false}
-          hoverOn={false}
           value={info.getValue() as number}
           greenValue={bottomTenPercent.forkCount as number}
           redValue={topTenPercent.forkCount as number}
         />
       )
     }),
+    // Contributors column definition
+    columnHelper.accessor('contributorCount', {
+      id: 'Contrib.',
+      header: 'Contrib.',
+      enableColumnFilter: true,
+      cell: (info) => (
+        <GitHubStatisticItem
+          Icon={BsPeople}
+          paddingOn={false}
+          outerPaddingOn={false}
+          value={info.getValue() as number}
+          greenValue={bottomTenPercent.contributorCount as number}
+          redValue={topTenPercent.contributorCount as number}
+        />
+      )
+    }),
     // Forks per Contributor column definition
     columnHelper.accessor((project) => (project.forkCount || 0) / (project.contributorCount || 1), {
       id: 'Forks/Contrib.',
-      header: 'F/Contrib.',
+      header: 'Forks/Contrib.',
       enableColumnFilter: true,
       cell: (info) => <p className="text-14">{formatNumber(info.getValue())}</p>
+    }),
+    // Issues per Contributor column definition
+    columnHelper.accessor(
+      (project) => (project.issueCount || 0) / (project.contributorCount || 1),
+      {
+        id: 'Issues/Contrib.',
+        header: 'Issues/Contrib.',
+        enableColumnFilter: true,
+        cell: (info) => <p className="text-14">{formatNumber(info.getValue())}</p>
+      }
+    ),
+    // PR column definition
+    columnHelper.accessor('pullRequestCount', {
+      id: 'PR',
+      header: 'Open PRs',
+      enableColumnFilter: true,
+      cell: (info) => (
+        <GitHubStatisticItem
+          Icon={GoGitPullRequest}
+          paddingOn={false}
+          outerPaddingOn={false}
+          value={info.getValue() as number}
+          greenValue={bottomTenPercent.pullRequestCount as number}
+          redValue={topTenPercent.pullRequestCount as number}
+        />
+      )
     })
   ]
 }
