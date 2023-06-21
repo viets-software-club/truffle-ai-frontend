@@ -8,7 +8,6 @@ import {
 import Error from '@/components/pure/Error'
 import Loading from '@/components/pure/Loading'
 import TopBar from '@/components/page/overview/TopBar'
-import defaultColumns from '@/components/side-effects/ProjectsTable/columns'
 import Table from '@/components/page/overview/Table'
 import FilterBar from '@/components/page/overview/FilterBar'
 import {
@@ -18,13 +17,13 @@ import {
   useTrendingProjectsQuery
 } from '@/graphql/generated/gql'
 import { defaultFilters, defaultSort } from '@/components/page/overview/types'
+import createColumns from '@/components/side-effects/ProjectsTable/columns'
 
 /**
  * Table for displaying trending projects
  */
 const ProjectsTable = () => {
   const [data, setData] = useState<Project[]>([])
-  const [columns] = useState(() => [...defaultColumns])
   const [columnVisibility, setColumnVisibility] = useState({})
   const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([])
   const [filters, setFilters] = useState<ProjectFilter>(defaultFilters)
@@ -34,51 +33,71 @@ const ProjectsTable = () => {
     setFilters(filter)
   }
 
-  // @TODO adapt default filters to new filtering system
+  const [topTenPercent, setTopTenPercent] = useState<{ [key in keyof Project]?: number | null }>({})
+  const [bottomTenPercent, setBottomTenPercent] = useState<{
+    [key in keyof Project]?: number | null
+  }>({})
 
-  // const defaultFilters = () => {
-  //   const starsColumn = table.getAllLeafColumns().find((c) => c.columnDef.header === 'Stars')
-  //   const forksColumn = table.getAllLeafColumns().find((c) => c.columnDef.header === 'Forks')
-  //   const issuesColumn = table.getAllLeafColumns().find((c) => c.columnDef.header === 'Issues')
-  //   const contributorsColumn = table
-  //     .getAllLeafColumns()
-  //     .find((c) => c.columnDef.header === 'Contrib.')
+  const [columns] = useState(() => createColumns(bottomTenPercent, topTenPercent))
 
-  //   if (starsColumn && forksColumn && issuesColumn && contributorsColumn) {
-  //     const savedStarsDefaultFilter = Number(localStorage.getItem('starsDefaultFilter'))
-  //     const savedForksDefaultFilter = Number(localStorage.getItem('forksDefaultFilter'))
-  //     const savedIssuesDefaultFilter = Number(localStorage.getItem('issuesDefaultFilter'))
-  //     const savedContributorsDefaultFilter = Number(
-  //       localStorage.getItem('contributorsDefaultFilter')
-  //     )
+  const getTopTenPercent = (projects: Project[]) => {
+    const numericFields: (keyof Project)[] = [
+      'contributorCount',
+      'forkCount',
+      'issueCount',
+      'pullRequestCount',
+      'starCount'
+    ]
 
-  //     const preFilters = [
-  //       {
-  //         column: starsColumn,
-  //         operator: NumberTableFilterOperator.GREATER_THAN,
-  //         value: savedStarsDefaultFilter
-  //       },
-  //       {
-  //         column: forksColumn,
-  //         operator: NumberTableFilterOperator.GREATER_THAN,
-  //         value: savedForksDefaultFilter
-  //       },
-  //       {
-  //         column: issuesColumn,
-  //         operator: NumberTableFilterOperator.GREATER_THAN,
-  //         value: savedIssuesDefaultFilter
-  //       },
-  //       {
-  //         column: contributorsColumn,
-  //         operator: NumberTableFilterOperator.GREATER_THAN,
-  //         value: savedContributorsDefaultFilter
-  //       }
-  //     ]
+    const result: { [key in keyof Project]?: number | null } = {}
 
-  //     return preFilters.filter((filter) => filter.value !== 0)
-  //   }
-  //   return []
-  // }
+    numericFields.forEach((field) => {
+      const sortedData = projects
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        .map((item) => item[field])
+        .filter((item): item is number => item !== undefined && item !== null)
+        .sort((a, b) => b - a)
+
+      const topTenPercentIndex = Math.ceil(sortedData.length / 10) - 1
+      if (topTenPercentIndex >= 0 && sortedData.length > 0) {
+        result[field] = sortedData[topTenPercentIndex]
+      } else {
+        result[field] = null
+      }
+    })
+
+    return result
+  }
+
+  const getBottomTenPercent = (projects: Project[]) => {
+    const numericFields: (keyof Project)[] = [
+      'contributorCount',
+      'forkCount',
+      'issueCount',
+      'pullRequestCount',
+      'starCount'
+    ]
+
+    const result: { [key in keyof Project]?: number | null } = {}
+
+    numericFields.forEach((field) => {
+      const sortedData = projects
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        .map((item) => item[field])
+        .filter((item): item is number => item !== undefined && item !== null)
+        .sort((a, b) => a - b)
+
+      // Find the index that represents the bottom 10% (rounding down)
+      const bottomTenPercentIndex = Math.floor(sortedData.length / 10) - 1
+      if (bottomTenPercentIndex >= 0 && sortedData.length > 0) {
+        result[field] = sortedData[bottomTenPercentIndex]
+      } else {
+        result[field] = null
+      }
+    })
+
+    return result
+  }
 
   // Fetch data from Supabase using generated Urql hook
   const [{ data: urqlData, fetching, error }] = useTrendingProjectsQuery({
@@ -92,6 +111,14 @@ const ProjectsTable = () => {
   useEffect(() => {
     if (urqlData) {
       setData(urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[])
+      setTopTenPercent(
+        getTopTenPercent(urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[])
+      )
+      setBottomTenPercent(
+        getBottomTenPercent(
+          urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[]
+        )
+      )
     }
   }, [urqlData])
 
