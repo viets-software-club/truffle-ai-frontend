@@ -19,6 +19,40 @@ import {
 import { defaultFilters, defaultSort } from '@/components/page/overview/types'
 import createColumns from '@/components/side-effects/ProjectsTable/columns'
 
+// Constants
+const NUMERIC_FIELDS = [
+  'contributorCount',
+  'forkCount',
+  'issueCount',
+  'pullRequestCount',
+  'starCount'
+]
+
+// Utility Functions
+const getPercentileValue = (projects: Project[], percentile: number, sortDescending = true) => {
+  const result = {}
+  NUMERIC_FIELDS.forEach((field) => {
+    const sortedData = projects
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      .map((item) => item[field])
+      .filter((item) => !!item)
+      .sort((a, b) => (sortDescending ? b - a : a - b))
+
+    const percentileIndex = Math.floor(sortedData.length * percentile)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    result[field] =
+      percentileIndex < sortedData.length && sortedData.length > 0
+        ? sortedData[percentileIndex]
+        : null
+  })
+
+  return result
+}
+
 /**
  * Table for displaying trending projects
  */
@@ -33,136 +67,18 @@ const ProjectsTable = () => {
     setFilters(filter)
   }
 
-  const [topTenPercent, setTopTenPercent] = useState<{ [key in keyof Project]?: number | null }>({})
-  const [topTwentyPercent, setTopTwentyPercent] = useState<{
-    [key in keyof Project]?: number | null
-  }>({})
-  const [bottomTenPercent, setBottomTenPercent] = useState<{
-    [key in keyof Project]?: number | null
-  }>({})
-  const [bottomTwentyPercent, setBottomTwentyPercent] = useState<{
-    [key in keyof Project]?: number | null
-  }>({})
+  const [percentileStats, setPercentileStats] = useState({
+    topTenPercent: {},
+    topTwentyPercent: {},
+    bottomTenPercent: {},
+    bottomTwentyPercent: {}
+  })
+
+  const { topTenPercent, topTwentyPercent, bottomTenPercent, bottomTwentyPercent } = percentileStats
 
   const [columns, setColumns] = useState(() =>
     createColumns(bottomTenPercent, topTenPercent, topTwentyPercent, bottomTwentyPercent)
   )
-
-  const getTopTenPercent = (projects: Project[]) => {
-    const numericFields: (keyof Project)[] = [
-      'contributorCount',
-      'forkCount',
-      'issueCount',
-      'pullRequestCount',
-      'starCount'
-    ]
-
-    const result: { [key in keyof Project]?: number | null } = {}
-
-    numericFields.forEach((field) => {
-      const sortedData = projects
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        .map((item) => item[field])
-        .filter((item): item is number => item !== undefined && item !== null)
-        .sort((a, b) => b - a)
-
-      const topTenPercentIndex = Math.floor(sortedData.length * 0.1)
-      if (topTenPercentIndex < sortedData.length && sortedData.length > 0) {
-        result[field] = sortedData[topTenPercentIndex]
-      } else {
-        result[field] = null
-      }
-    })
-
-    return result
-  }
-
-  const getTopTwentyPercent = (projects: Project[]) => {
-    const numericFields: (keyof Project)[] = [
-      'contributorCount',
-      'forkCount',
-      'issueCount',
-      'pullRequestCount',
-      'starCount'
-    ]
-
-    const result: { [key in keyof Project]?: number | null } = {}
-
-    numericFields.forEach((field) => {
-      const sortedData = projects
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        .map((item) => item[field])
-        .filter((item): item is number => item !== undefined && item !== null)
-        .sort((a, b) => b - a)
-
-      const topTwentyPercentIndex = Math.floor(sortedData.length * 0.2)
-      if (topTwentyPercentIndex < sortedData.length && sortedData.length > 0) {
-        result[field] = sortedData[topTwentyPercentIndex]
-      } else {
-        result[field] = null
-      }
-    })
-
-    return result
-  }
-
-  const getBottomTenPercent = (projects: Project[]) => {
-    const numericFields: (keyof Project)[] = [
-      'contributorCount',
-      'forkCount',
-      'issueCount',
-      'pullRequestCount',
-      'starCount'
-    ]
-
-    const result: { [key in keyof Project]?: number | null } = {}
-
-    numericFields.forEach((field) => {
-      const sortedData = projects
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        .map((item) => item[field])
-        .filter((item): item is number => item !== undefined && item !== null)
-        .sort((a, b) => a - b)
-
-      const bottomTenPercentIndex = Math.floor(sortedData.length * 0.1)
-      if (bottomTenPercentIndex < sortedData.length && sortedData.length > 0) {
-        result[field] = sortedData[bottomTenPercentIndex]
-      } else {
-        result[field] = null
-      }
-    })
-
-    return result
-  }
-
-  const getBottomTwentyPercent = (projects: Project[]) => {
-    const numericFields: (keyof Project)[] = [
-      'contributorCount',
-      'forkCount',
-      'issueCount',
-      'pullRequestCount',
-      'starCount'
-    ]
-
-    const result: { [key in keyof Project]?: number | null } = {}
-
-    numericFields.forEach((field) => {
-      const sortedData = projects
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        .map((item) => item[field])
-        .filter((item): item is number => item !== undefined && item !== null)
-        .sort((a, b) => a - b)
-
-      const bottomTwentyPercentIndex = Math.floor(sortedData.length * 0.2)
-      if (bottomTwentyPercentIndex < sortedData.length && sortedData.length > 0) {
-        result[field] = sortedData[bottomTwentyPercentIndex]
-      } else {
-        result[field] = null
-      }
-    })
-
-    return result
-  }
 
   // Fetch data from Supabase using generated Urql hook
   const [{ data: urqlData, fetching, error }] = useTrendingProjectsQuery({
@@ -172,17 +88,26 @@ const ProjectsTable = () => {
     }
   })
 
-  // Only update table data when urql data changes
+  // Effect Hooks
   useEffect(() => {
     if (urqlData) {
       const projectData = urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[]
       setData(projectData)
-      setTopTenPercent(getTopTenPercent(projectData))
-      setBottomTenPercent(getBottomTenPercent(projectData))
-      setTopTwentyPercent(getTopTwentyPercent(projectData))
-      setBottomTwentyPercent(getBottomTwentyPercent(projectData))
+
+      setPercentileStats({
+        topTenPercent: getPercentileValue(projectData, 0.1),
+        bottomTenPercent: getPercentileValue(projectData, 0.1, false),
+        topTwentyPercent: getPercentileValue(projectData, 0.2),
+        bottomTwentyPercent: getPercentileValue(projectData, 0.2, false)
+      })
     }
   }, [urqlData])
+
+  useEffect(() => {
+    setColumns(() =>
+      createColumns(bottomTenPercent, topTenPercent, topTwentyPercent, bottomTwentyPercent)
+    )
+  }, [bottomTenPercent, topTenPercent, topTwentyPercent, bottomTwentyPercent])
 
   useEffect(() => {
     setColumns(() =>
