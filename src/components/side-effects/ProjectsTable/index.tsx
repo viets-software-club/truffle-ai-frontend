@@ -34,11 +34,19 @@ const ProjectsTable = () => {
   }
 
   const [topTenPercent, setTopTenPercent] = useState<{ [key in keyof Project]?: number | null }>({})
+  const [topTwentyPercent, setTopTwentyPercent] = useState<{
+    [key in keyof Project]?: number | null
+  }>({})
   const [bottomTenPercent, setBottomTenPercent] = useState<{
     [key in keyof Project]?: number | null
   }>({})
+  const [bottomTwentyPercent, setBottomTwentyPercent] = useState<{
+    [key in keyof Project]?: number | null
+  }>({})
 
-  const [columns, setColumns] = useState(() => createColumns(bottomTenPercent, topTenPercent))
+  const [columns, setColumns] = useState(() =>
+    createColumns(bottomTenPercent, topTenPercent, topTwentyPercent, bottomTwentyPercent)
+  )
 
   const getTopTenPercent = (projects: Project[]) => {
     const numericFields: (keyof Project)[] = [
@@ -58,9 +66,38 @@ const ProjectsTable = () => {
         .filter((item): item is number => item !== undefined && item !== null)
         .sort((a, b) => b - a)
 
-      const topTenPercentIndex = Math.ceil(sortedData.length / 10) - 1
-      if (topTenPercentIndex >= 0 && sortedData.length > 0) {
+      const topTenPercentIndex = Math.floor(sortedData.length * 0.1)
+      if (topTenPercentIndex < sortedData.length && sortedData.length > 0) {
         result[field] = sortedData[topTenPercentIndex]
+      } else {
+        result[field] = null
+      }
+    })
+
+    return result
+  }
+
+  const getTopTwentyPercent = (projects: Project[]) => {
+    const numericFields: (keyof Project)[] = [
+      'contributorCount',
+      'forkCount',
+      'issueCount',
+      'pullRequestCount',
+      'starCount'
+    ]
+
+    const result: { [key in keyof Project]?: number | null } = {}
+
+    numericFields.forEach((field) => {
+      const sortedData = projects
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        .map((item) => item[field])
+        .filter((item): item is number => item !== undefined && item !== null)
+        .sort((a, b) => b - a)
+
+      const topTwentyPercentIndex = Math.floor(sortedData.length * 0.2)
+      if (topTwentyPercentIndex < sortedData.length && sortedData.length > 0) {
+        result[field] = sortedData[topTwentyPercentIndex]
       } else {
         result[field] = null
       }
@@ -87,9 +124,38 @@ const ProjectsTable = () => {
         .filter((item): item is number => item !== undefined && item !== null)
         .sort((a, b) => a - b)
 
-      const bottomTenPercentIndex = Math.ceil(sortedData.length / 10) - 1
-      if (bottomTenPercentIndex >= 0 && sortedData.length > 0) {
+      const bottomTenPercentIndex = Math.floor(sortedData.length * 0.1)
+      if (bottomTenPercentIndex < sortedData.length && sortedData.length > 0) {
         result[field] = sortedData[bottomTenPercentIndex]
+      } else {
+        result[field] = null
+      }
+    })
+
+    return result
+  }
+
+  const getBottomTwentyPercent = (projects: Project[]) => {
+    const numericFields: (keyof Project)[] = [
+      'contributorCount',
+      'forkCount',
+      'issueCount',
+      'pullRequestCount',
+      'starCount'
+    ]
+
+    const result: { [key in keyof Project]?: number | null } = {}
+
+    numericFields.forEach((field) => {
+      const sortedData = projects
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        .map((item) => item[field])
+        .filter((item): item is number => item !== undefined && item !== null)
+        .sort((a, b) => a - b)
+
+      const bottomTwentyPercentIndex = Math.floor(sortedData.length * 0.2)
+      if (bottomTwentyPercentIndex < sortedData.length && sortedData.length > 0) {
+        result[field] = sortedData[bottomTwentyPercentIndex]
       } else {
         result[field] = null
       }
@@ -109,21 +175,20 @@ const ProjectsTable = () => {
   // Only update table data when urql data changes
   useEffect(() => {
     if (urqlData) {
-      setData(urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[])
-      setTopTenPercent(
-        getTopTenPercent(urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[])
-      )
-      setBottomTenPercent(
-        getBottomTenPercent(
-          urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[]
-        )
-      )
+      const projectData = urqlData?.projectCollection?.edges?.map((edge) => edge.node) as Project[]
+      setData(projectData)
+      setTopTenPercent(getTopTenPercent(projectData))
+      setBottomTenPercent(getBottomTenPercent(projectData))
+      setTopTwentyPercent(getTopTwentyPercent(projectData))
+      setBottomTwentyPercent(getBottomTwentyPercent(projectData))
     }
   }, [urqlData])
 
   useEffect(() => {
-    setColumns(() => createColumns(bottomTenPercent, topTenPercent))
-  }, [bottomTenPercent, topTenPercent])
+    setColumns(() =>
+      createColumns(bottomTenPercent, topTenPercent, topTwentyPercent, bottomTwentyPercent)
+    )
+  }, [bottomTenPercent, topTenPercent, topTwentyPercent, bottomTwentyPercent])
 
   // Initialize TanStack table
   const table = useReactTable({

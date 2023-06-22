@@ -3,8 +3,10 @@ import formatNumber from '@/util/formatNumber'
 
 enum Color {
   DEFAULT = 'text-gray-100',
-  GREEN = 'text-green',
-  RED = 'text-red'
+  GREEN = 'text-green-500',
+  LIGHT_GREEN = 'text-green-300',
+  RED = 'text-red-500',
+  LIGHT_RED = 'text-red-300'
 }
 
 type GithubStatItemProps = {
@@ -15,7 +17,9 @@ type GithubStatItemProps = {
   paddingOn?: boolean
   outerPaddingOn?: boolean
   greenValue?: number
+  lightGreenValue?: number
   redValue?: number
+  lightRedValue?: number
   largeGap?: boolean
   link?: string
 }
@@ -28,15 +32,21 @@ const GithubStatItem = ({
   paddingOn,
   outerPaddingOn,
   greenValue,
+  lightGreenValue,
   redValue,
+  lightRedValue,
   largeGap,
   link
 }: GithubStatItemProps) => {
   let color = Color.DEFAULT
   if (greenValue !== undefined && value !== undefined && value > greenValue) {
     color = Color.GREEN
+  } else if (lightGreenValue !== undefined && value !== undefined && value > lightGreenValue) {
+    color = Color.LIGHT_GREEN
   } else if (redValue !== undefined && value !== undefined && value < redValue) {
     color = Color.RED
+  } else if (lightRedValue !== undefined && value !== undefined && value < lightRedValue) {
+    color = Color.LIGHT_RED
   }
 
   const gap = largeGap ? 'gap-[10px]' : 'gap-[5px]'
@@ -47,7 +57,7 @@ const GithubStatItem = ({
         <div className={`flex flex-row items-center justify-center text-xs ${gap}`}>
           {Icon && <Icon className={`h-[14px] w-[14px] ${color}`} />}
           {IconMetric}
-          {value && (
+          {value !== undefined && (
             <span className={`text-xs not-italic leading-3 ${paddingOn ? 'w-6' : ''} ${color}`}>
               {formatNumber(value)}
             </span>
@@ -72,7 +82,9 @@ GithubStatItem.defaultProps = {
   outerPaddingOn: true,
   paddingOn: true,
   greenValue: 100,
+  lightGreenValue: 75,
   redValue: 0,
+  lightRedValue: 25,
   largeGap: false,
   link: undefined
 }

@@ -9,8 +9,8 @@ const Banner = ({ message, variant }: BannerProps) => {
   const [isVisible, setIsVisible] = useState(true)
 
   const variantClasses = {
-    error: 'border-red bg-red/50 ',
-    success: 'border-green bg-green/90'
+    error: 'border-red-500 bg-red-500/50 ',
+    success: 'border-green-500 bg-green-500/90'
   }
 
   // Hide banner after 5 seconds (5000 ms)

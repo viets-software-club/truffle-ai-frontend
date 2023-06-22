@@ -10,7 +10,12 @@ import Image from 'next/image'
 
 type TenPercent = { [key in keyof Project]?: number | null }
 
-const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) => {
+const createColumns = (
+  topTenPercent: TenPercent,
+  bottomTenPercent: TenPercent,
+  topTwentyPercent: TenPercent,
+  bottomTwentyPercent: TenPercent
+) => {
   const columnHelper = createColumnHelper<Project>()
   return [
     // Logo column definition
@@ -62,7 +67,9 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           outerPaddingOn={false}
           value={info.getValue() as number}
           greenValue={bottomTenPercent.starCount as number}
+          lightGreenValue={topTwentyPercent.starCount as number}
           redValue={topTenPercent.starCount as number}
+          lightRedValue={bottomTwentyPercent.starCount as number}
         />
       )
     }),
@@ -78,7 +85,9 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           outerPaddingOn={false}
           value={info.getValue() as number}
           greenValue={bottomTenPercent.issueCount as number}
+          lightGreenValue={topTwentyPercent.issueCount as number}
           redValue={topTenPercent.issueCount as number}
+          lightRedValue={bottomTwentyPercent.issueCount as number}
         />
       )
     }),
@@ -94,7 +103,9 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           outerPaddingOn={false}
           value={info.getValue() as number}
           greenValue={bottomTenPercent.forkCount as number}
+          lightGreenValue={topTwentyPercent.forkCount as number}
           redValue={topTenPercent.forkCount as number}
+          lightRedValue={bottomTwentyPercent.forkCount as number}
         />
       )
     }),
@@ -108,9 +119,11 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           Icon={BsPeople}
           paddingOn={false}
           outerPaddingOn={false}
-          value={info.getValue() as number}
+          value={(info.getValue() as number) || 0}
           greenValue={bottomTenPercent.contributorCount as number}
+          lightGreenValue={topTwentyPercent.contributorCount as number}
           redValue={topTenPercent.contributorCount as number}
+          lightRedValue={bottomTwentyPercent.contributorCount as number}
         />
       )
     }),
@@ -141,9 +154,11 @@ const createColumns = (topTenPercent: TenPercent, bottomTenPercent: TenPercent) 
           Icon={GoGitPullRequest}
           paddingOn={false}
           outerPaddingOn={false}
-          value={info.getValue() as number}
+          value={(info.getValue() as number) || 0}
           greenValue={bottomTenPercent.pullRequestCount as number}
+          lightGreenValue={topTwentyPercent.pullRequestCount as number}
           redValue={topTenPercent.pullRequestCount as number}
+          lightRedValue={bottomTwentyPercent.pullRequestCount as number}
         />
       )
     })
